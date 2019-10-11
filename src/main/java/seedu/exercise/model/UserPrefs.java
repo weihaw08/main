@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path exerciseBookFilePath = Paths.get("data" , "exercisebook.json");
+    private Path propertyManagerFilePath = Paths.get("data", "propertymanager.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setExerciseBookFilePath(newUserPrefs.getExerciseBookFilePath());
+        setPropertyManagerFilePath(newUserPrefs.getPropertyManagerFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -54,6 +56,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setExerciseBookFilePath(Path exerciseBookFilePath) {
         requireNonNull(exerciseBookFilePath);
         this.exerciseBookFilePath = exerciseBookFilePath;
+    }
+
+    public Path getPropertyManagerFilePath() {
+        return propertyManagerFilePath;
+    }
+
+    public void setPropertyManagerFilePath(Path propertyManagerFilePath) {
+        requireNonNull(propertyManagerFilePath);
+        this.propertyManagerFilePath = propertyManagerFilePath;
     }
 
     @Override

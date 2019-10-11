@@ -1,5 +1,7 @@
 package seedu.exercise;
 
+import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -21,10 +23,14 @@ import seedu.exercise.model.ModelManager;
 import seedu.exercise.model.ReadOnlyExerciseBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.util.DefaultPropertyManagerUtil;
 import seedu.exercise.model.util.SampleDataUtil;
 import seedu.exercise.storage.ExerciseBookStorage;
 import seedu.exercise.storage.JsonExerciseBookStorage;
+import seedu.exercise.storage.JsonPropertyManagerStorage;
 import seedu.exercise.storage.JsonUserPrefsStorage;
+import seedu.exercise.storage.PropertyManagerStorage;
 import seedu.exercise.storage.Storage;
 import seedu.exercise.storage.StorageManager;
 import seedu.exercise.storage.UserPrefsStorage;
@@ -57,7 +63,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         ExerciseBookStorage exerciseBookStorage = new JsonExerciseBookStorage(userPrefs.getExerciseBookFilePath());
-        storage = new StorageManager(exerciseBookStorage, userPrefsStorage);
+        PropertyManagerStorage propertyManagerStorage =
+            new JsonPropertyManagerStorage(userPrefs.getPropertyManagerFilePath());
+        storage = new StorageManager(exerciseBookStorage, userPrefsStorage, propertyManagerStorage);
 
         initLogging(config);
 
@@ -75,22 +83,34 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyExerciseBook> exerciseBookOptional;
+        Optional<PropertyManager> propertyManagerOptional;
         ReadOnlyExerciseBook initialData;
+        PropertyManager initialPropertyManager;
         try {
             exerciseBookOptional = storage.readExerciseBook();
             if (!exerciseBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample ExerciseBook");
+                logger.info("Data file for ExerciseBook not found. Will be starting with a sample ExerciseBook");
             }
             initialData = exerciseBookOptional.orElseGet(SampleDataUtil::getSampleExerciseBook);
+
+            propertyManagerOptional = storage.readPropertyManager();
+            if (!propertyManagerOptional.isPresent()) {
+                logger.info("Data for PropertyManager not found. Will be starting with default PropertyManager");
+            }
+            initialPropertyManager =
+                propertyManagerOptional.orElseGet(DefaultPropertyManagerUtil::getDefaultPropertyManager);
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ExerciseBook");
             initialData = new ExerciseBook();
+            initialPropertyManager = getDefaultPropertyManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty ExerciseBook");
             initialData = new ExerciseBook();
+            initialPropertyManager = getDefaultPropertyManager();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialPropertyManager);
     }
 
     private void initLogging(Config config) {

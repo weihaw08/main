@@ -12,7 +12,7 @@ import seedu.exercise.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends ExerciseBookStorage, UserPrefsStorage {
+public interface Storage extends ExerciseBookStorage, UserPrefsStorage, PropertyManagerStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

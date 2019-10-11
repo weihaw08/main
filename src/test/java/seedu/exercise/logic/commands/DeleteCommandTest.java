@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.exercise.logic.commands.CommandTestUtil.showExerciseAtIndex;
+import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
 import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
 import static seedu.exercise.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.exercise.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
@@ -24,7 +25,7 @@ import seedu.exercise.model.exercise.Exercise;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalExerciseBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +34,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAllData(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAllData(), new UserPrefs(), getDefaultPropertyManager());
         expectedModel.deleteExercise(exerciseToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +57,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
 
-        Model expectedModel = new ModelManager(model.getAllData(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAllData(), new UserPrefs(), getDefaultPropertyManager());
         expectedModel.deleteExercise(exerciseToDelete);
         showNoExercise(expectedModel);
 

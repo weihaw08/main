@@ -50,7 +50,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a muscle set containing the list of strings given.
      */
     public static Set<Muscle> getMuscleSet(String... strings) {
         return Arrays.stream(strings)

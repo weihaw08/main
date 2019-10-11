@@ -7,9 +7,10 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
+import static seedu.exercise.logic.parser.CliSyntax.PROPERTY_PREFIXES;
 
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.exercise.logic.commands.AddCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
@@ -33,11 +34,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES, PREFIX_QUANTITY,
-                PREFIX_UNIT, PREFIX_MUSCLE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PROPERTY_PREFIXES);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DATE, PREFIX_CALORIES, PREFIX_UNIT)
+        if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DATE, PREFIX_CALORIES, PREFIX_UNIT)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -48,18 +47,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Unit unit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
         Set<Muscle> muscleList = ParserUtil.parseMuscles(argMultimap.getAllValues(PREFIX_MUSCLE));
+        Map<String, String> customPropertiesMap =
+            ParserUtil.parseCustomProperties(argMultimap.getAllCustomProperties());
 
-        Exercise exercise = new Exercise(name, date, calories, quantity, unit, muscleList);
+        Exercise exercise = new Exercise(name, date, calories, quantity, unit, muscleList, customPropertiesMap);
 
         return new AddCommand(exercise);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

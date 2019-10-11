@@ -7,17 +7,10 @@ import static seedu.exercise.commons.util.AppUtil.checkArgument;
  * Represents an Exercise's name in the exercise book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name extends Property {
-
+public class Name {
+    public static final String PROPERTY_NAME = "Name";
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets and spaces, and it should not be blank";
-
-    /*
-     * The first character of the exercise must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "^[ A-Za-z]+$";
-
+        "Names should only contain alphabets and spaces, and it should not be blank";
     public final String fullName;
 
     /**
@@ -35,7 +28,7 @@ public class Name extends Property {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(ValidationRegex.ONLY_ALPHABETS_AND_SPACE.getRegex());
     }
 
 
@@ -47,8 +40,8 @@ public class Name extends Property {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+            || (other instanceof Name // instanceof handles nulls
+            && fullName.equals(((Name) other).fullName)); // state check
     }
 
     @Override

@@ -3,15 +3,16 @@ package seedu.exercise.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
- *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
+ * e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
  * 1. An argument's value can be an empty string e.g. the value of {@code k/} in the above example.<br>
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
  * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
- *    in the above example.<br>
+ * in the above example.<br>
  */
 public class ArgumentTokenizer {
 
@@ -21,7 +22,7 @@ public class ArgumentTokenizer {
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to tokenize the arguments string with
-     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     * @return ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
@@ -29,16 +30,30 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     *
+     * @param argsString Arguments string of the from: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     * @return ArgumentMultimap object that maps prefixes to their arguments
+     */
+    public static ArgumentMultimap tokenize(String argsString, Set<Prefix> prefixes) {
+        int numOfPrefixes = prefixes.size();
+        Prefix[] prefixArray = prefixes.toArray(new Prefix[numOfPrefixes]);
+        return tokenize(argsString, prefixArray);
+    }
+
+    /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to find in the arguments string
-     * @return           List of zero-based prefix positions in the given arguments string
+     * @return List of zero-based prefix positions in the given arguments string
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
         return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-                .collect(Collectors.toList());
+            .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
+            .collect(Collectors.toList());
     }
 
     /**
@@ -62,7 +77,7 @@ public class ArgumentTokenizer {
      * {@code argsString} starting from index {@code fromIndex}. An occurrence
      * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
      * such occurrence can be found.
-     *
+     * <p>
      * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns -1 as there are no valid
      * occurrences of "p/" with whitespace before it. However, if
@@ -72,7 +87,7 @@ public class ArgumentTokenizer {
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+            : prefixIndex + 1; // +1 as offset for whitespace
     }
 
     /**
@@ -82,7 +97,7 @@ public class ArgumentTokenizer {
      *
      * @param argsString      Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
-     * @return                ArgumentMultimap object that maps prefixes to their arguments
+     * @return ArgumentMultimap object that maps prefixes to their arguments
      */
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
@@ -114,8 +129,8 @@ public class ArgumentTokenizer {
      * The end position of the value is determined by {@code nextPrefixPosition}.
      */
     private static String extractArgumentValue(String argsString,
-                                        PrefixPosition currentPrefixPosition,
-                                        PrefixPosition nextPrefixPosition) {
+                                               PrefixPosition currentPrefixPosition,
+                                               PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.commons.core.Messages.MESSAGE_EXERCISES_LISTED_OVERVIEW;
 import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
 import static seedu.exercise.testutil.TypicalExercises.DANCE;
 import static seedu.exercise.testutil.TypicalExercises.SKIP;
 import static seedu.exercise.testutil.TypicalExercises.SPRINT;
@@ -24,8 +25,9 @@ import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalExerciseBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
+    private Model expectedModel =
+        new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
 
     @Test
     public void equals() {

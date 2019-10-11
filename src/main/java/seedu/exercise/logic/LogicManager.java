@@ -44,6 +44,8 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveExerciseBook(model.getAllData());
+            storage.savePropertyManager(model.getPropertyManager());
+
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

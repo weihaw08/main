@@ -2,6 +2,7 @@ package seedu.exercise.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -12,7 +13,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
+import seedu.exercise.logic.parser.Prefix;
+import seedu.exercise.model.exercise.CustomProperty;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.exercise.PropertyManager;
 
 /**
  * Represents the in-memory model of the exercise book data.
@@ -22,13 +26,15 @@ public class ModelManager implements Model {
 
     private final ExerciseBook exerciseBook;
     private final UserPrefs userPrefs;
+    private final PropertyManager propertyManager;
     private final FilteredList<Exercise> filteredExercises;
     private final SortedList<Exercise> sortedExercises;
 
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
      */
-    public ModelManager(ReadOnlyExerciseBook exerciseBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyExerciseBook exerciseBook, ReadOnlyUserPrefs userPrefs,
+                        PropertyManager propertyManager) {
         super();
         requireAllNonNull(exerciseBook, userPrefs);
 
@@ -38,11 +44,12 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredExercises = new FilteredList<>(this.exerciseBook.getExerciseList());
         sortedExercises = new SortedList<>(this.exerciseBook.getExerciseList());
-
+        this.propertyManager = propertyManager;
+        this.propertyManager.updatePropertyPrefixes();
     }
 
     public ModelManager() {
-        this(new ExerciseBook(), new UserPrefs());
+        this(new ExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -154,8 +161,38 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return exerciseBook.equals(other.exerciseBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredExercises.equals(other.filteredExercises)
-                && sortedExercises.equals(other.sortedExercises);
+            && userPrefs.equals(other.userPrefs)
+            && filteredExercises.equals(other.filteredExercises)
+            && sortedExercises.equals(other.sortedExercises);
+    }
+
+    //=========== Property Manager Accessors =============================================================
+
+    public PropertyManager getPropertyManager() {
+        return propertyManager;
+    }
+
+    public boolean isPrefixPresent(Prefix prefix) {
+        return propertyManager.isPrefixPresent(prefix);
+    }
+
+    public boolean isFullNamePresent(String fullName) {
+        return propertyManager.isFullNamePresent(fullName);
+    }
+
+    /**
+     * Adds the new prefix into the PropertyManager. PropertyManager will update the property prefixes.
+     */
+    public void addPrefix(Prefix prefix) {
+        propertyManager.addPrefix(prefix);
+        propertyManager.updatePropertyPrefixes();
+    }
+
+    public void addFullName(String fullName) {
+        propertyManager.addFullName(fullName);
+    }
+
+    public void addCustomProperty(CustomProperty customProperty) {
+        propertyManager.addCustomProperty(customProperty);
     }
 }
