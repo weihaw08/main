@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
+import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.tag.Muscle;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "D@nce";
@@ -61,7 +61,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCalories_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCalories((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCalories(null));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseQuantity_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity(null));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseUnit_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit(null));
     }
 
     @Test

@@ -41,10 +41,10 @@ import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
+import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.tag.Muscle;
 import seedu.exercise.testutil.EditExerciseDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -80,7 +80,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 3/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

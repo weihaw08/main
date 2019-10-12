@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
+import seedu.exercise.model.RegimeBook;
 import seedu.exercise.model.UserPrefs;
 
 /**
@@ -23,8 +24,10 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
-        expectedModel = new ModelManager(model.getAllData(), new UserPrefs(), getDefaultPropertyManager());
+        model = new ModelManager(getTypicalExerciseBook(), new RegimeBook(),
+            new UserPrefs(), getDefaultPropertyManager());
+        expectedModel = new ModelManager(model.getAllExerciseData(), new RegimeBook(),
+            new UserPrefs(), getDefaultPropertyManager());
     }
 
     @Test

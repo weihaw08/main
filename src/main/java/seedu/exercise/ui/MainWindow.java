@@ -32,9 +32,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ExerciseListPanel filteredListPanel;
-    private ExerciseListPanel sortedListPanel;
+    private RegimeListPanel regimeListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ResolveWindow resolveWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,13 +44,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane filteredListPanelPlaceholder;
+    private MenuItem resolveWindowMenuItem;
+
+    @FXML
+    private StackPane exerciseListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane sortedListPanelPlaceholder;
+    private StackPane regimeListPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -66,12 +70,12 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-        primaryStage.setMaximized(true);
         primaryStage.setTitle("ExerHealth");
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resolveWindow = new ResolveWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -117,10 +121,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         filteredListPanel = new ExerciseListPanel(logic.getFilteredExerciseList());
-        filteredListPanelPlaceholder.getChildren().add(filteredListPanel.getRoot());
+        exerciseListPanelPlaceholder.getChildren().add(filteredListPanel.getRoot());
 
-        sortedListPanel = new ExerciseListPanel(logic.getSortedExerciseList());
-        sortedListPanelPlaceholder.getChildren().add(sortedListPanel.getRoot());
+        regimeListPanel = new RegimeListPanel(logic.getFilteredRegimeList());
+        regimeListPanelPlaceholder.getChildren().add(regimeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -156,6 +160,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the resolve window and blocks all events until closed
+     */
+    @FXML
+    private void handleResolve() {
+        String testData = "This is clearly test data. DELETE".repeat(1000);
+        resolveWindow.setLeftRightText(testData, testData);
+        if (resolveWindow.isShowing()) {
+            resolveWindow.focus();
+        } else {
+            resolveWindow.show();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -169,11 +187,16 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        resolveWindow.hideAndClearText();
         primaryStage.hide();
     }
 
     public ExerciseListPanel getExerciseListPanel() {
         return filteredListPanel;
+    }
+
+    public RegimeListPanel getRegimeListPanel() {
+        return regimeListPanel;
     }
 
     /**

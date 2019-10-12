@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
+import seedu.exercise.model.RegimeBook;
 import seedu.exercise.model.UserPrefs;
 import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
 
@@ -25,16 +26,17 @@ import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
-    private Model expectedModel =
-        new ModelManager(getTypicalExerciseBook(), new UserPrefs(), getDefaultPropertyManager());
+    private Model model = new ModelManager(getTypicalExerciseBook(), new RegimeBook(),
+        new UserPrefs(), getDefaultPropertyManager());
+    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), new RegimeBook(),
+        new UserPrefs(), getDefaultPropertyManager());
 
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+            new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+            new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);

@@ -9,6 +9,7 @@ import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.exercise.CustomProperty;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.regime.Regime;
 
 /**
  * The API of the Model component.
@@ -18,6 +19,9 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Exercise> PREDICATE_SHOW_ALL_EXERCISES = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true*/
+    Predicate<Regime> PREDICATE_SHOW_ALL_REGIMES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,10 +58,8 @@ public interface Model {
      */
     void setExerciseBook(ReadOnlyExerciseBook anotherBook);
 
-    /**
-     * Returns the data in the exercise book
-     */
-    ReadOnlyExerciseBook getAllData();
+    /** Returns the data in the exercise book */
+    ReadOnlyExerciseBook getAllExerciseData();
 
     /**
      * Returns true if an exercise with the same identity as {@code exercise} exists in the exercise book.
@@ -89,7 +91,8 @@ public interface Model {
      */
     ObservableList<Exercise> getFilteredExerciseList();
 
-    ObservableList<Exercise> getSortedExerciseList();
+    /** Returns an unmodifiable view of the filtered regime list */
+    ObservableList<Regime> getFilteredRegimeList();
 
     /**
      * Updates the filter of the filtered exercise list to filter by the given {@code predicate}.
@@ -98,6 +101,60 @@ public interface Model {
      */
     void updateFilteredExerciseList(Predicate<Exercise> predicate);
 
+
+    /**
+     * Returns the user prefs' regime book file path.
+     */
+    Path getRegimeBookFilePath();
+
+    /**
+     * Sets the user prefs' regime book file path.
+     */
+    void setRegimeBookFilePath(Path regimeBookFilePath);
+
+    /**
+     * Replaces regime book data with the data in {@code anotherBook}.
+     */
+    void setRegimeBook(ReadOnlyRegimeBook anotherBook);
+
+    /** Returns the data in the regime book */
+    ReadOnlyRegimeBook getAllRegimeData();
+
+    /**
+     * Returns true if an regime with the same identity as {@code regime} exists in the regime book.
+     */
+    boolean hasRegime(Regime regime);
+
+    /**
+     * Adds the given regime.
+     * {@code regime} must not already exist in regime book.
+     */
+    void addRegime(Regime regime);
+
+    /**
+     * Replaces the given regime {@code target} with {@code editedRegime}.
+     * {@code target} must exist in regime book.
+     * The regime identity of {@code editedRegime} must not be the same as another existing regime in
+     * the regime book.
+     */
+    void setRegime(Regime target, Regime editedRegime);
+
+    /**
+     * Deletes the given regime.
+     * The regime must exist in the regime book.
+     */
+    void deleteRegime(Regime regime);
+
+    /**
+     * Returns the index of regime in regime book.
+     */
+    int getRegimeIndex(Regime regime);
+
+    /**
+     * Updates the filter of the filtered exercise list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRegimeList(Predicate<Regime> predicate);
     /**
      * Returns the {@code PropertyManager} object that is contained in {@code Model}.
      */

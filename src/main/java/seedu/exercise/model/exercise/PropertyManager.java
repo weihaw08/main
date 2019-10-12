@@ -1,11 +1,12 @@
 package seedu.exercise.model.exercise;
 
-import static seedu.exercise.logic.parser.CliSyntax.setPropertyPrefixes;
+import static seedu.exercise.logic.parser.CliSyntax.setPrefixesSet;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.exercise.logic.parser.Prefix;
@@ -15,9 +16,9 @@ import seedu.exercise.logic.parser.Prefix;
  * It also helps to keep track of all the existing custom properties that have been defined by the user.
  */
 public class PropertyManager {
-    private static final Set<Prefix> PREFIXES = new HashSet<>();
-    private static final Set<String> FULL_NAMES = new HashSet<>();
     private static final List<CustomProperty> CUSTOM_PROPERTIES = new ArrayList<>();
+    private final Set<Prefix> prefixes = new HashSet<>();
+    private final Set<String> fullNames = new HashSet<>();
 
     /**
      * Initialises an instance of {@code PropertyManager} object.
@@ -56,28 +57,28 @@ public class PropertyManager {
      * Checks if the prefix has already been used by a property.
      */
     public boolean isPrefixPresent(Prefix prefix) {
-        return PREFIXES.contains(prefix);
+        return prefixes.contains(prefix);
     }
 
     /**
      * Checks if the full name has already been used by a property.
      */
     public boolean isFullNamePresent(String fullName) {
-        return FULL_NAMES.contains(fullName);
+        return fullNames.contains(fullName);
     }
 
     /**
      * Adds the prefix for a newly defined custom property.
      */
     public void addPrefix(Prefix prefix) {
-        PREFIXES.add(prefix);
+        prefixes.add(prefix);
     }
 
     /**
      * Adds the full name for a newly defined custom property.
      */
     public void addFullName(String fullName) {
-        FULL_NAMES.add(fullName);
+        fullNames.add(fullName);
     }
 
     /**
@@ -92,7 +93,7 @@ public class PropertyManager {
      * if modification is attempted.
      */
     public Set<Prefix> getPrefixes() {
-        return Collections.unmodifiableSet(PREFIXES);
+        return Collections.unmodifiableSet(prefixes);
     }
 
     /**
@@ -102,8 +103,8 @@ public class PropertyManager {
      * @param prefixes the prefixes to be added
      */
     public void setPrefixes(Set<Prefix> prefixes) {
-        if (PREFIXES.isEmpty()) {
-            PREFIXES.addAll(prefixes);
+        if (this.prefixes.isEmpty()) {
+            this.prefixes.addAll(prefixes);
         }
     }
 
@@ -112,7 +113,7 @@ public class PropertyManager {
      * if modification is attempted.
      */
     public Set<String> getFullNames() {
-        return Collections.unmodifiableSet(FULL_NAMES);
+        return Collections.unmodifiableSet(fullNames);
     }
 
     /**
@@ -122,8 +123,8 @@ public class PropertyManager {
      * @param fullNames the full names to be added
      */
     public void setFullNames(Set<String> fullNames) {
-        if (FULL_NAMES.isEmpty()) {
-            FULL_NAMES.addAll(fullNames);
+        if (this.fullNames.isEmpty()) {
+            this.fullNames.addAll(fullNames);
         }
     }
 
@@ -131,6 +132,26 @@ public class PropertyManager {
      * Updates the property prefixes in {@code CliSyntax} class.
      */
     public void updatePropertyPrefixes() {
-        setPropertyPrefixes(getPrefixes());
+        setPrefixesSet(getPrefixes());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof PropertyManager)) {
+            return false;
+        }
+
+        PropertyManager anotherManager = (PropertyManager) other;
+        return prefixes.equals(anotherManager.prefixes)
+            && fullNames.equals(anotherManager.fullNames);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prefixes, fullNames);
     }
 }

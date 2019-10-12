@@ -2,13 +2,13 @@ package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIXES_SET;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
-import static seedu.exercise.logic.parser.CliSyntax.PROPERTY_PREFIXES;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.tag.Muscle;
+import seedu.exercise.model.exercise.Muscle;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -35,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PROPERTY_PREFIXES);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIXES_SET);
 
         Index index;
 

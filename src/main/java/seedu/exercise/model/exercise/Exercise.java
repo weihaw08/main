@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.exercise.model.tag.Muscle;
-
 /**
  * Represents an Exercise in the exercise book.
  * Guarantees: details are present and not null, field values are validated, immutable.
