@@ -175,6 +175,42 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String category} into a String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code category} is invalid
+     */
+    public static String parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!trimmedCategory.equals("exercise") && !trimmedCategory.equals("regime")) {
+            throw new ParseException("Category can only be \'exercise\' or \'regime\'");
+        }
+        return trimmedCategory;
+    }
+
+    /**
+     * Parses and trims all of the keys in {@code Map<String, String> customProperties}.
+     *
+     * @throws ParseException if any of the keys present in {@code customProperties} is invalid.
+     */
+    static Map<String, String> parseCustomProperties(Map<String, String> customProperties)
+        throws ParseException {
+        requireNonNull(customProperties);
+        List<CustomProperty> allCustomProperties = getCustomProperties();
+        final Map<String, String> customPropertiesMap = new HashMap<>();
+        for (CustomProperty property : allCustomProperties) {
+            String propertyName = property.getFullName();
+            if (customProperties.containsKey(propertyName)) {
+                String rawResult = customProperties.get(propertyName);
+                String trimmedResult = parseCustomProperty(property, rawResult);
+                customPropertiesMap.put(propertyName, trimmedResult);
+            }
+        }
+        return customPropertiesMap;
+    }
+
+    /**
      * Trims, validates and formats the full name of a {@code String fullName}.
      *
      * @param fullName the full name of a custom property
@@ -187,37 +223,13 @@ public class ParserUtil {
         if (!CustomProperty.isValidFullName(trimmedFullName)) {
             throw new ParseException(CustomProperty.FULL_NAME_CONSTRAINTS);
         }
-        return formatWords(trimmedFullName);
-    }
-
-    /**
-     * Formats a single word by capitalising the first letter and setting the remaining
-     * as lowercase.
-     */
-    private static String formatSingleWord(String word) {
-        String capitalisedFirstLetter = word.substring(0, 1).toUpperCase();
-        String lowercaseRemaining = word.substring(1).toLowerCase();
-        return capitalisedFirstLetter + lowercaseRemaining;
-    }
-
-    /**
-     * Formats a group of words by capitalising the first letter and setting the remaining
-     * as lower case for each word present. Any additional spaces between 2 words are now
-     * reduced to a single space.
-     */
-    private static String formatWords(String words) {
-        String[] tokens = words.split("\\s+");
-        StringBuilder builder = new StringBuilder();
-        for (String token : tokens) {
-            builder.append(formatSingleWord(token)).append(" ");
-        }
-        return builder.toString().stripTrailing();
+        return toStartCase(trimmedFullName);
     }
 
     /**
      * Parses and trims the leading and trailing whitespaces of {@code String shortName}.
      *
-     * @param shortName the intended short name (prefix) for a custom property
+     * @param shortName the intended short name for a custom property
      * @return a {@code Prefix} object containing the trimmed short name for a custom property
      * @throws ParseException if the given short name is invalid
      */
@@ -259,10 +271,35 @@ public class ParserUtil {
     }
 
     /**
+     * Formats a single word by capitalising the first letter and setting the remaining
+     * as lowercase.
+     */
+    private static String capitaliseSingleWord(String word) {
+        String capitalisedFirstLetter = word.substring(0, 1).toUpperCase();
+        String lowercaseRemaining = word.substring(1).toLowerCase();
+        return capitalisedFirstLetter + lowercaseRemaining;
+    }
+
+    /**
+     * Formats a group of words by capitalising the first letter and setting the remaining
+     * as lower case for each word present. Any additional spaces between 2 words are now
+     * reduced to a single space.
+     */
+    private static String toStartCase(String words) {
+        String[] tokens = words.split("\\s+");
+        StringBuilder builder = new StringBuilder();
+        for (String token : tokens) {
+            builder.append(capitaliseSingleWord(token)).append(" ");
+        }
+        return builder.toString().stripTrailing();
+    }
+
+    /**
      * Parses and trims {@code String propertyValue} based on the {@code CustomProperty}.
      */
     private static String parseCustomProperty(CustomProperty property, String propertyValue)
         throws ParseException {
+        requireNonNull(property, propertyValue);
         ParameterType paramType = property.getParameterType();
         if (paramType.equals(ParameterType.DATE)) {
             return parseDate(propertyValue).toString();
@@ -301,38 +338,4 @@ public class ParserUtil {
         return trimmedNumber;
     }
 
-    /**
-     * Parses and trims all of the keys in {@code Map<String, String> customProperties}.
-     *
-     * @throws ParseException if any of the keys present in {@code customProperties} is invalid.
-     */
-    static Map<String, String> parseCustomProperties(Map<String, String> customProperties)
-        throws ParseException {
-        List<CustomProperty> allCustomProperties = getCustomProperties();
-        final Map<String, String> customPropertiesMap = new HashMap<>();
-        for (CustomProperty property : allCustomProperties) {
-            String propertyName = property.getFullName();
-            if (customProperties.containsKey(propertyName)) {
-                String rawResult = customProperties.get(propertyName);
-                String trimmedResult = parseCustomProperty(property, rawResult);
-                customPropertiesMap.put(propertyName, trimmedResult);
-            }
-        }
-        return customPropertiesMap;
-    }
-
-    /**
-     * Parses a {@code String category} into a String.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException
-     */
-    public static String parseCategory(String category) throws ParseException {
-        requireNonNull(category);
-        String trimmedCategory = category.trim();
-        if (!trimmedCategory.equals("exercise") && !trimmedCategory.equals("regime")) {
-            throw new ParseException("Category can only be \'exercise\' or \'regime\'");
-        }
-        return trimmedCategory;
-    }
 }

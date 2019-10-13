@@ -1,5 +1,8 @@
 package seedu.exercise.model.exercise;
 
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_ALPHABETS_AND_SPACE;
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_NUMBERS;
+
 /**
  * Encapsulates the different parameter types that a custom property can take in.
  */
@@ -38,7 +41,7 @@ public enum ParameterType {
      * @return true if and only if the the given value is a valid text
      */
     public static boolean isValidText(String value) {
-        return value.matches(ValidationRegex.ONLY_ALPHABETS_AND_SPACE.getRegex());
+        return value.matches(ONLY_ALPHABETS_AND_SPACE);
     }
 
     /**
@@ -49,7 +52,7 @@ public enum ParameterType {
      * @return true if and only if the given value is a valid number
      */
     public static boolean isValidNumber(String value) {
-        return value.matches(ValidationRegex.ONLY_NUMBERS.getRegex());
+        return value.matches(ONLY_NUMBERS);
     }
 
     /**

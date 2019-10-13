@@ -1,5 +1,7 @@
 package seedu.exercise.model.exercise;
 
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_ALPHABETS;
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_ALPHABETS_AND_SPACE;
 import static seedu.exercise.commons.util.AppUtil.checkArgument;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -24,7 +26,7 @@ public class CustomProperty {
      * Instantiates a new {@code CustomProperty} instance.
      *
      * @param fullName      the full name of the custom property
-     * @param prefix        the short name (prefix) for the custom property
+     * @param prefix        the prefix for the custom property
      * @param parameterType the string used to validate an input for the custom property
      */
     public CustomProperty(Prefix prefix, String fullName, ParameterType parameterType) {
@@ -43,7 +45,7 @@ public class CustomProperty {
      * @return true if and only if the full name contains only alphabets
      */
     public static boolean isValidFullName(String test) {
-        return test.matches(ValidationRegex.ONLY_ALPHABETS_AND_SPACE.getRegex());
+        return test.matches(ONLY_ALPHABETS_AND_SPACE);
     }
 
     /**
@@ -51,11 +53,10 @@ public class CustomProperty {
      * '/' in its prefix.
      *
      * @param test the short name of a custom property
-     * @return true if and only if the prefix contains only alphabets and does not contain any whitespaces.
+     * @return true if and only if the short name contains only alphabets and does not contain any whitespaces.
      */
     public static boolean isValidShortName(String test) {
-        boolean containsSpace = test.contains(" ");
-        return !containsSpace && test.matches(ValidationRegex.ONLY_ALPHABETS.getRegex());
+        return test.matches(ONLY_ALPHABETS);
     }
 
     /**

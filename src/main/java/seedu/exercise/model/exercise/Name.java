@@ -1,6 +1,7 @@
 package seedu.exercise.model.exercise;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_ALPHABETS_AND_SPACE;
 import static seedu.exercise.commons.util.AppUtil.checkArgument;
 
 /**
@@ -28,7 +29,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(ValidationRegex.ONLY_ALPHABETS_AND_SPACE.getRegex());
+        return test.matches(ONLY_ALPHABETS_AND_SPACE);
     }
 
 

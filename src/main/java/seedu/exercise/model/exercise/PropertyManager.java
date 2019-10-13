@@ -85,6 +85,10 @@ public class PropertyManager {
      * Adds the newly defined custom property into the manager.
      */
     public void addCustomProperty(CustomProperty customProperty) {
+        Prefix newPrefix = customProperty.getPrefix();
+        String newFullName = customProperty.getFullName();
+        addPrefix(newPrefix);
+        addFullName(newFullName);
         CUSTOM_PROPERTIES.add(customProperty);
     }
 

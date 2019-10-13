@@ -34,9 +34,10 @@ public interface Logic {
     ReadOnlyExerciseBook getExerciseBook();
 
     /**
-     * Returns an unmodifiable view of the filtered list of persons
+     * Returns an unmodifiable view of the filtered list of exercises.
      */
     ObservableList<Exercise> getFilteredExerciseList();
+
     /**
      * Returns the RegimeBook.
      *

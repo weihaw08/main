@@ -2,13 +2,15 @@ package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIXES_SET;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
+import static seedu.exercise.logic.parser.CliSyntax.combinePrefixes;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIXES_SET);
+        Prefix[] allPrefixes = combinePrefixes(PREFIX_CATEGORY, PREFIX_INDEX);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, allPrefixes);
 
         Index index;
 
@@ -82,7 +85,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Muscle>} containing zero muscles.
      */
     private Optional<Set<Muscle>> parseMusclesForEdit(Collection<String> muscles) throws ParseException {
-        assert muscles != null;
+        requireNonNull(muscles);
 
         if (muscles.isEmpty()) {
             return Optional.empty();
@@ -100,7 +103,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Map<String, String>> parseCustomPropertiesForEdit(Map<String, String> customProperties)
         throws ParseException {
-        assert customProperties != null;
+        requireNonNull(customProperties);
 
         if (customProperties.isEmpty()) {
             return Optional.empty();

@@ -171,16 +171,6 @@ public interface Model {
     boolean isFullNamePresent(String fullName);
 
     /**
-     * Adds the given {@code prefix} into the PropertyManager.
-     */
-    void addPrefix(Prefix prefix);
-
-    /**
-     * Adds the given {@code fullName} into the PropertyManager.
-     */
-    void addFullName(String fullName);
-
-    /**
      * Adds the given {@code customProperty} into the PropertyManager.
      */
     void addCustomProperty(CustomProperty customProperty);

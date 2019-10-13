@@ -221,16 +221,6 @@ public class AddExerciseCommandTest {
         }
 
         @Override
-        public void addPrefix(Prefix prefix) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addFullName(String fullName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addCustomProperty(CustomProperty customProperty) {
             throw new AssertionError("This method should not be called.");
         }

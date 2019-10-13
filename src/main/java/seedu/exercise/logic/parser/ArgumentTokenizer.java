@@ -3,7 +3,6 @@ package seedu.exercise.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -27,20 +26,6 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
-    }
-
-    /**
-     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
-     * respective argument values. Only the given prefixes will be recognized in the arguments string.
-     *
-     * @param argsString Arguments string of the from: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to tokenize the arguments string with
-     * @return ArgumentMultimap object that maps prefixes to their arguments
-     */
-    public static ArgumentMultimap tokenize(String argsString, Set<Prefix> prefixes) {
-        int numOfPrefixes = prefixes.size();
-        Prefix[] prefixArray = prefixes.toArray(new Prefix[numOfPrefixes]);
-        return tokenize(argsString, prefixArray);
     }
 
     /**

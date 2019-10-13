@@ -212,6 +212,24 @@ public class ModelManager implements Model {
         filteredRegimes.setPredicate(predicate);
     }
 
+    //=========== Property Manager Accessors =============================================================
+
+    public PropertyManager getPropertyManager() {
+        return propertyManager;
+    }
+
+    public boolean isPrefixPresent(Prefix prefix) {
+        return propertyManager.isPrefixPresent(prefix);
+    }
+
+    public boolean isFullNamePresent(String fullName) {
+        return propertyManager.isFullNamePresent(fullName);
+    }
+
+    public void addCustomProperty(CustomProperty customProperty) {
+        propertyManager.addCustomProperty(customProperty);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -234,33 +252,4 @@ public class ModelManager implements Model {
             && propertyManager.equals(other.propertyManager);
     }
 
-    //=========== Property Manager Accessors =============================================================
-
-    public PropertyManager getPropertyManager() {
-        return propertyManager;
-    }
-
-    public boolean isPrefixPresent(Prefix prefix) {
-        return propertyManager.isPrefixPresent(prefix);
-    }
-
-    public boolean isFullNamePresent(String fullName) {
-        return propertyManager.isFullNamePresent(fullName);
-    }
-
-    /**
-     * Adds the new prefix into the PropertyManager. PropertyManager will update the property prefixes.
-     */
-    public void addPrefix(Prefix prefix) {
-        propertyManager.addPrefix(prefix);
-        propertyManager.updatePropertyPrefixes();
-    }
-
-    public void addFullName(String fullName) {
-        propertyManager.addFullName(fullName);
-    }
-
-    public void addCustomProperty(CustomProperty customProperty) {
-        propertyManager.addCustomProperty(customProperty);
-    }
 }

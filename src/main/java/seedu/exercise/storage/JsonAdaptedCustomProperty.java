@@ -46,6 +46,19 @@ public class JsonAdaptedCustomProperty {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted custom property
      */
+    public CustomProperty toModelType() throws IllegalValueException {
+        final Prefix modelShortName = toModelShortName();
+        final String modelFullName = toModelFullName();
+        final ParameterType modelParameterType = toModelParameterType();
+        return new CustomProperty(modelShortName, modelFullName, modelParameterType);
+    }
+
+    /**
+     * Converts the short name of a Jackson-friendly adapted custom property object into its corresponding
+     * model's {@code Prefix} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted custom property
+     */
     private Prefix toModelShortName() throws IllegalValueException {
         if (shortName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -97,18 +110,5 @@ public class JsonAdaptedCustomProperty {
         } else {
             return ParameterType.DATE;
         }
-    }
-
-    /**
-     * Converts the short name of a Jackson-friendly adapted custom property object into its corresponding
-     * model's {@code Prefix} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted custom property
-     */
-    public CustomProperty toModelType() throws IllegalValueException {
-        final Prefix modelShortName = toModelShortName();
-        final String modelFullName = toModelFullName();
-        final ParameterType modelParameterType = toModelParameterType();
-        return new CustomProperty(modelShortName, modelFullName, modelParameterType);
     }
 }

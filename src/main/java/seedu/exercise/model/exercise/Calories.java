@@ -1,6 +1,7 @@
 package seedu.exercise.model.exercise;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_NUMBERS;
 import static seedu.exercise.commons.util.AppUtil.checkArgument;
 
 /**
@@ -27,7 +28,7 @@ public class Calories {
      * Returns true if a given string is a valid calories burnt.
      */
     public static boolean isValidCalories(String test) {
-        return test.matches(ValidationRegex.ONLY_NUMBERS.getRegex());
+        return test.matches(ONLY_NUMBERS);
     }
 
     @Override

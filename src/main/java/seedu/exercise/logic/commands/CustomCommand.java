@@ -57,8 +57,6 @@ public class CustomCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SHORT_NAME);
         }
 
-        model.addPrefix(shortName);
-        model.addFullName(fullName);
         model.addCustomProperty(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

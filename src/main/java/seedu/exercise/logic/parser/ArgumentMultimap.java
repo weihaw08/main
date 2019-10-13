@@ -65,15 +65,15 @@ public class ArgumentMultimap {
      */
     public Map<String, String> getAllCustomProperties() {
         List<CustomProperty> currentCustomProperties = getCustomProperties();
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> customPropertiesMap = new HashMap<>();
         for (CustomProperty property : currentCustomProperties) {
             Prefix currentPrefix = property.getPrefix();
             Optional<String> propertyValue = getValue(currentPrefix);
             if (propertyValue.isPresent()) {
-                result.put(property.getFullName(), propertyValue.get());
+                customPropertiesMap.put(property.getFullName(), propertyValue.get());
             }
         }
-        return result;
+        return customPropertiesMap;
     }
 
     /**

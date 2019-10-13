@@ -1,7 +1,6 @@
 package seedu.exercise.logic.parser;
 
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIXES_SET;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
@@ -10,6 +9,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
+import static seedu.exercise.logic.parser.CliSyntax.combinePrefixes;
 
 import java.util.List;
 import java.util.Map;
@@ -41,8 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        Prefix[] allPrefixes = combinePrefixes(PREFIX_CATEGORY, PREFIX_INDEX);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIXES_SET);
+            ArgumentTokenizer.tokenize(args, allPrefixes);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_CATEGORY) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -98,6 +99,5 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddRegimeCommand(indexes, regimeName);
     }
-
 
 }
