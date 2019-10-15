@@ -28,7 +28,7 @@ import seedu.exercise.model.exercise.PropertyManager;
 public class DefaultPropertyManagerUtil {
 
     /**
-     * Creates a new {@code PropertyManager} that contains the default short names, default full names and
+     * Creates a new {@code PropertyManager} that contains the default prefixes, default full names and
      * an empty list of default custom properties.
      */
     public static PropertyManager getDefaultPropertyManager() {
@@ -39,7 +39,7 @@ public class DefaultPropertyManagerUtil {
     }
 
     /**
-     * Creates a new {@code Set<Prefix>} that contains all the short names of the default exercise properties.
+     * Creates a new {@code Set<Prefix>} that contains all the prefixes of the default exercise properties.
      */
     private static Set<Prefix> getDefaultPrefixes() {
         Set<Prefix> defaultPrefixes = new HashSet<>();

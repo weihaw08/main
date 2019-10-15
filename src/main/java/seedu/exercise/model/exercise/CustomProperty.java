@@ -15,7 +15,7 @@ import seedu.exercise.logic.parser.Prefix;
 public class CustomProperty {
     public static final String FULL_NAME_CONSTRAINTS = "Full names should contain only alphabets and should"
         + " not be blank.";
-    public static final String SHORT_NAME_CONSTRAINTS = "Short names should contain only alphabets and should"
+    public static final String PREFIX_NAME_CONSTRAINTS = "Prefix names should contain only alphabets, should"
         + " have no spaces and should not be blank.";
 
     private final Prefix prefix;
@@ -32,7 +32,7 @@ public class CustomProperty {
     public CustomProperty(Prefix prefix, String fullName, ParameterType parameterType) {
         requireAllNonNull(fullName, prefix, parameterType);
         checkArgument(isValidFullName(fullName), FULL_NAME_CONSTRAINTS);
-        checkArgument(isValidShortName(prefix.getPrefixName()), SHORT_NAME_CONSTRAINTS);
+        checkArgument(isValidPrefixName(prefix.getPrefixName()), PREFIX_NAME_CONSTRAINTS);
         this.fullName = fullName;
         this.prefix = prefix;
         this.parameterType = parameterType;
@@ -49,13 +49,13 @@ public class CustomProperty {
     }
 
     /**
-     * Checks if the given short name is valid. The short name of a custom property refers to the text before
+     * Checks if the given prefix name is valid. The prefix name of a custom property refers to the text before
      * '/' in its prefix.
      *
-     * @param test the short name of a custom property
-     * @return true if and only if the short name contains only alphabets and does not contain any whitespaces.
+     * @param test the prefix name of a custom property
+     * @return true if and only if the prefix name contains only alphabets and does not contain any whitespaces.
      */
-    public static boolean isValidShortName(String test) {
+    public static boolean isValidPrefixName(String test) {
         return test.matches(ONLY_ALPHABETS);
     }
 
@@ -111,7 +111,7 @@ public class CustomProperty {
         StringBuilder builder = new StringBuilder();
         builder.append(" Full Name: ")
             .append(fullName)
-            .append(" Short Name: ")
+            .append(" Prefix Name: ")
             .append(prefix.getPrefixName());
         return builder.toString();
     }

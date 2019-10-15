@@ -22,7 +22,7 @@ public class Exercise {
     private final Unit unit;
     private final Calories calories;
 
-    // Data fields
+    // Optional fields
     private final Set<Muscle> muscles = new HashSet<>();
     private final Map<String, String> customProperties = new HashMap<>();
 

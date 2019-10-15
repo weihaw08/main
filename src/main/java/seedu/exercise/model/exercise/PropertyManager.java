@@ -70,14 +70,14 @@ public class PropertyManager {
     /**
      * Adds the prefix for a newly defined custom property.
      */
-    public void addPrefix(Prefix prefix) {
+    private void addPrefix(Prefix prefix) {
         prefixes.add(prefix);
     }
 
     /**
      * Adds the full name for a newly defined custom property.
      */
-    public void addFullName(String fullName) {
+    private void addFullName(String fullName) {
         fullNames.add(fullName);
     }
 
@@ -90,6 +90,7 @@ public class PropertyManager {
         addPrefix(newPrefix);
         addFullName(newFullName);
         CUSTOM_PROPERTIES.add(customProperty);
+        updatePropertyPrefixes();
     }
 
     /**
