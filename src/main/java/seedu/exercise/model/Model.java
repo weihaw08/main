@@ -6,9 +6,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.exercise.CustomProperty;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.PropertyManager;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.schedule.Schedule;
 
@@ -59,10 +60,12 @@ public interface Model {
     /**
      * Replaces exercise book data with the data in {@code anotherBook}.
      */
-    void setExerciseBook(ReadOnlyExerciseBook anotherBook);
+    void setExerciseBook(ReadOnlyResourceBook<Exercise> anotherBook);
 
-    /** Returns the data in the exercise book */
-    ReadOnlyExerciseBook getExerciseBookData();
+    /**
+     * Returns the data in the exercise book
+     */
+    ReadOnlyResourceBook<Exercise> getExerciseBookData();
 
     /**
      * Returns true if an exercise with the same identity as {@code exercise} exists in the exercise book.
@@ -99,7 +102,9 @@ public interface Model {
      */
     ObservableList<Regime> getFilteredRegimeList();
 
-    /** Returns an unmodifiable view of the filtered schedule list */
+    /**
+     * Returns an unmodifiable view of the filtered schedule list
+     */
     ObservableList<Schedule> getFilteredScheduleList();
 
     /**
@@ -108,7 +113,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExerciseList(Predicate<Exercise> predicate);
-
 
     /**
      * Returns the user prefs' regime book file path.
@@ -123,10 +127,12 @@ public interface Model {
     /**
      * Replaces regime book data with the data in {@code anotherBook}.
      */
-    void setRegimeBook(ReadOnlyRegimeBook anotherBook);
+    void setRegimeBook(ReadOnlyResourceBook<Regime> anotherBook);
 
-    /** Returns the data in the regime book */
-    ReadOnlyRegimeBook getAllRegimeData();
+    /**
+     * Returns the data in the regime book
+     */
+    ReadOnlyResourceBook<Regime> getAllRegimeData();
 
     /**
      * Returns true if an regime with the same identity as {@code regime} exists in the regime book.
@@ -160,6 +166,7 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered exercise list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRegimeList(Predicate<Regime> predicate);
@@ -175,16 +182,18 @@ public interface Model {
      */
     void addSchedule(Schedule schedule);
 
-    /** Returns the data in the regime book */
-    ReadOnlyScheduleBook getAllScheduleData();
+    /**
+     * Returns the data in the regime book
+     */
+    ReadOnlyResourceBook<Schedule> getAllScheduleData();
 
     /**
      * Deletes a Schedule and adds it to {@code ExerciseBook} for tracking.
-     *
+     * <p>
      * If the schedule has some exercises that are duplicates exercises as
-     * specified by {@link Exercise#isSameExercise}, that exercise will
+     * specified by {@link Exercise#isSameResource}, that exercise will
      * be ignored and not be added into the exercise tracker.
-     *
+     * <p>
      * All exercises added will have their dates changed to be the date
      * of the schedule itself.
      *
@@ -214,11 +223,12 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the list of suggested exercises
-     * */
+     */
     ObservableList<Exercise> getSuggestedExerciseList();
 
     /**
      * Updates the filter of the filtered exercise list to filter by the give {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateSuggestedExerciseList(Predicate<Exercise> predicateShowAllExercises);
@@ -226,5 +236,5 @@ public interface Model {
     /**
      * Returns the data of all exercises in the database
      */
-    ReadOnlyExerciseBook getDatabaseBook();
+    ReadOnlyResourceBook<Exercise> getDatabaseBook();
 }

@@ -1,6 +1,6 @@
 package seedu.exercise.storage;
 
-import static seedu.exercise.model.exercise.PropertyManager.getCustomProperties;
+import static seedu.exercise.model.property.PropertyManager.getCustomProperties;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.exercise.CustomProperty;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.PropertyManager;
 
 /**
  * A PropertyManager that is serializable to JSON format.

@@ -9,11 +9,19 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.exercise.model.Resource;
+import seedu.exercise.model.property.Calories;
+import seedu.exercise.model.property.Date;
+import seedu.exercise.model.property.Muscle;
+import seedu.exercise.model.property.Name;
+import seedu.exercise.model.property.Quantity;
+import seedu.exercise.model.property.Unit;
+
 /**
  * Represents an Exercise in the exercise book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Exercise {
+public class Exercise extends Resource {
 
     // Identity fields
     private final Name name;
@@ -94,11 +102,16 @@ public class Exercise {
      * Returns true if both exercises of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two exercises.
      */
-    public boolean isSameExercise(Exercise otherExercise) {
-        if (otherExercise == this) {
+    public boolean isSameResource(Resource otherResource) {
+        if (otherResource == this) {
             return true;
         }
 
+        if (!(otherResource instanceof Exercise)) {
+            return false;
+        }
+
+        Exercise otherExercise = (Exercise) otherResource;
         return otherExercise != null
             && otherExercise.getName().equals(getName())
             && otherExercise.getDate().equals(getDate());

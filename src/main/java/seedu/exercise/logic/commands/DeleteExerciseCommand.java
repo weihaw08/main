@@ -6,8 +6,8 @@ import java.util.List;
 
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
+import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.exceptions.CommandException;
-import seedu.exercise.logic.commands.history.EventHistory;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.exercise.Exercise;
 
@@ -52,7 +52,7 @@ public class DeleteExerciseCommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteExerciseCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteExerciseCommand) other).targetIndex)); // state check
+            || (other instanceof DeleteExerciseCommand // instanceof handles nulls
+            && targetIndex.equals(((DeleteExerciseCommand) other).targetIndex)); // state check
     }
 }

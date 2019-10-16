@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.exercise.model.ExerciseBook;
+import seedu.exercise.model.book.ExerciseBook;
 import seedu.exercise.model.exercise.Exercise;
 
 /**
@@ -68,7 +68,7 @@ public class TypicalExercises {
     public static ExerciseBook getTypicalExerciseBook() {
         ExerciseBook eb = new ExerciseBook();
         for (Exercise exercise : getTypicalExercises()) {
-            eb.addExercise(exercise);
+            eb.addResource(exercise);
         }
         return eb;
     }

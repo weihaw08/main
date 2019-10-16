@@ -6,12 +6,12 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
-import static seedu.exercise.model.exercise.Calories.PROPERTY_CALORIES;
-import static seedu.exercise.model.exercise.Date.PROPERTY_DATE;
-import static seedu.exercise.model.exercise.Muscle.PROPERTY_MUSCLE;
-import static seedu.exercise.model.exercise.Name.PROPERTY_NAME;
-import static seedu.exercise.model.exercise.Quantity.PROPERTY_QUANTITY;
-import static seedu.exercise.model.exercise.Unit.PROPERTY_UNIT;
+import static seedu.exercise.model.property.Calories.PROPERTY_CALORIES;
+import static seedu.exercise.model.property.Date.PROPERTY_DATE;
+import static seedu.exercise.model.property.Muscle.PROPERTY_MUSCLE;
+import static seedu.exercise.model.property.Name.PROPERTY_NAME;
+import static seedu.exercise.model.property.Quantity.PROPERTY_QUANTITY;
+import static seedu.exercise.model.property.Unit.PROPERTY_UNIT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.exercise.CustomProperty;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.PropertyManager;
 
 /**
  * Contains utility methods for initialising a default {@code PropertyManager}.

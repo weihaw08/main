@@ -26,24 +26,24 @@ public class ExerciseTest {
     @Test
     public void isSameExercise() {
         // same object -> returns true
-        assertTrue(WALK.isSameExercise(WALK));
+        assertTrue(WALK.isSameResource(WALK));
 
         // null -> returns false
-        assertFalse(WALK.isSameExercise(null));
+        assertFalse(WALK.isSameResource(null));
 
         // different date and calories -> returns false
         Exercise editedWalk = new ExerciseBuilder(WALK).withDate(VALID_DATE_BASKETBALL)
             .withCalories(VALID_CALORIES_BASKETBALL).build();
-        assertFalse(WALK.isSameExercise(editedWalk));
+        assertFalse(WALK.isSameResource(editedWalk));
 
         // different name -> returns false
         editedWalk = new ExerciseBuilder(WALK).withName(VALID_NAME_BASKETBALL).build();
-        assertFalse(WALK.isSameExercise(editedWalk));
+        assertFalse(WALK.isSameResource(editedWalk));
 
         // same name, same calories, different attributes -> returns true
         editedWalk = new ExerciseBuilder(WALK).withCalories(VALID_CALORIES_BASKETBALL)
             .withQuantity(VALID_QUANTITY_BASKETBALL).withMuscles(VALID_MUSCLE_AEROBICS).build();
-        assertTrue(WALK.isSameExercise(editedWalk));
+        assertTrue(WALK.isSameResource(editedWalk));
     }
 
     @Test

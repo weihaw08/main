@@ -2,10 +2,11 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.exercise.logic.commands.history.EventHistory;
-import seedu.exercise.model.ExerciseBook;
+import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.ReadOnlyExerciseBook;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.exercise.Exercise;
 
 /**
  * Clears the exercise book.
@@ -18,7 +19,7 @@ public class ClearCommand extends Command implements UndoableCommand {
     /**
      * The exercise book that this instance of ClearCommand has cleared.
      */
-    private ReadOnlyExerciseBook exerciseBookCleared;
+    private ReadOnlyResourceBook<Exercise> exerciseBookCleared;
 
     @Override
     public CommandResult execute(Model model) {
@@ -34,7 +35,7 @@ public class ClearCommand extends Command implements UndoableCommand {
      *
      * @return exercise book to be cleared
      */
-    public ReadOnlyExerciseBook getExerciseBookCleared() {
+    public ReadOnlyResourceBook<Exercise> getExerciseBookCleared() {
         return exerciseBookCleared;
     }
 }

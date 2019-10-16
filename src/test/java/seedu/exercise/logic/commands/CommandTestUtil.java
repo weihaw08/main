@@ -17,8 +17,8 @@ import java.util.List;
 
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.exceptions.CommandException;
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
+import seedu.exercise.model.book.ExerciseBook;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
 import seedu.exercise.testutil.EditExerciseDescriptorBuilder;

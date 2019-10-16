@@ -9,12 +9,12 @@ import static seedu.exercise.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
-import seedu.exercise.model.RegimeBook;
-import seedu.exercise.model.ScheduleBook;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

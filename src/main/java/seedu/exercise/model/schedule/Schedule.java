@@ -1,15 +1,17 @@
 package seedu.exercise.model.schedule;
 
 import java.util.List;
+import java.util.Objects;
 
-import seedu.exercise.model.exercise.Date;
+import seedu.exercise.model.Resource;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.property.Date;
 import seedu.exercise.model.regime.Regime;
 
 /**
  * Represents a schedule for a regime at a certain date.
  */
-public class Schedule {
+public class Schedule extends Resource {
     private final Regime regime;
     private final Date date;
 
@@ -27,21 +29,31 @@ public class Schedule {
     }
 
     public List<Exercise> getExercises() {
-        return regime.getExercises().asUnmodifiableObservableList();
+        return regime.getRegimeExercises().asUnmodifiableObservableList();
     }
 
     /**
      * Returns true if both {@code schedules} have the same date
      */
-    public boolean isSameSchedule(Schedule schedule) {
-        return date.equals(schedule.date);
+    public boolean isSameResource(Resource otherResource) {
+        return this.equals(otherResource);
     }
 
     @Override
     public boolean equals(Object other) {
         return (other == this)
             || (other instanceof Schedule)
-            && date.equals (((Schedule) other).date);
+            && date.equals(((Schedule) other).date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(regime, date);
+    }
+
+    @Override
+    public String toString() {
+        return date.toString() + "\n" + regime.toString();
     }
 
 }

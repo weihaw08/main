@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.model.exercise.exceptions.DuplicateExerciseException;
-import seedu.exercise.model.exercise.exceptions.ExerciseNotFoundException;
+import seedu.exercise.model.exceptions.DuplicateResourceException;
+import seedu.exercise.model.exceptions.ResourceNotFoundException;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 public class UniqueExerciseListTest {
@@ -55,28 +55,28 @@ public class UniqueExerciseListTest {
     @Test
     public void add_duplicateExercise_throwsDuplicateExerciseException() {
         uniqueExerciseList.add(WALK);
-        assertThrows(DuplicateExerciseException.class, () -> uniqueExerciseList.add(WALK));
+        assertThrows(DuplicateResourceException.class, () -> uniqueExerciseList.add(WALK));
     }
 
     @Test
     public void setExercise_nullTargetExercise_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setExercise(null, WALK));
+        assertThrows(NullPointerException.class, () -> uniqueExerciseList.set(null, WALK));
     }
 
     @Test
     public void setExercise_nullEditedExercise_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setExercise(WALK, null));
+        assertThrows(NullPointerException.class, () -> uniqueExerciseList.set(WALK, null));
     }
 
     @Test
     public void setExercise_targetExerciseNotInList_throwsExerciseNotFoundException() {
-        assertThrows(ExerciseNotFoundException.class, () -> uniqueExerciseList.setExercise(WALK, WALK));
+        assertThrows(ResourceNotFoundException.class, () -> uniqueExerciseList.set(WALK, WALK));
     }
 
     @Test
     public void setExercise_editedExerciseIsSameExercise_success() {
         uniqueExerciseList.add(WALK);
-        uniqueExerciseList.setExercise(WALK, WALK);
+        uniqueExerciseList.set(WALK, WALK);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(WALK);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
@@ -87,7 +87,7 @@ public class UniqueExerciseListTest {
         uniqueExerciseList.add(WALK);
         Exercise editedWalk = new ExerciseBuilder(WALK).withQuantity(VALID_QUANTITY_BASKETBALL)
             .withMuscles(VALID_MUSCLE_AEROBICS).build();
-        uniqueExerciseList.setExercise(WALK, editedWalk);
+        uniqueExerciseList.set(WALK, editedWalk);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(editedWalk);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
@@ -96,7 +96,7 @@ public class UniqueExerciseListTest {
     @Test
     public void setExercise_editedExerciseHasDifferentIdentity_success() {
         uniqueExerciseList.add(WALK);
-        uniqueExerciseList.setExercise(WALK, BASKETBALL);
+        uniqueExerciseList.set(WALK, BASKETBALL);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(BASKETBALL);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
@@ -106,7 +106,7 @@ public class UniqueExerciseListTest {
     public void setExercise_editedExerciseHasNonUniqueIdentity_throwsDuplicateExerciseException() {
         uniqueExerciseList.add(WALK);
         uniqueExerciseList.add(BASKETBALL);
-        assertThrows(DuplicateExerciseException.class, () -> uniqueExerciseList.setExercise(WALK, BASKETBALL));
+        assertThrows(DuplicateResourceException.class, () -> uniqueExerciseList.set(WALK, BASKETBALL));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class UniqueExerciseListTest {
 
     @Test
     public void remove_exerciseDoesNotExist_throwsExerciseNotFoundException() {
-        assertThrows(ExerciseNotFoundException.class, () -> uniqueExerciseList.remove(WALK));
+        assertThrows(ResourceNotFoundException.class, () -> uniqueExerciseList.remove(WALK));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class UniqueExerciseListTest {
 
     @Test
     public void setExercises_nullUniqueExerciseList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setExercises((UniqueExerciseList) null));
+        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setAll((UniqueExerciseList) null));
     }
 
     @Test
@@ -137,20 +137,20 @@ public class UniqueExerciseListTest {
         uniqueExerciseList.add(WALK);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(BASKETBALL);
-        uniqueExerciseList.setExercises(expectedUniqueExerciseList);
+        uniqueExerciseList.setAll(expectedUniqueExerciseList);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
     }
 
     @Test
     public void setExercises_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setExercises((List<Exercise>) null));
+        assertThrows(NullPointerException.class, () -> uniqueExerciseList.setAll((List<Exercise>) null));
     }
 
     @Test
     public void setExercises_list_replacesOwnListWithProvidedList() {
         uniqueExerciseList.add(WALK);
         List<Exercise> exerciseList = Collections.singletonList(BASKETBALL);
-        uniqueExerciseList.setExercises(exerciseList);
+        uniqueExerciseList.setAll(exerciseList);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(BASKETBALL);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
@@ -159,8 +159,8 @@ public class UniqueExerciseListTest {
     @Test
     public void setExercises_listWithDuplicateExercises_throwsDuplicateExerciseException() {
         List<Exercise> listWithDuplicateExercises = Arrays.asList(WALK, WALK);
-        assertThrows(DuplicateExerciseException.class, () ->
-            uniqueExerciseList.setExercises(listWithDuplicateExercises));
+        assertThrows(DuplicateResourceException.class, () ->
+            uniqueExerciseList.setAll(listWithDuplicateExercises));
     }
 
     @Test

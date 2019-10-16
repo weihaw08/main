@@ -2,14 +2,14 @@ package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CUSTOM_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_FULL_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_PARAMETER_TYPE;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CUSTOM_NAME;
 
 import seedu.exercise.logic.commands.CustomCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.exercise.CustomProperty;
-import seedu.exercise.model.exercise.ParameterType;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.ParameterType;
 
 /**
  * Parses input arguments and creates a new CustomCommand object.

@@ -39,12 +39,12 @@ import org.junit.jupiter.api.Test;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
-import seedu.exercise.model.exercise.Calories;
-import seedu.exercise.model.exercise.Date;
-import seedu.exercise.model.exercise.Muscle;
-import seedu.exercise.model.exercise.Name;
-import seedu.exercise.model.exercise.Quantity;
-import seedu.exercise.model.exercise.Unit;
+import seedu.exercise.model.property.Calories;
+import seedu.exercise.model.property.Date;
+import seedu.exercise.model.property.Muscle;
+import seedu.exercise.model.property.Name;
+import seedu.exercise.model.property.Quantity;
+import seedu.exercise.model.property.Unit;
 import seedu.exercise.testutil.EditExerciseDescriptorBuilder;
 
 public class EditCommandParserTest {

@@ -1,14 +1,14 @@
 package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CUSTOM_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_FULL_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_PARAMETER_TYPE;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CUSTOM_NAME;
 
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.exercise.CustomProperty;
+import seedu.exercise.model.property.CustomProperty;
 
 /**
  * Adds a custom property for the exercises.

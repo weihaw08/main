@@ -25,20 +25,20 @@ import seedu.exercise.logic.commands.CommandResult;
 import seedu.exercise.logic.commands.ListCommand;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
-import seedu.exercise.model.ReadOnlyExerciseBook;
-import seedu.exercise.model.RegimeBook;
-import seedu.exercise.model.ScheduleBook;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.storage.JsonExerciseBookStorage;
 import seedu.exercise.storage.JsonPropertyManagerStorage;
-import seedu.exercise.storage.JsonRegimeBookStorage;
-import seedu.exercise.storage.JsonScheduleBookStorage;
 import seedu.exercise.storage.JsonUserPrefsStorage;
 import seedu.exercise.storage.StorageManager;
+import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
+import seedu.exercise.storage.bookstorage.JsonRegimeBookStorage;
+import seedu.exercise.storage.bookstorage.JsonScheduleBookStorage;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 public class LogicManagerTest {
@@ -52,20 +52,20 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonExerciseBookStorage exerciseBookStorage =
+        JsonExerciseBookStorage jsonExerciseBookStorage =
             new JsonExerciseBookStorage(temporaryFolder.resolve("exerciseBook.json"));
-        JsonRegimeBookStorage regimeBookStorage =
-                new JsonRegimeBookStorage(temporaryFolder.resolve("regimeBook.json"));
-        JsonExerciseBookStorage allExerciseBookStorage =
-                new JsonExerciseBookStorage(temporaryFolder.resolve("exercisedatabase.json"));
+        JsonRegimeBookStorage jsonRegimeBookStorage =
+            new JsonRegimeBookStorage(temporaryFolder.resolve("regimeBook.json"));
+        JsonExerciseBookStorage allJsonExerciseDatabase =
+            new JsonExerciseBookStorage(temporaryFolder.resolve("exercisedatabase.json"));
         new JsonRegimeBookStorage(temporaryFolder.resolve("regimeBook.json"));
-        JsonScheduleBookStorage scheduleBookStorage =
-                new JsonScheduleBookStorage(temporaryFolder.resolve("scheduleBook.json"));
+        JsonScheduleBookStorage jsonScheduleBookStorage =
+            new JsonScheduleBookStorage(temporaryFolder.resolve("scheduleBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonPropertyManagerStorage propertyManagerStorage =
             new JsonPropertyManagerStorage(temporaryFolder.resolve("propertyManager.json"));
-        StorageManager storage = new StorageManager(exerciseBookStorage, regimeBookStorage,
-            allExerciseBookStorage, scheduleBookStorage, userPrefsStorage, propertyManagerStorage);
+        StorageManager storage = new StorageManager(jsonExerciseBookStorage, allJsonExerciseDatabase,
+            jsonRegimeBookStorage, jsonScheduleBookStorage, userPrefsStorage, propertyManagerStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -90,20 +90,20 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonExerciseBookIoExceptionThrowingStub
-        JsonExerciseBookStorage exerciseBookStorage =
+        JsonExerciseBookStorage jsonExerciseBookStorage =
             new JsonExerciseBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionExerciseBook.json"));
-        JsonRegimeBookStorage regimeBookStorage =
+        JsonRegimeBookStorage jsonRegimeBookStorage =
             new JsonRegimeBookStorage(temporaryFolder.resolve("ioExceptionRegimeBook.json"));
-        JsonScheduleBookStorage scheduleBookStorage =
-                new JsonScheduleBookStorage(temporaryFolder.resolve("ioExceptionScheduleBook.json"));
-        JsonExerciseBookStorage allExerciseBookStorage =
-                new JsonExerciseBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAllExerciseBook.json"));
+        JsonScheduleBookStorage jsonScheduleBookStorage =
+            new JsonScheduleBookStorage(temporaryFolder.resolve("ioExceptionScheduleBook.json"));
+        JsonExerciseBookStorage allJsonExerciseBookStorage =
+            new JsonExerciseBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAllExerciseBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
             new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonPropertyManagerStorage propertyManagerStorage =
             new JsonPropertyManagerStorage(temporaryFolder.resolve("ioExceptionPropertyManager.json"));
-        StorageManager storage = new StorageManager(exerciseBookStorage, regimeBookStorage,
-            allExerciseBookStorage, scheduleBookStorage, userPrefsStorage, propertyManagerStorage);
+        StorageManager storage = new StorageManager(jsonExerciseBookStorage, allJsonExerciseBookStorage,
+            jsonRegimeBookStorage, jsonScheduleBookStorage, userPrefsStorage, propertyManagerStorage);
 
         logic = new LogicManager(model, storage);
 
@@ -163,7 +163,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
         Model expectedModel = new ModelManager(model.getExerciseBookData(), new RegimeBook(),
-                new ExerciseBook(), new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+            new ExerciseBook(), new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -189,8 +189,7 @@ public class LogicManagerTest {
             super(filePath);
         }
 
-        @Override
-        public void saveExerciseBook(ReadOnlyExerciseBook exerciseBook, Path filePath) throws IOException {
+        public void saveResourceBook(ReadOnlyResourceBook<Exercise> exerciseBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

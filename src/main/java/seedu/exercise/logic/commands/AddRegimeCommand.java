@@ -14,8 +14,8 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.property.Name;
 import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.regime.RegimeName;
 
 /**
  *
@@ -29,7 +29,7 @@ public class AddRegimeCommand extends AddCommand {
             + PREFIX_INDEX + "INDEX\n"
             + "\t\tExample: " + COMMAND_WORD + " "
             + PREFIX_CATEGORY + "regime "
-            + PREFIX_NAME + "power set"
+            + PREFIX_NAME + "power set "
             + PREFIX_INDEX + "1 "
             + PREFIX_INDEX + "2";
 
@@ -40,9 +40,9 @@ public class AddRegimeCommand extends AddCommand {
     public static final String MESSAGE_DUPLICATE_INDEX_WHEN_CREATING_REGIME = "There is duplicate index.";
 
     private List<Index> toAddIndexes;
-    private RegimeName name;
+    private Name name;
 
-    public AddRegimeCommand(List<Index> indexes, RegimeName name) {
+    public AddRegimeCommand(List<Index> indexes, Name name) {
         requireAllNonNull(indexes, name);
         toAddIndexes = indexes;
         this.name = name;
@@ -65,7 +65,7 @@ public class AddRegimeCommand extends AddCommand {
         Regime regime = new Regime(name, new UniqueExerciseList());
         if (!model.hasRegime(regime)) {
             for (Index index : toAddIndexes) {
-                if (regime.getExercises().contains(lastShownList.get(index.getZeroBased()))) {
+                if (regime.getRegimeExercises().contains(lastShownList.get(index.getZeroBased()))) {
                     throw new CommandException(MESSAGE_DUPLICATE_INDEX_WHEN_CREATING_REGIME);
                 }
                 regime.addExercise(lastShownList.get(index.getZeroBased()));
@@ -82,7 +82,7 @@ public class AddRegimeCommand extends AddCommand {
             List<Regime> regimes = model.getFilteredRegimeList();
             Regime regimeToAddExercises = regimes.get(indexOfRegime);
 
-            UniqueExerciseList currentExerciseList = regimeToAddExercises.getExercises();
+            UniqueExerciseList currentExerciseList = regimeToAddExercises.getRegimeExercises();
 
             //check whether exercise is in current exercise list in regime
             for (Index index : toAddIndexes) {
@@ -108,4 +108,6 @@ public class AddRegimeCommand extends AddCommand {
                 || (other instanceof AddRegimeCommand // instanceof handles nulls
                 && toAddIndexes.equals(((AddRegimeCommand) other).toAddIndexes));
     }
+
+
 }

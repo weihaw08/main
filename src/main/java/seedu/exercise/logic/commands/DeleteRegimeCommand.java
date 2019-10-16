@@ -10,8 +10,8 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.property.Name;
 import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.regime.RegimeName;
 
 /**
  * Deletes a regime identified using it's name or deletes exercises in regime.
@@ -23,9 +23,9 @@ public class DeleteRegimeCommand extends DeleteCommand {
     private static final String MESSAGE_DELETE_EXERCISE_IN_REGIME_SUCCESS = "Deleted exercises in regime.";
 
     private final List<Index> indexes;
-    private final RegimeName name;
+    private final Name name;
 
-    public DeleteRegimeCommand(RegimeName name, List<Index> indexes) {
+    public DeleteRegimeCommand(Name name, List<Index> indexes) {
         this.name = name;
         this.indexes = indexes;
     }
@@ -51,7 +51,7 @@ public class DeleteRegimeCommand extends DeleteCommand {
 
         } else { //index provided, delete exercise in regime
 
-            List<Exercise> currentExerciseList = regimeToDelete.getExercises().asUnmodifiableObservableList();
+            List<Exercise> currentExerciseList = regimeToDelete.getRegimeExercises().asUnmodifiableObservableList();
             //check all index valid
             for (Index targetIndex : indexes) {
                 if (targetIndex.getZeroBased() >= currentExerciseList.size()) {

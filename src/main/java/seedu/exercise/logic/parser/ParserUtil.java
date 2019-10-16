@@ -1,7 +1,7 @@
 package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.exercise.model.exercise.PropertyManager.getCustomProperties;
+import static seedu.exercise.model.property.PropertyManager.getCustomProperties;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,15 +14,14 @@ import java.util.Set;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.util.StringUtil;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.exercise.Calories;
-import seedu.exercise.model.exercise.CustomProperty;
-import seedu.exercise.model.exercise.Date;
-import seedu.exercise.model.exercise.Muscle;
-import seedu.exercise.model.exercise.Name;
-import seedu.exercise.model.exercise.ParameterType;
-import seedu.exercise.model.exercise.Quantity;
-import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.regime.RegimeName;
+import seedu.exercise.model.property.Calories;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.Date;
+import seedu.exercise.model.property.Muscle;
+import seedu.exercise.model.property.Name;
+import seedu.exercise.model.property.ParameterType;
+import seedu.exercise.model.property.Quantity;
+import seedu.exercise.model.property.Unit;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -70,21 +69,6 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String name} into a {@code RegimeName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static RegimeName parseRegimeName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!RegimeName.isValidRegimeName(trimmedName)) {
-            throw new ParseException(RegimeName.MESSAGE_CONSTRAINTS);
-        }
-        return new RegimeName(trimmedName);
     }
 
     /**

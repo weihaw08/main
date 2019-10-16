@@ -16,12 +16,12 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
-import seedu.exercise.model.RegimeBook;
-import seedu.exercise.model.ScheduleBook;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
 
 /**

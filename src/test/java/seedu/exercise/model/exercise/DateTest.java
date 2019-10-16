@@ -6,6 +6,8 @@ import static seedu.exercise.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.exercise.model.property.Date;
+
 public class DateTest {
 
     @Test

@@ -51,8 +51,8 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteExerciseCommand command = (DeleteExerciseCommand) parser.parseCommand(
-                DeleteExerciseCommand.COMMAND_WORD + " " + CATEGORY_DESC_EXERCISE + " "
-                        + PREFIX_INDEX + INDEX_FIRST_EXERCISE.getOneBased());
+            DeleteExerciseCommand.COMMAND_WORD + " " + CATEGORY_DESC_EXERCISE + " "
+                + PREFIX_INDEX + INDEX_FIRST_EXERCISE.getOneBased());
         assertEquals(new DeleteExerciseCommand(INDEX_FIRST_EXERCISE), command);
     }
 
@@ -61,7 +61,7 @@ public class ExerciseBookParserTest {
         Exercise build = new ExerciseBuilder().build();
         EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(build).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_EXERCISE.getOneBased() + " " + ExerciseUtil.getEditExerciseDescriptorDetails(descriptor));
+            + INDEX_FIRST_EXERCISE.getOneBased() + " " + ExerciseUtil.getEditExerciseDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_EXERCISE, descriptor), command);
     }
 
@@ -75,7 +75,7 @@ public class ExerciseBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

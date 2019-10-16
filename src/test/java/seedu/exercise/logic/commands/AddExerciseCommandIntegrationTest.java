@@ -8,12 +8,12 @@ import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
-import seedu.exercise.model.RegimeBook;
-import seedu.exercise.model.ScheduleBook;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.testutil.ExerciseBuilder;
 
@@ -27,7 +27,7 @@ public class AddExerciseCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalExerciseBook(), new RegimeBook(), new ExerciseBook(),
-                new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+            new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
     }
 
     @Test
@@ -35,18 +35,18 @@ public class AddExerciseCommandIntegrationTest {
         Exercise validExercise = new ExerciseBuilder().build();
 
         Model expectedModel = new ModelManager(model.getExerciseBookData(), new RegimeBook(), new ExerciseBook(),
-                new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+            new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
         expectedModel.addExercise(validExercise);
 
         assertCommandSuccess(new AddExerciseCommand(validExercise), model,
-                String.format(AddExerciseCommand.MESSAGE_SUCCESS, validExercise), expectedModel);
+            String.format(AddExerciseCommand.MESSAGE_SUCCESS, validExercise), expectedModel);
     }
 
     @Test
     public void execute_duplicateExercise_throwsCommandException() {
-        Exercise exerciseInList = model.getExerciseBookData().getExerciseList().get(0);
+        Exercise exerciseInList = model.getExerciseBookData().getResourceList().get(0);
         assertCommandFailure(new AddExerciseCommand(exerciseInList), model,
-                AddExerciseCommand.MESSAGE_DUPLICATE_EXERCISE);
+            AddExerciseCommand.MESSAGE_DUPLICATE_EXERCISE);
     }
 
 }

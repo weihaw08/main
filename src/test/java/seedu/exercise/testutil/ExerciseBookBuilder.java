@@ -1,6 +1,6 @@
 package seedu.exercise.testutil;
 
-import seedu.exercise.model.ExerciseBook;
+import seedu.exercise.model.book.ExerciseBook;
 import seedu.exercise.model.exercise.Exercise;
 
 /**
@@ -24,7 +24,7 @@ public class ExerciseBookBuilder {
      * Adds a new {@code Exercise} to the {@code ExerciseBook} that we are building.
      */
     public ExerciseBookBuilder withExercise(Exercise exercise) {
-        exerciseBook.addExercise(exercise);
+        exerciseBook.addResource(exercise);
         return this;
     }
 

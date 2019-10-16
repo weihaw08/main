@@ -15,8 +15,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.commons.core.GuiSettings;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.property.PropertyManager;
 import seedu.exercise.testutil.ExerciseBookBuilder;
 
 public class ModelManagerTest {

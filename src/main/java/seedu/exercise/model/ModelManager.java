@@ -14,9 +14,13 @@ import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.exercise.CustomProperty;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.PropertyManager;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.schedule.Schedule;
 import seedu.exercise.model.util.DateChangerUtil;
@@ -41,8 +45,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
      */
-    public ModelManager(ReadOnlyExerciseBook exerciseBook, ReadOnlyRegimeBook regimeBook,
-                        ReadOnlyExerciseBook databaseBook, ReadOnlyScheduleBook scheduleBook,
+    public ModelManager(ReadOnlyResourceBook<Exercise> exerciseBook, ReadOnlyResourceBook<Regime> regimeBook,
+                        ReadOnlyResourceBook<Exercise> databaseBook, ReadOnlyResourceBook<Schedule> scheduleBook,
                         ReadOnlyUserPrefs userPrefs, PropertyManager propertyManager) {
         super();
         requireAllNonNull(exerciseBook, regimeBook, databaseBook, scheduleBook, userPrefs, propertyManager);
@@ -54,10 +58,10 @@ public class ModelManager implements Model {
         this.regimeBook = new RegimeBook(regimeBook);
         this.scheduleBook = new ScheduleBook(scheduleBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredExercises = new FilteredList<>(this.exerciseBook.getExerciseList());
-        suggestedExercises = new FilteredList<>(this.databaseBook.getExerciseList());
-        filteredRegimes = new FilteredList<>(this.regimeBook.getRegimeList());
-        filteredSchedules = new FilteredList<>(this.scheduleBook.getScheduleList());
+        filteredExercises = new FilteredList<>(this.exerciseBook.getResourceList());
+        suggestedExercises = new FilteredList<>(this.databaseBook.getResourceList());
+        filteredRegimes = new FilteredList<>(this.regimeBook.getResourceList());
+        filteredSchedules = new FilteredList<>(this.scheduleBook.getResourceList());
 
         this.propertyManager = propertyManager;
         this.propertyManager.updatePropertyPrefixes();
@@ -65,7 +69,7 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new ExerciseBook(), new RegimeBook(), new ExerciseBook(),
-                new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+            new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -117,49 +121,49 @@ public class ModelManager implements Model {
     //=========== ExerciseBook ================================================================================
 
     @Override
-    public void setExerciseBook(ReadOnlyExerciseBook anotherBook) {
+    public void setExerciseBook(ReadOnlyResourceBook<Exercise> anotherBook) {
         this.exerciseBook.resetData(anotherBook);
     }
 
     @Override
-    public ReadOnlyExerciseBook getExerciseBookData() {
+    public ReadOnlyResourceBook<Exercise> getExerciseBookData() {
         return exerciseBook;
     }
 
     @Override
     public boolean hasExercise(Exercise exercise) {
         requireNonNull(exercise);
-        return exerciseBook.hasExercise(exercise);
+        return exerciseBook.hasResource(exercise);
     }
 
     @Override
     public void deleteExercise(Exercise target) {
-        exerciseBook.removeExercise(target);
+        exerciseBook.removeResource(target);
     }
 
     /**
      * Adds an {@code Exercise} object into the exercise book.
      */
     public void addExercise(Exercise exercise) {
-        exerciseBook.addExercise(exercise);
+        exerciseBook.addResource(exercise);
         updateFilteredExerciseList(PREDICATE_SHOW_ALL_EXERCISES);
     }
 
     public void setExercise(Exercise target, Exercise editedExercise) {
         requireAllNonNull(target, editedExercise);
 
-        exerciseBook.setExercise(target, editedExercise);
+        exerciseBook.setResource(target, editedExercise);
     }
 
     //===================RegimeBook==============================================================================
 
     @Override
-    public void setRegimeBook(ReadOnlyRegimeBook anotherBook) {
+    public void setRegimeBook(ReadOnlyResourceBook<Regime> anotherBook) {
         this.regimeBook.resetData(anotherBook);
     }
 
     @Override
-    public ReadOnlyRegimeBook getAllRegimeData() {
+    public ReadOnlyResourceBook<Regime> getAllRegimeData() {
         return regimeBook;
     }
 
@@ -168,23 +172,23 @@ public class ModelManager implements Model {
      */
     @Override
     public void addRegime(Regime regime) {
-        regimeBook.addRegime(regime);
+        regimeBook.addResource(regime);
     }
 
     @Override
     public void deleteRegime(Regime target) {
-        regimeBook.removeRegime(target);
+        regimeBook.removeResource(target);
     }
 
     @Override
     public void setRegime(Regime target, Regime editedRegime) {
-        regimeBook.setRegime(target, editedRegime);
+        regimeBook.setResource(target, editedRegime);
     }
 
     @Override
     public boolean hasRegime(Regime regime) {
         requireNonNull(regime);
-        return regimeBook.hasRegime(regime);
+        return regimeBook.hasResource(regime);
     }
 
     @Override
@@ -196,31 +200,31 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
-        return scheduleBook.hasSchedule(schedule);
+        return scheduleBook.hasResource(schedule);
     }
 
     @Override
     public void addSchedule(Schedule schedule) {
         requireNonNull(schedule);
-        scheduleBook.addSchedule(schedule);
+        scheduleBook.addResource(schedule);
     }
 
     @Override
     public void completeSchedule(Schedule schedule) {
         requireNonNull(schedule);
 
-        scheduleBook.removeSchedule(schedule);
+        scheduleBook.removeResource(schedule);
         Collection<Exercise> scheduledExercises = DateChangerUtil
-                .changeAllDate(schedule.getExercises(), schedule.getDate());
+            .changeAllDate(schedule.getExercises(), schedule.getDate());
         for (Exercise exercise : scheduledExercises) {
-            if (!exerciseBook.hasExercise(exercise)) {
-                exerciseBook.addExercise(exercise);
+            if (!exerciseBook.hasResource(exercise)) {
+                exerciseBook.addResource(exercise);
             }
         }
     }
 
     @Override
-    public ReadOnlyScheduleBook getAllScheduleData() {
+    public ReadOnlyResourceBook<Schedule> getAllScheduleData() {
         return scheduleBook;
     }
 
@@ -259,6 +263,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Schedule List Accessors ===============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Schedule} backed by the internal list of
      * {@code scheduleBook}
@@ -288,7 +293,7 @@ public class ModelManager implements Model {
     //=========== ExerciseDatabase ===============================================================
 
     @Override
-    public ReadOnlyExerciseBook getDatabaseBook() {
+    public ReadOnlyResourceBook<Exercise> getDatabaseBook() {
         return databaseBook;
     }
 
@@ -319,15 +324,15 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return exerciseBook.equals(other.exerciseBook)
-                && regimeBook.equals(other.regimeBook)
-                && scheduleBook.equals(other.scheduleBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredExercises.equals(other.filteredExercises)
-                && filteredRegimes.equals(other.filteredRegimes)
-                && filteredSchedules.equals(other.filteredSchedules)
-                && databaseBook.equals(other.databaseBook)
-                && suggestedExercises.equals(other.suggestedExercises)
-                && propertyManager.equals(other.propertyManager);
+            && regimeBook.equals(other.regimeBook)
+            && scheduleBook.equals(other.scheduleBook)
+            && userPrefs.equals(other.userPrefs)
+            && filteredExercises.equals(other.filteredExercises)
+            && filteredRegimes.equals(other.filteredRegimes)
+            && filteredSchedules.equals(other.filteredSchedules)
+            && databaseBook.equals(other.databaseBook)
+            && suggestedExercises.equals(other.suggestedExercises)
+            && propertyManager.equals(other.propertyManager);
     }
 
 }

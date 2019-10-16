@@ -17,31 +17,29 @@ import seedu.exercise.commons.util.ConfigUtil;
 import seedu.exercise.commons.util.StringUtil;
 import seedu.exercise.logic.Logic;
 import seedu.exercise.logic.LogicManager;
-import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
-import seedu.exercise.model.ReadOnlyExerciseBook;
-import seedu.exercise.model.ReadOnlyRegimeBook;
-import seedu.exercise.model.ReadOnlyScheduleBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
-import seedu.exercise.model.RegimeBook;
-import seedu.exercise.model.ScheduleBook;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.exercise.PropertyManager;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.book.RegimeBook;
+import seedu.exercise.model.book.ScheduleBook;
+import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.property.PropertyManager;
+import seedu.exercise.model.regime.Regime;
+import seedu.exercise.model.schedule.Schedule;
 import seedu.exercise.model.util.DefaultPropertyManagerUtil;
 import seedu.exercise.model.util.SampleDataUtil;
-import seedu.exercise.storage.ExerciseBookStorage;
-import seedu.exercise.storage.JsonExerciseBookStorage;
 import seedu.exercise.storage.JsonPropertyManagerStorage;
-import seedu.exercise.storage.JsonRegimeBookStorage;
-import seedu.exercise.storage.JsonScheduleBookStorage;
 import seedu.exercise.storage.JsonUserPrefsStorage;
 import seedu.exercise.storage.PropertyManagerStorage;
-import seedu.exercise.storage.RegimeBookStorage;
-import seedu.exercise.storage.ScheduleBookStorage;
 import seedu.exercise.storage.Storage;
 import seedu.exercise.storage.StorageManager;
 import seedu.exercise.storage.UserPrefsStorage;
+import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
+import seedu.exercise.storage.bookstorage.JsonRegimeBookStorage;
+import seedu.exercise.storage.bookstorage.JsonScheduleBookStorage;
 import seedu.exercise.ui.Ui;
 import seedu.exercise.ui.UiManager;
 
@@ -70,16 +68,21 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ExerciseBookStorage exerciseBookStorage = new JsonExerciseBookStorage(userPrefs.getExerciseBookFilePath());
-        ExerciseBookStorage exerciseDatabaseStorage =
-                new JsonExerciseBookStorage(userPrefs.getAllExerciseBookFilePath());
-        RegimeBookStorage regimeBookStorage = new JsonRegimeBookStorage(userPrefs.getRegimeBookFilePath());
-        ScheduleBookStorage scheduleBookStorage = new JsonScheduleBookStorage(userPrefs.getScheduleBookFilePath());
+
+        JsonExerciseBookStorage exerciseBookStorage = new JsonExerciseBookStorage(userPrefs.getExerciseBookFilePath());
+
+        JsonExerciseBookStorage exerciseDatabaseStorage =
+            new JsonExerciseBookStorage(userPrefs.getAllExerciseBookFilePath());
+
+        JsonRegimeBookStorage regimeBookStorage = new JsonRegimeBookStorage(userPrefs.getRegimeBookFilePath());
+
+        JsonScheduleBookStorage scheduleBookStorage = new JsonScheduleBookStorage(userPrefs.getScheduleBookFilePath());
+
         PropertyManagerStorage propertyManagerStorage =
             new JsonPropertyManagerStorage(userPrefs.getPropertyManagerFilePath());
-        storage = new StorageManager(exerciseBookStorage, regimeBookStorage,
-                exerciseDatabaseStorage, scheduleBookStorage, userPrefsStorage, propertyManagerStorage);
 
+        storage = new StorageManager(exerciseBookStorage, exerciseDatabaseStorage, regimeBookStorage,
+            scheduleBookStorage, userPrefsStorage, propertyManagerStorage);
 
         initLogging(config);
 
@@ -96,24 +99,31 @@ public class MainApp extends Application {
      * or an empty exercise book will be used instead if errors occur when reading {@code storage}'s exercise book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        ReadOnlyExerciseBook initialData = readExerciseData(storage, storage.getExerciseBookFilePath());
-        ReadOnlyRegimeBook initialRegimeData = readRegimeData(storage, storage.getRegimeBookFilePath());
-        ReadOnlyExerciseBook initialDatabase = readExerciseData(storage, storage.getAllExerciseBookFilePath());
-        ReadOnlyScheduleBook initialScheduleData = readScheduleData(storage);
+        ReadOnlyResourceBook<Exercise> initialData = readExerciseData(storage, storage.getExerciseBookFilePath());
+
+        ReadOnlyResourceBook<Regime> initialRegimeData = readRegimeData(storage, storage.getRegimeBookFilePath());
+
+        ReadOnlyResourceBook<Exercise> initialDatabase =
+            readExerciseData(storage, storage.getExerciseDatabaseFilePath());
+
+        ReadOnlyResourceBook<Schedule> initialScheduleData = readScheduleData(storage);
+
         PropertyManager initialPropertyManager = getInitialPropertyManager(storage);
+
         return new ModelManager(initialData, initialRegimeData,
-                initialDatabase, initialScheduleData, userPrefs, initialPropertyManager);
+            initialDatabase, initialScheduleData, userPrefs, initialPropertyManager);
     }
 
     /**
-     * Returns a {@code ReadOnlyRegimeBook} using the file at {@code path}. <br>
+     * Returns a {@code ReadOnlyResourceBook<Regime>} using the file at {@code path}. <br>
      * The data is read from {@code storage}.
      */
-    private ReadOnlyRegimeBook readRegimeData(Storage storage, Path path) {
-        Optional<ReadOnlyRegimeBook> regimeBookOptional;
-        ReadOnlyRegimeBook regimeData;
+    private ReadOnlyResourceBook<Regime> readRegimeData(Storage storage, Path path) {
+        Optional<ReadOnlyResourceBook<Regime>> regimeBookOptional;
+        ReadOnlyResourceBook<Regime> regimeData;
+
         try {
-            regimeBookOptional = storage.readRegimeBook();
+            regimeBookOptional = storage.readRegimeBook(path);
             if (regimeBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample RegimeBook");
             }
@@ -124,17 +134,19 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty RegimeBook");
             regimeData = new RegimeBook();
+
         }
+
         return regimeData;
     }
 
     /**
-     * Returns a {@code ReadOnlyExerciseBook} using the file at {@code path}. <br>
+     * Returns a {@code ReadOnlyResourceBook<Exercise>} using the file at {@code path}. <br>
      * The data is read from {@code storage}.
      */
-    private ReadOnlyExerciseBook readExerciseData(Storage storage, Path path) {
-        Optional<ReadOnlyExerciseBook> exerciseBookOptional;
-        ReadOnlyExerciseBook exerciseData;
+    private ReadOnlyResourceBook<Exercise> readExerciseData(Storage storage, Path path) {
+        Optional<ReadOnlyResourceBook<Exercise>> exerciseBookOptional;
+        ReadOnlyResourceBook<Exercise> exerciseData;
 
         try {
             exerciseBookOptional = storage.readExerciseBook(path);
@@ -149,15 +161,16 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty ExerciseBook");
             exerciseData = new ExerciseBook();
         }
+
         return exerciseData;
     }
 
     /**
      * Returns a {@code PropertyManager} from {@code storage}.
      */
-    private ReadOnlyScheduleBook readScheduleData(Storage storage) {
-        Optional<ReadOnlyScheduleBook> scheduleBookOptional;
-        ReadOnlyScheduleBook initialScheduleData;
+    private ReadOnlyResourceBook<Schedule> readScheduleData(Storage storage) {
+        Optional<ReadOnlyResourceBook<Schedule>> scheduleBookOptional;
+        ReadOnlyResourceBook<Schedule> initialScheduleData;
 
         try {
             scheduleBookOptional = storage.readScheduleBook();

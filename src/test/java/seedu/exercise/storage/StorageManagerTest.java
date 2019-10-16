@@ -11,9 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.exercise.commons.core.GuiSettings;
-import seedu.exercise.model.ExerciseBook;
-import seedu.exercise.model.ReadOnlyExerciseBook;
 import seedu.exercise.model.UserPrefs;
+import seedu.exercise.model.book.ExerciseBook;
+import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
+import seedu.exercise.storage.bookstorage.JsonRegimeBookStorage;
+import seedu.exercise.storage.bookstorage.JsonScheduleBookStorage;
 
 public class StorageManagerTest {
 
@@ -24,15 +28,26 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonExerciseBookStorage exerciseBookStorage = new JsonExerciseBookStorage(getTempFilePath("eb"));
-        JsonRegimeBookStorage regimeBookStorage = new JsonRegimeBookStorage(getTempFilePath("rb"));
-        JsonExerciseBookStorage allExerciseBookStorage = new JsonExerciseBookStorage(getTempFilePath("aeb"));
-        JsonScheduleBookStorage scheduleBookStorage = new JsonScheduleBookStorage((getTempFilePath("sb")));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
+        JsonExerciseBookStorage jsonExerciseBookStorage =
+            new JsonExerciseBookStorage(getTempFilePath("eb"));
+
+        JsonRegimeBookStorage jsonRegimeBookStorage =
+            new JsonRegimeBookStorage(getTempFilePath("rb"));
+
+        JsonExerciseBookStorage allJsonExerciseBookStorage =
+            new JsonExerciseBookStorage(getTempFilePath("aeb"));
+
+        JsonScheduleBookStorage jsonScheduleBookStorage =
+            new JsonScheduleBookStorage((getTempFilePath("sb")));
+
+        JsonUserPrefsStorage userPrefsStorage =
+            new JsonUserPrefsStorage(getTempFilePath("prefs"));
+
         JsonPropertyManagerStorage propertyManagerStorage =
             new JsonPropertyManagerStorage(getTempFilePath("pm"));
-        storageManager = new StorageManager(exerciseBookStorage, regimeBookStorage, allExerciseBookStorage,
-                scheduleBookStorage, userPrefsStorage, propertyManagerStorage);
+
+        storageManager = new StorageManager(jsonExerciseBookStorage, allJsonExerciseBookStorage,
+            jsonRegimeBookStorage, jsonScheduleBookStorage, userPrefsStorage, propertyManagerStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -62,7 +77,7 @@ public class StorageManagerTest {
          */
         ExerciseBook original = getTypicalExerciseBook();
         storageManager.saveExerciseBook(original);
-        ReadOnlyExerciseBook retrieved = storageManager.readExerciseBook().get();
+        ReadOnlyResourceBook<Exercise> retrieved = storageManager.readExerciseBook().get();
         assertEquals(original, new ExerciseBook(retrieved));
     }
 
