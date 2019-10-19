@@ -97,14 +97,10 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         ReadOnlyResourceBook<Exercise> initialData = readExerciseData(storage, storage.getExerciseBookFilePath());
-
         ReadOnlyResourceBook<Regime> initialRegimeData = readRegimeData(storage, storage.getRegimeBookFilePath());
-
         ReadOnlyResourceBook<Exercise> initialDatabase =
             readExerciseData(storage, storage.getExerciseDatabaseFilePath());
-
         ReadOnlyResourceBook<Schedule> initialScheduleData = readScheduleData(storage);
-
         PropertyManager initialPropertyManager = getInitialPropertyManager(storage);
 
         return new ModelManager(initialData, initialRegimeData,
