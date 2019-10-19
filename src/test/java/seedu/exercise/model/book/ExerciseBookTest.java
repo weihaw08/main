@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_MUSCLE_AEROBICS;
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_QUANTITY_BASKETBALL;
 import static seedu.exercise.testutil.Assert.assertThrows;
-import static seedu.exercise.testutil.TypicalExercises.WALK;
-import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
+import static seedu.exercise.testutil.exercise.TypicalExercises.WALK;
+import static seedu.exercise.testutil.exercise.TypicalExercises.getTypicalExerciseBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,13 +18,14 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.exceptions.DuplicateResourceException;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.testutil.ExerciseBuilder;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
 
 public class ExerciseBookTest {
 
-    private final ExerciseBook exerciseBook = new ExerciseBook();
+    private final ReadOnlyResourceBook<Exercise> exerciseBook = new ReadOnlyResourceBook<>();
 
     @Test
     public void constructor() {
@@ -38,7 +39,7 @@ public class ExerciseBookTest {
 
     @Test
     public void resetData_withValidReadOnlyExerciseBook_replacesData() {
-        ExerciseBook newData = getTypicalExerciseBook();
+        ReadOnlyResourceBook<Exercise> newData = getTypicalExerciseBook();
         exerciseBook.resetData(newData);
         assertEquals(newData, exerciseBook);
     }

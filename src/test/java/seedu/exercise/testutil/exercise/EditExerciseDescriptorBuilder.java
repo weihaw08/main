@@ -1,17 +1,17 @@
-package seedu.exercise.testutil;
+package seedu.exercise.testutil.exercise;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * A utility class to help with building EditExerciseDescriptor objects.

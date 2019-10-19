@@ -31,20 +31,20 @@ import static seedu.exercise.logic.commands.CommandTestUtil.VALID_QUANTITY_BASKE
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_UNIT_BASKETBALL;
 import static seedu.exercise.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.exercise.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.exercise.testutil.TypicalExercises.AEROBICS;
-import static seedu.exercise.testutil.TypicalExercises.BASKETBALL;
+import static seedu.exercise.testutil.exercise.TypicalExercises.AEROBICS;
+import static seedu.exercise.testutil.exercise.TypicalExercises.BASKETBALL;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.logic.commands.AddExerciseCommand;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
-import seedu.exercise.testutil.ExerciseBuilder;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
 
 public class AddExerciseCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

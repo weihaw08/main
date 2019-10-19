@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.exercise.model.exceptions.DuplicateResourceException;
 import seedu.exercise.model.exceptions.ResourceNotFoundException;
+import seedu.exercise.model.resource.Resource;
 
 /**
  * A list of resources of type {@code T} that enforces uniqueness between its elements and does not allow nulls.
@@ -20,17 +21,18 @@ import seedu.exercise.model.exceptions.ResourceNotFoundException;
  * same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
+ * </p>
  *
  * @see Resource#isSameResource(Resource)
  */
-public class UniqueList<T extends Resource> implements Iterable<T> {
+public class UniqueResourceList<T extends Resource> implements Iterable<T> {
 
-    protected final ObservableList<T> internalList = FXCollections.observableArrayList();
-    protected final ObservableList<T> internalUnmodifiableList =
+    private final ObservableList<T> internalList = FXCollections.observableArrayList();
+    private final ObservableList<T> internalUnmodifiableList =
         FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the {@code UniqueList} instance invoking this method contains {@code toCheck}.
+     * Returns true if the {@code UniqueResourceList} instance invoking this method contains {@code toCheck}.
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
@@ -43,7 +45,7 @@ public class UniqueList<T extends Resource> implements Iterable<T> {
     }
 
     /**
-     * Adds {@code toAdd} into the {@code UniqueList} only if the {@code toAdd} object is not
+     * Adds {@code toAdd} into the {@code UniqueResourceList} only if the {@code toAdd} object is not
      * present in the list.
      */
     public void add(T toAdd) {
@@ -74,7 +76,7 @@ public class UniqueList<T extends Resource> implements Iterable<T> {
     }
 
     /**
-     * Removes {@code toRemove} from a {@code UniqueList}.
+     * Removes {@code toRemove} from a {@code UniqueResourceList}.
      * The {@code toRemove} object must be present in the list.
      */
     public void remove(T toRemove) {
@@ -85,15 +87,15 @@ public class UniqueList<T extends Resource> implements Iterable<T> {
     }
 
     /**
-     * Replaces all of the data in the {@code UniqueList} instance with {@code replacement}.
+     * Replaces all of the data in the {@code UniqueResourceList} instance with {@code replacement}.
      */
-    public void setAll(UniqueList<T> replacement) {
+    public void setAll(UniqueResourceList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Works similarly to {@link #setAll(UniqueList)}.
+     * Works similarly to {@link #setAll(UniqueResourceList)}.
      */
     public void setAll(List<T> replacement) {
         requireNonNull(replacement);
@@ -104,7 +106,7 @@ public class UniqueList<T extends Resource> implements Iterable<T> {
     }
 
     /**
-     * Returns an unmodifiable list of the data in a {@code UniqueList}.
+     * Returns an unmodifiable list of the data in a {@code UniqueResourceList}.
      */
     public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -118,8 +120,8 @@ public class UniqueList<T extends Resource> implements Iterable<T> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof UniqueList)// instanceof handles nulls
-            && internalList.equals(((UniqueList<T>) other).internalList);
+            || (other instanceof UniqueResourceList)// instanceof handles nulls
+            && internalList.equals(((UniqueResourceList) other).internalList);
     }
 
     @Override

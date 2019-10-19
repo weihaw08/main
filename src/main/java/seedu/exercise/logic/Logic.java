@@ -7,10 +7,10 @@ import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.logic.commands.CommandResult;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 
 /**
  * API of the Logic component

@@ -1,22 +1,20 @@
 package seedu.exercise.storage.serializablebook;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.resource.JsonAdaptedExercise;
 
 /**
  * An Immutable ExerciseBook that is serializable to JSON format.
  */
 @JsonRootName(value = "exercisebook")
-public class JsonSerializableExerciseBook extends SerializableResourceBook<JsonAdaptedExercise> {
+public class JsonSerializableExerciseBook extends SerializableResourceBook<JsonAdaptedExercise, Exercise> {
 
     /**
      * Constructs a {@code JsonSerializableExerciseBook} with the given persons.
@@ -32,13 +30,7 @@ public class JsonSerializableExerciseBook extends SerializableResourceBook<JsonA
      * @param source future changes to this will not affect the created {@code JsonSerializableExerciseBook}.
      */
     public JsonSerializableExerciseBook(ReadOnlyResourceBook<Exercise> source) {
-        List<JsonAdaptedExercise> exercises = new ArrayList<>();
-        exercises
-            .addAll(source.getResourceList()
-                .stream()
-                .map(JsonAdaptedExercise::new)
-                .collect(Collectors.toList()));
-        jsonResources.addAll(exercises);
+        super(source, JsonAdaptedExercise.class);
     }
 
 }

@@ -2,10 +2,11 @@ package seedu.exercise.storage.serializablebook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
-import seedu.exercise.model.Resource;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Resource;
 import seedu.exercise.storage.resource.JsonAdaptedResource;
 
 /**
@@ -13,18 +14,23 @@ import seedu.exercise.storage.resource.JsonAdaptedResource;
  * In particular, this resource book can be extended to create an immutable ResourceBook that holds
  * any {@code JsonAdaptedResource} of type {@code T}.
  */
-public class SerializableResourceBook<T extends JsonAdaptedResource> {
+public abstract class SerializableResourceBook<T extends JsonAdaptedResource<U>, U extends Resource> {
 
     public static final String MESSAGE_DUPLICATE_RESOURCE = "The list has duplicate exercises/regimes/schedules.";
 
-    protected final List<T> jsonResources = new ArrayList<>();
-
-    public SerializableResourceBook() {
-
-    }
+    private final List<T> jsonResources = new ArrayList<>();
 
     public SerializableResourceBook(List<T> jsonResources) {
         this.jsonResources.addAll(jsonResources);
+    }
+
+    public SerializableResourceBook(ReadOnlyResourceBook<U> source, Class<T> clazz) {
+        jsonResources
+            .addAll(source.getResourceList()
+                .stream()
+                .map(U::toJsonType)
+                .map(clazz::cast)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -32,16 +38,20 @@ public class SerializableResourceBook<T extends JsonAdaptedResource> {
      *
      * @throws IllegalValueException if there are any violations in the data constraints.
      */
-    public <U extends Resource> ReadOnlyResourceBook<U> toModelType() throws IllegalValueException {
+    public ReadOnlyResourceBook<U> toModelType(Class<U> clazz) throws IllegalValueException {
         ReadOnlyResourceBook<U> resourceBook = new ReadOnlyResourceBook<>();
-        for (T jsonResource : jsonResources) {
-            U resourceModel = jsonResource.toModelType();
+        for (JsonAdaptedResource jsonResource : jsonResources) {
+            U resourceModel = clazz.cast(jsonResource.toModelType());
             if (resourceBook.hasResource(resourceModel)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RESOURCE);
             }
             resourceBook.addResource(resourceModel);
         }
         return resourceBook;
+    }
+
+    public void setList(List<T> data) {
+        jsonResources.addAll(data);
     }
 
 }

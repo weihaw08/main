@@ -1,4 +1,4 @@
-package seedu.exercise.testutil;
+package seedu.exercise.testutil.exercise;
 
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_CALORIES_AEROBICS;
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_CALORIES_BASKETBALL;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * A utility class containing a list of {@code Exercise} objects to be used in tests.
@@ -63,10 +63,10 @@ public class TypicalExercises {
     } // prevents instantiation
 
     /**
-     * Returns an {@code ExerciseBook} with all the typical exercises.
+     * Returns an {@code ReadOnlyResourceBook<Exercise>} with all the typical exercises.
      */
-    public static ExerciseBook getTypicalExerciseBook() {
-        ExerciseBook eb = new ExerciseBook();
+    public static ReadOnlyResourceBook<Exercise> getTypicalExerciseBook() {
+        ReadOnlyResourceBook<Exercise> eb = new ReadOnlyResourceBook<>();
         for (Exercise exercise : getTypicalExercises()) {
             eb.addResource(exercise);
         }

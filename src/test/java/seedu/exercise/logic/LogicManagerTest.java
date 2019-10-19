@@ -11,7 +11,7 @@ import static seedu.exercise.logic.commands.CommandTestUtil.QUANTITY_DESC_AEROBI
 import static seedu.exercise.logic.commands.CommandTestUtil.UNIT_DESC_AEROBICS;
 import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
 import static seedu.exercise.testutil.Assert.assertThrows;
-import static seedu.exercise.testutil.TypicalExercises.AEROBICS;
+import static seedu.exercise.testutil.exercise.TypicalExercises.AEROBICS;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,19 +27,16 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.book.RegimeBook;
-import seedu.exercise.model.book.ScheduleBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.JsonPropertyManagerStorage;
 import seedu.exercise.storage.JsonUserPrefsStorage;
 import seedu.exercise.storage.StorageManager;
 import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
 import seedu.exercise.storage.bookstorage.JsonRegimeBookStorage;
 import seedu.exercise.storage.bookstorage.JsonScheduleBookStorage;
-import seedu.exercise.testutil.ExerciseBuilder;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -162,8 +159,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getExerciseBookData(), new RegimeBook(),
-            new ExerciseBook(), new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+        Model expectedModel = new ModelManager(model.getExerciseBookData(), new ReadOnlyResourceBook<>(),
+            new ReadOnlyResourceBook<>(), new ReadOnlyResourceBook<>(), new UserPrefs(), getDefaultPropertyManager());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

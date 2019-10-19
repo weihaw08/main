@@ -6,12 +6,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 
 /**
  * The API of the Model component.
@@ -178,7 +177,7 @@ public interface Model {
 
     /**
      * Schedules a {@code schedule} for the user.
-     * It must be guranteed that there is no existing schedule in the {@code ScheduleBook}
+     * It must be guaranteed that there is no existing schedule in the {@code ReadOnlyResourceBook<Schedule>}
      */
     void addSchedule(Schedule schedule);
 
@@ -188,12 +187,12 @@ public interface Model {
     ReadOnlyResourceBook<Schedule> getAllScheduleData();
 
     /**
-     * Deletes a Schedule and adds it to {@code ExerciseBook} for tracking.
+     * Deletes a Schedule and adds it to {@code ReadOnlyResourceBook<Exercise>} for tracking.
      * <p>
      * If the schedule has some exercises that are duplicates exercises as
      * specified by {@link Exercise#isSameResource}, that exercise will
      * be ignored and not be added into the exercise tracker.
-     * <p>
+     * </p>
      * All exercises added will have their dates changed to be the date
      * of the schedule itself.
      *

@@ -4,23 +4,20 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.book.RegimeBook;
-import seedu.exercise.model.book.ScheduleBook;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.UniqueResourceList;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 
 /**
- * Contains utility methods for populating {@code ExerciseBook} with sample data.
+ * Contains utility methods for populating {@code ReadOnlyResourceBook} with sample data.
  */
 public class SampleDataUtil {
     public static Exercise[] getSampleExercises() {
@@ -47,7 +44,7 @@ public class SampleDataUtil {
     }
 
     public static Regime[] getSampleRegimes() {
-        UniqueExerciseList list1 = new UniqueExerciseList();
+        UniqueResourceList<Exercise> list1 = new UniqueResourceList<>();
         list1.add(new Exercise(new Name("Rope Skipping"), new Date("26/09/2019"), new Calories("330"),
             new Quantity("10"), new Unit("counts"),
             getMuscleSet("Legs")));
@@ -56,7 +53,7 @@ public class SampleDataUtil {
             getMuscleSet("Triceps")));
 
 
-        UniqueExerciseList list2 = new UniqueExerciseList();
+        UniqueResourceList<Exercise> list2 = new UniqueResourceList<>();
         list2.add(new Exercise(new Name("Running"), new Date("26/09/2019"), new Calories("9999999"),
             new Quantity("2.4"), new Unit("km"),
             getMuscleSet("Legs")));
@@ -67,7 +64,7 @@ public class SampleDataUtil {
             new Quantity("10"), new Unit("laps"),
             getMuscleSet("Calves")));
 
-        UniqueExerciseList list3 = new UniqueExerciseList();
+        UniqueResourceList<Exercise> list3 = new UniqueResourceList<>();
         list3.add(new Exercise(new Name("Rope Skipping"), new Date("26/09/2019"), new Calories("330"),
             new Quantity("10"), new Unit("counts"),
             getMuscleSet("Legs")));
@@ -100,22 +97,6 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyResourceBook<Exercise> getSampleExerciseBook() {
-        ExerciseBook sampleEb = new ExerciseBook();
-        for (Exercise sampleExercise : getSampleExercises()) {
-            sampleEb.addResource(sampleExercise);
-        }
-        return sampleEb;
-    }
-
-    public static ReadOnlyResourceBook<Schedule> getSampleScheduleBook() {
-        ScheduleBook sampleSb = new ScheduleBook();
-        for (Schedule sampleSchedule : getSampleSchedules()) {
-            sampleSb.addResource(sampleSchedule);
-        }
-        return sampleSb;
-    }
-
     /**
      * Returns a muscle set containing the list of strings given.
      */
@@ -125,10 +106,27 @@ public class SampleDataUtil {
             .collect(Collectors.toSet());
     }
 
+
+    public static ReadOnlyResourceBook<Exercise> getSampleExerciseBook() {
+        ReadOnlyResourceBook<Exercise> sampleEb = new ReadOnlyResourceBook<>();
+        for (Exercise sampleExercise : getSampleExercises()) {
+            sampleEb.addResource(sampleExercise);
+        }
+        return sampleEb;
+    }
+
+    public static ReadOnlyResourceBook<Schedule> getSampleScheduleBook() {
+        ReadOnlyResourceBook<Schedule> sampleSb = new ReadOnlyResourceBook<>();
+        for (Schedule sampleSchedule : getSampleSchedules()) {
+            sampleSb.addResource(sampleSchedule);
+        }
+        return sampleSb;
+    }
+
     public static ReadOnlyResourceBook<Regime> getSampleRegimeBook() {
-        RegimeBook sampleRb = new RegimeBook();
-        for (Regime r : getSampleRegimes()) {
-            sampleRb.addResource(r);
+        ReadOnlyResourceBook<Regime> sampleRb = new ReadOnlyResourceBook<>();
+        for (Regime sampleRegime : getSampleRegimes()) {
+            sampleRb.addResource(sampleRegime);
         }
         return sampleRb;
     }

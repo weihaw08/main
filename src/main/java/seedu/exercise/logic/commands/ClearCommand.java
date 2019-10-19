@@ -4,9 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * Clears the exercise book.
@@ -26,7 +25,7 @@ public class ClearCommand extends Command implements UndoableCommand {
         requireNonNull(model);
         exerciseBookCleared = model.getExerciseBookData();
         EventHistory.getInstance().addCommandToUndoStack(this);
-        model.setExerciseBook(new ExerciseBook());
+        model.setExerciseBook(new ReadOnlyResourceBook<>());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

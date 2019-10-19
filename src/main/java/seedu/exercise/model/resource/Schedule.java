@@ -1,12 +1,10 @@
-package seedu.exercise.model.schedule;
+package seedu.exercise.model.resource;
 
 import java.util.List;
 import java.util.Objects;
 
-import seedu.exercise.model.Resource;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Date;
-import seedu.exercise.model.regime.Regime;
+import seedu.exercise.storage.resource.JsonAdaptedSchedule;
 
 /**
  * Represents a schedule for a regime at a certain date.
@@ -32,9 +30,12 @@ public class Schedule extends Resource {
         return regime.getRegimeExercises().asUnmodifiableObservableList();
     }
 
+
+
     /**
      * Returns true if both {@code schedules} have the same date
      */
+    @Override
     public boolean isSameResource(Resource otherResource) {
         return this.equals(otherResource);
     }
@@ -54,6 +55,11 @@ public class Schedule extends Resource {
     @Override
     public String toString() {
         return date.toString() + "\n" + regime.toString();
+    }
+
+    @Override
+    public JsonAdaptedSchedule toJsonType() {
+        return new JsonAdaptedSchedule(this);
     }
 
 }

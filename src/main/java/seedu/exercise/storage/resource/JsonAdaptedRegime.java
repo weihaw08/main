@@ -7,14 +7,15 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
-import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.UniqueResourceList;
 import seedu.exercise.model.property.Name;
-import seedu.exercise.model.regime.Regime;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
 
 /**
  * Jackson-friendly version of {@link Regime}.
  */
-public class JsonAdaptedRegime extends JsonAdaptedResource {
+public class JsonAdaptedRegime extends JsonAdaptedResource<Regime> {
 
     private final String name;
     private final List<JsonAdaptedExercise> exercises = new ArrayList<>();
@@ -31,11 +32,10 @@ public class JsonAdaptedRegime extends JsonAdaptedResource {
     }
 
     /**
-     * Converts a given {@code Exercise} into this class for Jackson use.
+     * Converts a given {@code Regime} into this class for Jackson use.
      */
     public JsonAdaptedRegime(Regime source) {
         name = source.getRegimeName().toString();
-
         exercises.addAll(source.getRegimeExercises().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedExercise::new)
             .collect(Collectors.toList()));
@@ -47,7 +47,7 @@ public class JsonAdaptedRegime extends JsonAdaptedResource {
      * @throws IllegalValueException if there were any data constraints violated in the adapted regime.
      */
     public Regime toModelType() throws IllegalValueException {
-        final UniqueExerciseList modelExercises = new UniqueExerciseList();
+        final UniqueResourceList<Exercise> modelExercises = new UniqueResourceList<>();
         for (JsonAdaptedExercise exercise : exercises) {
             modelExercises.add(exercise.toModelType());
         }

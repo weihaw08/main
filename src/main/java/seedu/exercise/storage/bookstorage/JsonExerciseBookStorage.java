@@ -12,8 +12,8 @@ import seedu.exercise.commons.exceptions.DataConversionException;
 import seedu.exercise.commons.exceptions.IllegalValueException;
 import seedu.exercise.commons.util.FileUtil;
 import seedu.exercise.commons.util.JsonUtil;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.serializablebook.JsonSerializableExerciseBook;
 
 /**
@@ -49,7 +49,7 @@ public class JsonExerciseBookStorage implements ResourceBookStorage<Exercise> {
         }
 
         try {
-            return Optional.of(jsonExerciseBook.get().toModelType());
+            return Optional.of(jsonExerciseBook.get().toModelType(Exercise.class));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

@@ -5,12 +5,12 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.exercise.commons.exceptions.DataConversionException;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 
 /**
  * API of the Storage component.

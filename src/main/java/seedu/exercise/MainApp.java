@@ -19,16 +19,13 @@ import seedu.exercise.logic.Logic;
 import seedu.exercise.logic.LogicManager;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.book.RegimeBook;
-import seedu.exercise.model.book.ScheduleBook;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.PropertyManager;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 import seedu.exercise.model.util.DefaultPropertyManagerUtil;
 import seedu.exercise.model.util.SampleDataUtil;
 import seedu.exercise.storage.JsonPropertyManagerStorage;
@@ -130,10 +127,10 @@ public class MainApp extends Application {
             regimeData = regimeBookOptional.orElseGet(SampleDataUtil::getSampleRegimeBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty RegimeBook");
-            regimeData = new RegimeBook();
+            regimeData = new ReadOnlyResourceBook<>();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty RegimeBook");
-            regimeData = new RegimeBook();
+            regimeData = new ReadOnlyResourceBook<>();
 
         }
 
@@ -156,10 +153,10 @@ public class MainApp extends Application {
             exerciseData = exerciseBookOptional.orElseGet(SampleDataUtil::getSampleExerciseBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in correct format. Will be starting with an empty ExerciseBook");
-            exerciseData = new ExerciseBook();
+            exerciseData = new ReadOnlyResourceBook<>();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty ExerciseBook");
-            exerciseData = new ExerciseBook();
+            exerciseData = new ReadOnlyResourceBook<>();
         }
 
         return exerciseData;
@@ -180,10 +177,10 @@ public class MainApp extends Application {
             initialScheduleData = scheduleBookOptional.orElseGet(SampleDataUtil::getSampleScheduleBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ScheduleBook");
-            initialScheduleData = new ScheduleBook();
+            initialScheduleData = new ReadOnlyResourceBook<>();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty ScheduleBook");
-            initialScheduleData = new ScheduleBook();
+            initialScheduleData = new ReadOnlyResourceBook<>();
         }
 
         return initialScheduleData;

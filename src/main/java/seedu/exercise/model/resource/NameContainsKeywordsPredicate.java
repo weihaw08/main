@@ -1,4 +1,4 @@
-package seedu.exercise.model.exercise;
+package seedu.exercise.model.resource;
 
 import java.util.List;
 import java.util.function.Predicate;

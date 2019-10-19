@@ -1,4 +1,4 @@
-package seedu.exercise.model.exercise;
+package seedu.exercise.model.resource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,12 +8,12 @@ import static seedu.exercise.logic.commands.CommandTestUtil.VALID_MUSCLE_AEROBIC
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_NAME_BASKETBALL;
 import static seedu.exercise.logic.commands.CommandTestUtil.VALID_QUANTITY_BASKETBALL;
 import static seedu.exercise.testutil.Assert.assertThrows;
-import static seedu.exercise.testutil.TypicalExercises.BASKETBALL;
-import static seedu.exercise.testutil.TypicalExercises.WALK;
+import static seedu.exercise.testutil.exercise.TypicalExercises.BASKETBALL;
+import static seedu.exercise.testutil.exercise.TypicalExercises.WALK;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.testutil.ExerciseBuilder;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
 
 public class ExerciseTest {
 

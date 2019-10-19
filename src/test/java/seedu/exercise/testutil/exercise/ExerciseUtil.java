@@ -1,4 +1,4 @@
-package seedu.exercise.testutil;
+package seedu.exercise.testutil.exercise;
 
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -12,8 +12,8 @@ import java.util.Set;
 
 import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Muscle;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * A utility class for Exercise.

@@ -12,19 +12,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.JsonAdaptedMuscle;
 
 /**
  * Jackson-friendly version of {@link Exercise}.
  */
-public class JsonAdaptedExercise extends JsonAdaptedResource {
+public class JsonAdaptedExercise extends JsonAdaptedResource<Exercise> {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Exercise's %s field is missing!";
 

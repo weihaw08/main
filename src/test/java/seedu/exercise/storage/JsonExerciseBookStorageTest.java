@@ -3,10 +3,10 @@ package seedu.exercise.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.exercise.testutil.Assert.assertThrows;
-import static seedu.exercise.testutil.TypicalExercises.CLAP;
-import static seedu.exercise.testutil.TypicalExercises.SLAP;
-import static seedu.exercise.testutil.TypicalExercises.WALK;
-import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
+import static seedu.exercise.testutil.exercise.TypicalExercises.CLAP;
+import static seedu.exercise.testutil.exercise.TypicalExercises.SLAP;
+import static seedu.exercise.testutil.exercise.TypicalExercises.WALK;
+import static seedu.exercise.testutil.exercise.TypicalExercises.getTypicalExerciseBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,9 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.exercise.commons.exceptions.DataConversionException;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
 
 public class JsonExerciseBookStorageTest {
@@ -66,26 +65,26 @@ public class JsonExerciseBookStorageTest {
     @Test
     public void readAndSaveExerciseBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempExerciseBook.json");
-        ExerciseBook original = getTypicalExerciseBook();
+        ReadOnlyResourceBook<Exercise> original = getTypicalExerciseBook();
         JsonExerciseBookStorage jsonExerciseBookStorage = new JsonExerciseBookStorage(filePath);
 
         // Save in new file and read back
         jsonExerciseBookStorage.saveResourceBook(original, filePath);
         ReadOnlyResourceBook<Exercise> readBack = jsonExerciseBookStorage.readResourceBook(filePath).get();
-        assertEquals(original, new ExerciseBook(readBack));
+        assertEquals(original, new ReadOnlyResourceBook<>(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addResource(CLAP);
         original.removeResource(WALK);
         jsonExerciseBookStorage.saveResourceBook(original, filePath);
         readBack = jsonExerciseBookStorage.readResourceBook(filePath).get();
-        assertEquals(original, new ExerciseBook(readBack));
+        assertEquals(original, new ReadOnlyResourceBook<>(readBack));
 
         // Save and read without specifying file path
         original.addResource(SLAP);
         jsonExerciseBookStorage.saveResourceBook(original); // file path not specified
         readBack = jsonExerciseBookStorage.readResourceBook().get(); // file path not specified
-        assertEquals(original, new ExerciseBook(readBack));
+        assertEquals(original, new ReadOnlyResourceBook<>(readBack));
 
     }
 
@@ -108,6 +107,6 @@ public class JsonExerciseBookStorageTest {
 
     @Test
     public void saveExerciseBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveExerciseBook(new ExerciseBook(), null));
+        assertThrows(NullPointerException.class, () -> saveExerciseBook(new ReadOnlyResourceBook<>(), null));
     }
 }

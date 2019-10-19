@@ -22,13 +22,13 @@ import seedu.exercise.commons.util.CollectionUtil;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * Edits the details of an existing exercise in the exercise book.

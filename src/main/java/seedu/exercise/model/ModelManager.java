@@ -14,15 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.parser.Prefix;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.book.RegimeBook;
-import seedu.exercise.model.book.ScheduleBook;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 import seedu.exercise.model.util.DateChangerUtil;
 
 /**
@@ -31,10 +27,10 @@ import seedu.exercise.model.util.DateChangerUtil;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ExerciseBook exerciseBook;
-    private final RegimeBook regimeBook;
-    private final ExerciseBook databaseBook;
-    private final ScheduleBook scheduleBook;
+    private final ReadOnlyResourceBook<Exercise> exerciseBook;
+    private final ReadOnlyResourceBook<Regime> regimeBook;
+    private final ReadOnlyResourceBook<Exercise> databaseBook;
+    private final ReadOnlyResourceBook<Schedule> scheduleBook;
     private final UserPrefs userPrefs;
     private final PropertyManager propertyManager;
     private final FilteredList<Exercise> filteredExercises;
@@ -53,10 +49,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with exercise book: " + exerciseBook + " and user prefs " + userPrefs);
 
-        this.exerciseBook = new ExerciseBook(exerciseBook);
-        this.databaseBook = new ExerciseBook(databaseBook);
-        this.regimeBook = new RegimeBook(regimeBook);
-        this.scheduleBook = new ScheduleBook(scheduleBook);
+        this.exerciseBook = new ReadOnlyResourceBook<>(exerciseBook);
+        this.databaseBook = new ReadOnlyResourceBook<>(databaseBook);
+        this.regimeBook = new ReadOnlyResourceBook<>(regimeBook);
+        this.scheduleBook = new ReadOnlyResourceBook<>(scheduleBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredExercises = new FilteredList<>(this.exerciseBook.getResourceList());
         suggestedExercises = new FilteredList<>(this.databaseBook.getResourceList());
@@ -68,8 +64,8 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new ExerciseBook(), new RegimeBook(), new ExerciseBook(),
-            new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+        this(new ReadOnlyResourceBook<>(), new ReadOnlyResourceBook<>(), new ReadOnlyResourceBook<>(),
+            new ReadOnlyResourceBook<>(), new UserPrefs(), getDefaultPropertyManager());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -193,10 +189,10 @@ public class ModelManager implements Model {
 
     @Override
     public int getRegimeIndex(Regime regime) {
-        return regimeBook.getRegimeIndex(regime);
+        return regimeBook.getResourceIndex(regime);
     }
 
-    //===================ScheduleBook==============================================================================
+    //===================ReadOnlyResourceBook<Schedule>===============================================================
     @Override
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);

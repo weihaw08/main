@@ -1,9 +1,8 @@
 package seedu.exercise.logic.commands.events;
 
 import seedu.exercise.model.Model;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * Represents a particular add event that can be redone or undone.
@@ -33,7 +32,7 @@ public class ClearEvent implements Event {
 
     @Override
     public void redo(Model model) {
-        model.setExerciseBook(new ExerciseBook());
+        model.setExerciseBook(new ReadOnlyResourceBook<>());
     }
 
     /**

@@ -1,20 +1,19 @@
-package seedu.exercise.model.regime;
+package seedu.exercise.model.resource;
 
 import java.util.Objects;
 
-import seedu.exercise.model.Resource;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.UniqueResourceList;
 import seedu.exercise.model.property.Name;
+import seedu.exercise.storage.resource.JsonAdaptedRegime;
 
 /**
  * Represents a Regime in the regime book.
  */
 public class Regime extends Resource {
     private final Name regimeName;
-    private final UniqueExerciseList regimeExercises;
+    private final UniqueResourceList<Exercise> regimeExercises;
 
-    public Regime(Name regimeName, UniqueExerciseList regimeExercises) {
+    public Regime(Name regimeName, UniqueResourceList<Exercise> regimeExercises) {
         this.regimeName = regimeName;
         this.regimeExercises = regimeExercises;
     }
@@ -34,11 +33,12 @@ public class Regime extends Resource {
     /**
      * Returns true if both regimes have the same name.
      */
+    @Override
     public boolean isSameResource(Resource otherResource) {
         return this.equals(otherResource);
     }
 
-    public UniqueExerciseList getRegimeExercises() {
+    public UniqueResourceList<Exercise> getRegimeExercises() {
         return regimeExercises;
     }
 
@@ -56,12 +56,17 @@ public class Regime extends Resource {
     @Override
     public boolean equals(Object other) {
         return other == this
-               || (other instanceof Regime)
-               && regimeName.equals(((Regime) other).getRegimeName());
+            || (other instanceof Regime)
+            && regimeName.equals(((Regime) other).getRegimeName());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(regimeName, regimeExercises);
+    }
+
+    @Override
+    public JsonAdaptedRegime toJsonType() {
+        return new JsonAdaptedRegime(this);
     }
 }

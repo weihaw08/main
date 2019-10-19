@@ -20,13 +20,13 @@ import seedu.exercise.logic.commands.AddCommand;
 import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.AddRegimeCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * Parses input arguments and creates a new AddExerciseCommand object

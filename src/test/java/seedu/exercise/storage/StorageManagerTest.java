@@ -2,7 +2,7 @@ package seedu.exercise.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
+import static seedu.exercise.testutil.exercise.TypicalExercises.getTypicalExerciseBook;
 
 import java.nio.file.Path;
 
@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.exercise.commons.core.GuiSettings;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.storage.bookstorage.JsonExerciseBookStorage;
 import seedu.exercise.storage.bookstorage.JsonRegimeBookStorage;
 import seedu.exercise.storage.bookstorage.JsonScheduleBookStorage;
@@ -75,10 +74,10 @@ public class StorageManagerTest {
          * {@link JsonExerciseBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonExerciseBookStorageTest} class.
          */
-        ExerciseBook original = getTypicalExerciseBook();
+        ReadOnlyResourceBook<Exercise> original = getTypicalExerciseBook();
         storageManager.saveExerciseBook(original);
         ReadOnlyResourceBook<Exercise> retrieved = storageManager.readExerciseBook().get();
-        assertEquals(original, new ExerciseBook(retrieved));
+        assertEquals(original, new ReadOnlyResourceBook<>(retrieved));
     }
 
     @Test

@@ -5,11 +5,11 @@ import static java.util.Objects.requireNonNull;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.commands.exceptions.ScheduleException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.UniqueResourceList;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Name;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 
 /**
  * Schedules a regime at a specific date.
@@ -25,7 +25,7 @@ public class ScheduleRegimeCommand extends ScheduleCommand {
     private Date dateToSchedule;
 
     public ScheduleRegimeCommand(Name regimeName, Date date) {
-        this.regime = new Regime(regimeName, new UniqueExerciseList());
+        this.regime = new Regime(regimeName, new UniqueResourceList<>());
         dateToSchedule = date;
     }
 

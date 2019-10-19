@@ -8,10 +8,10 @@ import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.UniqueResourceList;
 import seedu.exercise.model.property.Name;
-import seedu.exercise.model.regime.Regime;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
 
 /**
  * Deletes a regime identified using it's name or deletes exercises in regime.
@@ -34,7 +34,7 @@ public class DeleteRegimeCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Regime> lastShownList = model.getFilteredRegimeList();
-        Regime regime = new Regime(name, new UniqueExerciseList());
+        Regime regime = new Regime(name, new UniqueResourceList<>());
 
         if (!model.hasRegime(regime)) {
             throw new CommandException(MESSAGE_REGIME_DOES_NOT_EXIST);
@@ -74,7 +74,7 @@ public class DeleteRegimeCommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteRegimeCommand // instanceof handles nulls
-                && indexes.equals(((DeleteRegimeCommand) other).indexes)); // state check
+            || (other instanceof DeleteRegimeCommand // instanceof handles nulls
+            && indexes.equals(((DeleteRegimeCommand) other).indexes)); // state check
     }
 }

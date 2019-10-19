@@ -1,4 +1,4 @@
-package seedu.exercise.model.exercise;
+package seedu.exercise.model.resource;
 
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.exercise.model.Resource;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.storage.resource.JsonAdaptedExercise;
 
 /**
  * Represents an Exercise in the exercise book.
@@ -102,6 +102,7 @@ public class Exercise extends Resource {
      * Returns true if both exercises of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two exercises.
      */
+    @Override
     public boolean isSameResource(Resource otherResource) {
         if (otherResource == this) {
             return true;
@@ -163,6 +164,11 @@ public class Exercise extends Resource {
         builder.append(" ");
         appendCustomProperties(builder);
         return builder.toString().stripTrailing();
+    }
+
+    @Override
+    public JsonAdaptedExercise toJsonType() {
+        return new JsonAdaptedExercise(this);
     }
 
     /**

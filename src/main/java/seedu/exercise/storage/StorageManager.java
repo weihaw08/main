@@ -7,17 +7,17 @@ import java.util.logging.Logger;
 
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.exceptions.DataConversionException;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.PropertyManager;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
 import seedu.exercise.storage.bookstorage.ResourceBookStorage;
 
 /**
- * Manages storage of ExerciseBook data in local storage.
+ * Manages storage of ExerHealth data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -142,7 +142,7 @@ public class StorageManager implements Storage {
         regimeBookStorage.saveResourceBook(regimeBook, filePath);
     }
 
-    //===============ScheduleBook methods=============================================
+    //===============ScheduleBook methods=========================================
     @Override
     public Path getScheduleBookFilePath() {
         return scheduleBookStorage.getResourceBookFilePath();

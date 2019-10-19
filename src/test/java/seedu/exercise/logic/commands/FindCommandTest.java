@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.commons.core.Messages.MESSAGE_EXERCISES_LISTED_OVERVIEW;
 import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.exercise.model.util.DefaultPropertyManagerUtil.getDefaultPropertyManager;
-import static seedu.exercise.testutil.TypicalExercises.DANCE;
-import static seedu.exercise.testutil.TypicalExercises.SKIP;
-import static seedu.exercise.testutil.TypicalExercises.SPRINT;
-import static seedu.exercise.testutil.TypicalExercises.getTypicalExerciseBook;
+import static seedu.exercise.testutil.exercise.TypicalExercises.DANCE;
+import static seedu.exercise.testutil.exercise.TypicalExercises.SKIP;
+import static seedu.exercise.testutil.exercise.TypicalExercises.SPRINT;
+import static seedu.exercise.testutil.exercise.TypicalExercises.getTypicalExerciseBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,20 +18,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.RegimeBook;
-import seedu.exercise.model.book.ScheduleBook;
-import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
+import seedu.exercise.model.resource.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalExerciseBook(), new RegimeBook(),
-        new ExerciseBook(), new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
-    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), new RegimeBook(),
-        new ExerciseBook(), new ScheduleBook(), new UserPrefs(), getDefaultPropertyManager());
+    private Model model = new ModelManager(getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
+        new ReadOnlyResourceBook<>(), new ReadOnlyResourceBook<>(), new UserPrefs(), getDefaultPropertyManager());
+    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
+        new ReadOnlyResourceBook<>(), new ReadOnlyResourceBook<>(), new UserPrefs(), getDefaultPropertyManager());
 
     @Test
     public void equals() {

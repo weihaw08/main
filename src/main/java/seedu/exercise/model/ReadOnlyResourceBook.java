@@ -1,4 +1,4 @@
-package seedu.exercise.model.book;
+package seedu.exercise.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
@@ -6,18 +6,17 @@ import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.exercise.model.Resource;
-import seedu.exercise.model.UniqueList;
+import seedu.exercise.model.resource.Resource;
 
 /**
  * Encapsulates a Resource Book that can contain {@code Resource} objects of type {@code T}.
  */
 public class ReadOnlyResourceBook<T extends Resource> {
 
-    protected final UniqueList<T> resources;
+    private final UniqueResourceList<T> resources;
 
     {
-        resources = new UniqueList<>();
+        resources = new UniqueResourceList<>();
     }
 
     public ReadOnlyResourceBook() {
@@ -78,6 +77,21 @@ public class ReadOnlyResourceBook<T extends Resource> {
     }
 
     /**
+     * Retrieves the index of {@code toGet} from the list.
+     * Returns -1 if the item is not present in the list.
+     */
+    public int getResourceIndex(T toGet) {
+        int i = 0;
+        for (T resource : resources) {
+            if (resource.equals(toGet)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    /**
      * Returns an unmodifiable list of {@code Resource} of type {@code T}.
      */
     public ObservableList<T> getResourceList() {
@@ -88,7 +102,7 @@ public class ReadOnlyResourceBook<T extends Resource> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof ReadOnlyResourceBook // instanceof handles nulls
-            && resources.equals(((ReadOnlyResourceBook<T>) other).resources));
+            && resources.equals(((ReadOnlyResourceBook) other).resources));
     }
 
     @Override

@@ -25,11 +25,11 @@ import seedu.exercise.logic.commands.FindCommand;
 import seedu.exercise.logic.commands.HelpCommand;
 import seedu.exercise.logic.commands.ListCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.exercise.NameContainsKeywordsPredicate;
-import seedu.exercise.testutil.EditExerciseDescriptorBuilder;
-import seedu.exercise.testutil.ExerciseBuilder;
-import seedu.exercise.testutil.ExerciseUtil;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.NameContainsKeywordsPredicate;
+import seedu.exercise.testutil.exercise.EditExerciseDescriptorBuilder;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
+import seedu.exercise.testutil.exercise.ExerciseUtil;
 
 public class ExerciseBookParserTest {
 

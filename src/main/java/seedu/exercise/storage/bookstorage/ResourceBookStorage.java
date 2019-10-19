@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.exercise.commons.exceptions.DataConversionException;
-import seedu.exercise.model.Resource;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Resource;
 
 /**
  * API of a ResourceBookStorage.

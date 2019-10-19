@@ -6,9 +6,8 @@ import seedu.exercise.logic.commands.DeleteExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.UndoableCommand;
 import seedu.exercise.logic.commands.exceptions.CommandException;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * A utility class to generate specific Event objects depending on requirements.
@@ -16,7 +15,7 @@ import seedu.exercise.model.exercise.Exercise;
 public class EventFactory {
 
     public static final String MESSAGE_COMMAND_NOT_UNDOABLE =
-            "The command \'%1$s\' cannot be stored as an undoable event.";
+        "The command \'%1$s\' cannot be stored as an undoable event.";
 
     /**
      * Generates an Event object that can execute the behaviour of a given Command as well
@@ -41,12 +40,12 @@ public class EventFactory {
 
         } else if (command instanceof ClearCommand) {
             ReadOnlyResourceBook<Exercise> exerciseBookCleared =
-                    new ExerciseBook(((ClearCommand) command).getExerciseBookCleared());
+                new ReadOnlyResourceBook<>(((ClearCommand) command).getExerciseBookCleared());
             return new ClearEvent(exerciseBookCleared);
 
         } else {
             throw new CommandException(
-                    String.format(MESSAGE_COMMAND_NOT_UNDOABLE, command.getClass().getName()));
+                String.format(MESSAGE_COMMAND_NOT_UNDOABLE, command.getClass().getName()));
         }
     }
 

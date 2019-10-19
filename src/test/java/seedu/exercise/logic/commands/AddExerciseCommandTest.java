@@ -18,15 +18,14 @@ import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.Model;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
-import seedu.exercise.model.book.ExerciseBook;
-import seedu.exercise.model.book.ReadOnlyResourceBook;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.schedule.Schedule;
-import seedu.exercise.testutil.ExerciseBuilder;
+import seedu.exercise.model.resource.Exercise;
+import seedu.exercise.model.resource.Regime;
+import seedu.exercise.model.resource.Schedule;
+import seedu.exercise.testutil.exercise.ExerciseBuilder;
 
 public class AddExerciseCommandTest {
 
@@ -312,7 +311,7 @@ public class AddExerciseCommandTest {
 
         @Override
         public ReadOnlyResourceBook<Exercise> getExerciseBookData() {
-            return new ExerciseBook();
+            return new ReadOnlyResourceBook<>();
         }
     }
 

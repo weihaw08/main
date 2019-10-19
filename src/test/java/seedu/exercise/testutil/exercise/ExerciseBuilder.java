@@ -1,15 +1,15 @@
-package seedu.exercise.testutil;
+package seedu.exercise.testutil.exercise;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
+import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.util.SampleDataUtil;
 
 /**

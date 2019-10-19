@@ -12,7 +12,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.resource.Exercise;
 
 /**
  * Adds an exercise to the exercise book.
