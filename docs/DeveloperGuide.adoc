@@ -704,7 +704,7 @@ Windows, Linux, Unix, OS-X.
 
 [[regime]] Regime::
 A specific set of exercises that are to be done together. For example,
-a *Legs* regime at the gym can include mutliple exercises such as
+a *Legs* regime at the gym can include multiple exercises such as
 squats, hamstring curl and calf raises.
 
 [[schedule]] Schedule::
@@ -713,6 +713,10 @@ Planning of an exercise on a later day.
 [[property]] Property::
 An attribute of an exercise item. Pre-defined attributes include name,
 quantity, units and calories.
+
+[[prefix]] Prefix::
+The term that comes before each parameter in the command. For example, the
+prefix in `p/Number` is `p/`.
 
 == Instructions for Manual Testing
 
