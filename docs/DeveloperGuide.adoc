@@ -304,6 +304,87 @@ image::ScheduleActivityDiagram.png[]
 *** UI required to catch `ScheduleException` and act on that catch which makes the program hard to integrate
 *** Codebase will contain multiple `try/catch` acting like a control flow mechanism
 
+=== Custom feature
+This feature is facilitated by both `PropertyBook` and `CustomProperty`. Whenever a user
+adds a newly defined custom property, a `CustomProperty` object will be created which is stored in
+`PropertyBook`. Its corresponding prefix and full name will be tracked by `PropertyBook` to avoid
+clashes in their uses.
+
+==== Current Implementation
+To keep track of the custom properties and its relevant information, the following are used:
+
+1. `CUSTOM_PROPERTIES`: A list containing all of the `CustomProperty` objects that
+have been created.
+
+2. `prefixes`: A set containing all of the `Prefix` objects associated with existing exercise's
+properties.
+
+3. `fullNames`: A set containing the full names of the existing exercise's properties.
+
+The following methods are also implemented in `PropertyBook` to aid in the addition of a new custom property:
+
+1. `PropertyBook#isPrefixUsed(Prefix)`: Checks if the given prefix has been used by a property.
+
+2. `PropertyBook#isFullNameUsed(String)`: Checks if the given name has been used by a property.
+
+3. `PropertyBook#addCustomProperty(CustomProperty)`: Adds the new custom property. Each time a custom property is
+added, the prefix set in `Prefix` is also updated.
+
+The first three methods are exposed in the `Model` interface as `Model#isPrefixUsed(Prefix)`,
+`Model#isFullNameUsed(String)` and `Model#addCustomProperty(CustomProperty)` respectively.
+These associations are illustrated in a class diagram (Figure 9).
+
+.Class diagram of the associations of `PropertyBook`
+image::CustomClassDiagram.png[]
+
+The following sequence diagram (Figure 10) illustrates how the custom operation works when a custom
+property is *successfully added*.
+
+.Sequence diagram of a successful addition of a custom property
+image::EditedCustomSequenceDiagram.png[]
+
+However, not all additions of a custom property will be successful. The next activity diagram
+(Figure 11) shows the workflow when a new custom property is defined.
+
+.Activity diagram of the workflow when a new custom property is added
+image::CustomActivityDiagram.png[]
+
+==== Design Considerations
+
+===== Aspect: Tracking custom properties
+* **Alternative 1 (Current choice)**: Store the custom properties in a list and store their full
+names and prefixes in a set.
+** Pros: Storing the full names and prefixes separately provides an efficient way to check if a
+full name or a prefix has been used.
+** Cons: It may incur additional memory usage since the full name and prefix of each `CustomProperty`
+object are stored multiple times.
+* **Alternative 2**: Store only a list of custom properties
+** Pros: Less memory used as no duplicates in terms of prefix and full names are stored.
+** Cons: It may require more time to check if a full name or a prefix has been used as one has to
+iterate through the whole list.
+
+Ultimately, Alternative 1 is chosen as it provides a faster way of checking if a full name or a prefix has
+been used. Also, keeping track of the prefixes separately allows us to simply pass them in when adding or
+editing an exercise.
+
+===== Aspect: Representing the custom properties
+* **Alternative 1 (Current choice)**: Represent the custom property as an object that contains
+3 information - its prefix, its name and its parameter type.
+** Pros: This allows us to distinguish custom properties from default properties. Furthermore, these
+objects can be stored in a data structure which can be passed around when adding or editing an exercise.
+** Cons: Each exercise has to store the value of each custom property separately from the custom property
+itself.
+
+* **Alternative 2**: Create a `Property` class which will contain the following information: name, constraint
+message, value and prefix. The default properties will be stored separately in a Java class and will be initialised
+every time the app starts.
+** Pros: This ensures that there is a consistency in terms of how an exercise property is represented
+and it also allows the property value to be stored together.
+** Cons: Methods have to be introduced to identify custom properties from the default ones.
+
+Ultimately, Alternative 1 is selected as we believe it is more important to distinguish the custom properties
+from the default ones. This separation ensures that methods meant to operate on custom properties are unable
+to operate on default properties.
 
 [[Implementation-Configuration]]
 === Configuration
