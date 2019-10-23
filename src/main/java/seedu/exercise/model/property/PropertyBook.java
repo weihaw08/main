@@ -90,7 +90,7 @@ public class PropertyBook {
         addPrefix(newPrefix);
         addFullName(newFullName);
         CUSTOM_PROPERTIES.add(customProperty);
-        setPrefixesSet(getPrefixes());
+        updatePropertyPrefixes();
     }
 
     /**
@@ -119,6 +119,10 @@ public class PropertyBook {
      */
     public Set<String> getFullNames() {
         return Collections.unmodifiableSet(fullNames);
+    }
+
+    public void updatePropertyPrefixes() {
+        setPrefixesSet(getPrefixes());
     }
 
     /**
