@@ -3,21 +3,27 @@ package seedu.exercise.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPropertyBook;
 import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Calories;
+import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
+import seedu.exercise.model.property.ParameterType;
+import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
 
@@ -38,6 +44,8 @@ public class ParserUtilTest {
     private static final String VALID_MUSCLE_2 = "Arms";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    private static final PropertyBook DEFAULT_PROPERTY_BOOK = getDefaultPropertyBook();
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -220,5 +228,150 @@ public class ParserUtilTest {
             new HashSet<Muscle>(Arrays.asList(new Muscle(VALID_MUSCLE_1), new Muscle(VALID_MUSCLE_2)));
 
         assertEquals(expectedMuscleSet, actualMuscleSet);
+    }
+
+    @Test
+    public void parseFullName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFullName(null));
+    }
+
+    @Test
+    public void parseFullName_invalidFullName_throwsParseException() {
+        // Contain punctuation -> invalid
+        assertThrows(ParseException.class, () -> ParserUtil.parseFullName("Inv@lid"));
+
+        // Contain number -> invalid
+        assertThrows(ParseException.class, () -> ParserUtil.parseFullName("1nval1d"));
+    }
+
+    @Test
+    public void parseFullName_validFullName_returnsFormattedFullName() throws Exception {
+        // Single letter -> valid
+        String singleLetter = "g";
+        assertEquals("G", ParserUtil.parseFullName(singleLetter));
+
+        // Randomly stylised string with whitespaces -> valid
+        String longName = "ThIs iS a     VaLid    NaME     with lOTs of SPACEs";
+        assertEquals("This Is A Valid Name With Lots Of Spaces", ParserUtil.parseFullName(longName));
+
+        // Correctly stylised string with whitespaces in front -> valid
+        String shortName = "   Short";
+        assertEquals("Short", ParserUtil.parseFullName(shortName));
+    }
+
+    @Test
+    public void parsePrefixName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePrefixName(null));
+    }
+
+    @Test
+    public void parsePrefixName_invalidPrefixName_throwsParseException() {
+        // EP: Contains number
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrefixName("33"));
+
+        // EP: Contains punctuation
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrefixName("?!"));
+
+        // EP: Contains whitespace
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrefixName("h i"));
+
+        // EP: Mix of punctuation, numbers and alphabets
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrefixName("invalid1234?!"));
+    }
+
+    @Test
+    public void parsePrefixName_validPrefixName_returnsPrefix() throws Exception {
+        // Single letter -> valid
+        String singleLetter = "r";
+        Prefix expectedPrefix1 = new Prefix("r/");
+        assertEquals(expectedPrefix1, ParserUtil.parsePrefixName(singleLetter));
+
+        // Multiple letters with no space -> valid
+        String multipleLetters = "rrrmd";
+        Prefix expectedPrefix2 = new Prefix("rrrmd/");
+        assertEquals(expectedPrefix2, ParserUtil.parsePrefixName(multipleLetters));
+
+        // Randomly stylised letters with no space -> valid
+        String randomlyStylised = "RmRDRd";
+        Prefix expectedPrefix3 = new Prefix("RmRDRd/");
+        assertEquals(expectedPrefix3, ParserUtil.parsePrefixName(randomlyStylised));
+    }
+
+    @Test
+    public void parseParameterType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseParameterType(null));
+    }
+
+    @Test
+    public void parseParameterType_invalidParameterType_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseParameterType(" "));
+        assertThrows(ParseException.class, () -> ParserUtil.parseParameterType("gG"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseParameterType("123"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseParameterType("?!"));
+    }
+
+    @Test
+    public void parseParameterType_validParameterType_returnsParameterType() throws Exception {
+        // String "Number" -> valid
+        assertEquals(ParameterType.NUMBER, ParserUtil.parseParameterType("Number"));
+
+        // String "Date" -> valid
+        assertEquals(ParameterType.DATE, ParserUtil.parseParameterType("Date"));
+
+        // String "Text" -> valid
+        assertEquals(ParameterType.TEXT, ParserUtil.parseParameterType("Text"));
+    }
+
+    @Test
+    public void parseCustomProperties_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCustomProperties(null));
+    }
+
+    @Test
+    public void parseCustomProperties_mapWithInvalidValues_throwsParseException() {
+        Prefix ratingPrefix = new Prefix("r/");
+        String ratingName = "Rating";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(ratingPrefix, ratingName, ParameterType.NUMBER));
+        Map<String, String> invalidRatingMap = Map.of(ratingName, "invalid");
+        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidRatingMap));
+
+        Prefix recoveryDatePrefix = new Prefix("rd/");
+        String recoveryDateName = "Recovery Date";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(recoveryDatePrefix, recoveryDateName,
+            ParameterType.DATE));
+        Map<String, String> invalidRecoveryDateMap = Map.of(recoveryDateName, "Invalid");
+        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidRecoveryDateMap));
+
+        Prefix equipmentPrefix = new Prefix("e/");
+        String equipmentName = "Equipment";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(equipmentPrefix, equipmentName,
+            ParameterType.TEXT));
+        Map<String, String> invalidEquipmentMap = Map.of(equipmentName, "123");
+        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidEquipmentMap));
+    }
+
+    @Test
+    public void parseCustomProperties_emptyMap_returnsEmptyMap() throws Exception {
+        assertTrue(ParserUtil.parseCustomProperties(new HashMap<>()).isEmpty());
+    }
+
+    @Test
+    public void parseCustomProperties_mapWithValidValues_returnsModifiedMap() throws Exception {
+        Prefix ratingPrefix = new Prefix("r/");
+        String ratingName = "Rating";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(ratingPrefix, ratingName, ParameterType.NUMBER));
+        Prefix recoveryDatePrefix = new Prefix("rd/");
+        String recoveryDateName = "Recovery Date";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(recoveryDatePrefix, recoveryDateName,
+            ParameterType.DATE));
+        Prefix equipmentPrefix = new Prefix("e/");
+        String equipmentName = "Equipment";
+        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(equipmentPrefix, equipmentName,
+            ParameterType.TEXT));
+        Map<String, String> validMap = Map.of("Rating", "  3.4 ", "Recovery Date", " 20/09/2019",
+            "Equipment", "Barbells    ");
+        Map<String, String> expectedMap = Map.of("Rating", "3.4", "Recovery Date", "20/09/2019",
+            "Equipment", "Barbells");
+        assertEquals(expectedMap, ParserUtil.parseCustomProperties(validMap));
     }
 }
