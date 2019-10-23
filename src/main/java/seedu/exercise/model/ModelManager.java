@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
@@ -147,7 +148,6 @@ public class ModelManager implements Model {
 
     public void setExercise(Exercise target, Exercise editedExercise) {
         requireAllNonNull(target, editedExercise);
-
         exerciseBook.setResource(target, editedExercise);
     }
 
@@ -229,11 +229,11 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Exercise} backed by the internal list of
-     * {@code versionedExerciseBook}
+     * {@code exerciseBook}.
      */
     @Override
     public ObservableList<Exercise> getFilteredExerciseList() {
-        return filteredExercises;
+        return FXCollections.unmodifiableObservableList(filteredExercises);
     }
 
     @Override
@@ -246,10 +246,10 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Regime} backed by the internal list of
-     * {@code versionedRegimeBook}
+     * {@code regimeBook}.
      */
     public ObservableList<Regime> getFilteredRegimeList() {
-        return filteredRegimes;
+        return FXCollections.unmodifiableObservableList(filteredRegimes);
     }
 
     @Override
@@ -284,6 +284,10 @@ public class ModelManager implements Model {
 
     public void addCustomProperty(CustomProperty customProperty) {
         propertyBook.addCustomProperty(customProperty);
+    }
+
+    public void removeCustomProperty(String fullName) {
+        propertyBook.removeCustomProperty(fullName);
     }
 
     //=========== ExerciseDatabase ===============================================================
