@@ -3,27 +3,22 @@ package seedu.exercise.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPropertyBook;
 import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Calories;
-import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.ParameterType;
-import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
 
@@ -44,8 +39,6 @@ public class ParserUtilTest {
     private static final String VALID_MUSCLE_2 = "Arms";
 
     private static final String WHITESPACE = " \t\r\n";
-
-    private static final PropertyBook DEFAULT_PROPERTY_BOOK = getDefaultPropertyBook();
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -325,53 +318,5 @@ public class ParserUtilTest {
     @Test
     public void parseCustomProperties_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCustomProperties(null));
-    }
-
-    @Test
-    public void parseCustomProperties_mapWithInvalidValues_throwsParseException() {
-        Prefix ratingPrefix = new Prefix("r/");
-        String ratingName = "Rating";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(ratingPrefix, ratingName, ParameterType.NUMBER));
-        Map<String, String> invalidRatingMap = Map.of(ratingName, "invalid");
-        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidRatingMap));
-
-        Prefix recoveryDatePrefix = new Prefix("rd/");
-        String recoveryDateName = "Recovery Date";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(recoveryDatePrefix, recoveryDateName,
-            ParameterType.DATE));
-        Map<String, String> invalidRecoveryDateMap = Map.of(recoveryDateName, "Invalid");
-        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidRecoveryDateMap));
-
-        Prefix equipmentPrefix = new Prefix("e/");
-        String equipmentName = "Equipment";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(equipmentPrefix, equipmentName,
-            ParameterType.TEXT));
-        Map<String, String> invalidEquipmentMap = Map.of(equipmentName, "123");
-        assertThrows(ParseException.class, () -> ParserUtil.parseCustomProperties(invalidEquipmentMap));
-    }
-
-    @Test
-    public void parseCustomProperties_emptyMap_returnsEmptyMap() throws Exception {
-        assertTrue(ParserUtil.parseCustomProperties(new HashMap<>()).isEmpty());
-    }
-
-    @Test
-    public void parseCustomProperties_mapWithValidValues_returnsModifiedMap() throws Exception {
-        Prefix ratingPrefix = new Prefix("r/");
-        String ratingName = "Rating";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(ratingPrefix, ratingName, ParameterType.NUMBER));
-        Prefix recoveryDatePrefix = new Prefix("rd/");
-        String recoveryDateName = "Recovery Date";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(recoveryDatePrefix, recoveryDateName,
-            ParameterType.DATE));
-        Prefix equipmentPrefix = new Prefix("e/");
-        String equipmentName = "Equipment";
-        DEFAULT_PROPERTY_BOOK.addCustomProperty(new CustomProperty(equipmentPrefix, equipmentName,
-            ParameterType.TEXT));
-        Map<String, String> validMap = Map.of("Rating", "  3.4 ", "Recovery Date", " 20/09/2019",
-            "Equipment", "Barbells    ");
-        Map<String, String> expectedMap = Map.of("Rating", "3.4", "Recovery Date", "20/09/2019",
-            "Equipment", "Barbells");
-        assertEquals(expectedMap, ParserUtil.parseCustomProperties(validMap));
     }
 }
