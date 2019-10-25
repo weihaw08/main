@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.ClearCommand;
 import seedu.exercise.logic.commands.Command;
-import seedu.exercise.logic.commands.CustomAddCommand;
+import seedu.exercise.logic.commands.CustomCommand;
 import seedu.exercise.logic.commands.DeleteExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.ExitCommand;
@@ -83,7 +83,7 @@ public class ExerciseBookParser {
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommandParser().parse(arguments);
 
-        case CustomAddCommand.COMMAND_WORD:
+        case CustomCommand.COMMAND_WORD:
             return new CustomCommandParser().parse(arguments);
 
         case SuggestCommand.COMMAND_WORD:

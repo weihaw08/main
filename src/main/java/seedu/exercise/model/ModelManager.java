@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
@@ -250,7 +249,7 @@ public class ModelManager implements Model {
             addResolvedSchedule(conflict.getScheduleByRegime(regime));
         } else {
             UniqueResourceList<Exercise> resolvedExercises =
-                    getResolvedExerciseList(indexFromSchedule, indexFromConflict);
+                getResolvedExerciseList(indexFromSchedule, indexFromConflict);
             Schedule resolvedSchedule = getResolvedSchedule(regimeName, resolvedExercises);
             addResolvedSchedule(resolvedSchedule);
             addCombinedRegime(resolvedSchedule.getRegime());
@@ -280,7 +279,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Exercise> getFilteredExerciseList() {
-        return FXCollections.unmodifiableObservableList(filteredExercises);
+        return filteredExercises;
     }
 
     @Override
@@ -296,7 +295,7 @@ public class ModelManager implements Model {
      * {@code regimeBook}.
      */
     public ObservableList<Regime> getFilteredRegimeList() {
-        return FXCollections.unmodifiableObservableList(filteredRegimes);
+        return filteredRegimes;
     }
 
     @Override
@@ -387,9 +386,9 @@ public class ModelManager implements Model {
         Regime scheduledRegime = conflict.getScheduledRegime();
         Regime conflictRegime = conflict.getConflictingRegime();
         List<Exercise> exercisesToAddFromScheduled = scheduledRegime.getRegimeExercises()
-                .getAllResourcesIndex(indexFromSchedule);
+            .getAllResourcesIndex(indexFromSchedule);
         List<Exercise> exercisesToAddFromConflicted = conflictRegime.getRegimeExercises()
-                .getAllResourcesIndex(indexFromConflict);
+            .getAllResourcesIndex(indexFromConflict);
         List<Exercise> resolvedExercises = append(exercisesToAddFromScheduled, exercisesToAddFromConflicted);
         UniqueResourceList<Exercise> uniqueResolveList = new UniqueResourceList<>();
         uniqueResolveList.setAll(resolvedExercises);

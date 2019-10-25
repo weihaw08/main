@@ -20,8 +20,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_CATEGORY = new Prefix("t/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
 
-    /* Prefix definitions for custom command */
+    /* Prefix definitions for resolve command */
     public static final Prefix PREFIX_CONFLICT_INDEX = new Prefix("r/");
+
+    /* Prefix definitions for custom command */
     public static final Prefix PREFIX_CUSTOM_NAME = new Prefix("s/");
     public static final Prefix PREFIX_FULL_NAME = new Prefix("f/");
     public static final Prefix PREFIX_PARAMETER_TYPE = new Prefix("p/");
@@ -31,7 +33,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUGGEST = new Prefix("g/");
 
     /* A set consisting of property prefix definitions for add and edit commands */
-    public static final Set<Prefix> PREFIXES_SET = new HashSet<>();
+    private static final Set<Prefix> PREFIXES_SET = new HashSet<>();
 
     /**
      * Updates the prefixes in {@code PREFIXES_SET} with the input {@code prefixes}.

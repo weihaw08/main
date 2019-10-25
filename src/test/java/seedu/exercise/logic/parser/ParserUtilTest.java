@@ -61,7 +61,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
+    public void parseName_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
@@ -84,7 +84,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCalories_null_throwsNullPointerException() {
+    public void parseCalories_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCalories(null));
     }
 
@@ -107,7 +107,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseQuantity_null_throwsNullPointerException() {
+    public void parseQuantity_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity(null));
     }
 
@@ -130,7 +130,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_null_throwsNullPointerException() {
+    public void parseDate_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
     }
 
@@ -153,7 +153,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseUnit_null_throwsNullPointerException() {
+    public void parseUnit_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit(null));
     }
 
@@ -176,7 +176,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMuscle_null_throwsNullPointerException() {
+    public void parseMuscle_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseMuscle(null));
     }
 
@@ -199,7 +199,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMuscles_null_throwsNullPointerException() {
+    public void parseMuscles_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseMuscles(null));
     }
 
@@ -224,7 +224,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFullName_null_throwsNullPointerException() {
+    public void parseFullName_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseFullName(null));
     }
 
@@ -253,7 +253,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePrefixName_null_throwsNullPointerException() {
+    public void parsePrefixName_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePrefixName(null));
     }
 
@@ -291,7 +291,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseParameterType_null_throwsNullPointerException() {
+    public void parseParameterType_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseParameterType(null));
     }
 
@@ -316,7 +316,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCustomProperties_null_throwsNullPointerException() {
+    public void parseCustomProperties_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCustomProperties(null));
     }
 }

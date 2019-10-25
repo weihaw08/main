@@ -59,7 +59,8 @@ public class CustomCommandParser implements Parser<CustomCommand> {
      * Returns true if the only prefixes present are the prefixes required for adding a new custom property.
      */
     private boolean areValidPrefixesForAddCustom(ArgumentMultimap argMultimap) {
-        return areAddPrefixesPresent(argMultimap) && !isRemovePrefixPresent(argMultimap);
+        return areAddPrefixesPresent(argMultimap) && !isRemovePrefixPresent(argMultimap)
+            && argMultimap.getPreamble().isEmpty();
     }
 
     /**
@@ -68,6 +69,7 @@ public class CustomCommandParser implements Parser<CustomCommand> {
      */
     private boolean isValidPrefixForRemoveCustom(ArgumentMultimap argMultimap) {
         return isRemovePrefixPresent(argMultimap)
+            && argMultimap.getPreamble().isEmpty()
             && !argMultimap.arePrefixesPresent(PREFIX_CUSTOM_NAME)
             && !argMultimap.arePrefixesPresent(PREFIX_FULL_NAME)
             && !argMultimap.arePrefixesPresent(PREFIX_PARAMETER_TYPE);
