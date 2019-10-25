@@ -21,6 +21,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
 
     /* Prefix definitions for custom command */
+    public static final Prefix PREFIX_CONFLICT_INDEX = new Prefix("r/");
     public static final Prefix PREFIX_CUSTOM_NAME = new Prefix("s/");
     public static final Prefix PREFIX_FULL_NAME = new Prefix("f/");
     public static final Prefix PREFIX_PARAMETER_TYPE = new Prefix("p/");
