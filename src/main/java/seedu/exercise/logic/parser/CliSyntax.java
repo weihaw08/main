@@ -30,7 +30,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMOVE_CUSTOM = new Prefix("rm/");
 
     /* Prefix definition for suggest command */
-    public static final Prefix PREFIX_SUGGEST = new Prefix("g/");
+    public static final Prefix PREFIX_SUGGEST_TYPE = new Prefix("s/");
 
     /* A set consisting of property prefix definitions for add and edit commands */
     private static final Set<Prefix> PREFIXES_SET = new HashSet<>();
