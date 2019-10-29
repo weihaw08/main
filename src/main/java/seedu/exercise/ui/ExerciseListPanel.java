@@ -3,12 +3,14 @@ package seedu.exercise.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.animation.FadeTransition;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.model.resource.Exercise;
 
@@ -17,6 +19,7 @@ import seedu.exercise.model.resource.Exercise;
  */
 public class ExerciseListPanel extends UiPart<Region> {
     private static final String FXML = "ExerciseListPanel.fxml";
+    private static final FadeTransition fade = new FadeTransition(Duration.millis(150));
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private ObservableList<Exercise> exerciseList;
