@@ -113,6 +113,7 @@ public class CommonTestData {
     public static final Prefix P_SLASH = new Prefix("p/");
     public static final Prefix DASH_T = new Prefix("-t");
     public static final Prefix HAT_Q = new Prefix("^Q");
+    public static final Prefix NUMBER_SLASH = new Prefix("34/");
 
     //=======================For being used to attach to front of commands=============================
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
