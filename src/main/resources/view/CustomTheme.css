@@ -324,7 +324,7 @@
 
 .scroll-bar .thumb {
     -fx-background-color: derive(#737373, 50%);
-    -fx-background-insets: 0;
+    -fx-background-insets: 3 3 0 0;
     -fx-padding: 2 2 2 2;
 }
 
