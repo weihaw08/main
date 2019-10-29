@@ -2,7 +2,8 @@ package seedu.exercise.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CUSTOM_NAME;
+import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.CommonTestData.INVALID_FULL_NAME_DESC;
 import static seedu.exercise.testutil.CommonTestData.INVALID_PREFIX_NAME_DESC;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_RATING;
@@ -18,6 +19,16 @@ import org.junit.jupiter.api.Test;
 import seedu.exercise.testutil.builder.CustomPropertyBuilder;
 
 class CustomPropertyTest {
+
+    @Test
+    public void constructor_withNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CustomProperty(null, VALID_FULL_NAME_REMARK,
+            ParameterType.TEXT));
+        assertThrows(NullPointerException.class, () -> new CustomProperty(PREFIX_CUSTOM_NAME, null,
+            ParameterType.TEXT));
+        assertThrows(NullPointerException.class, () -> new CustomProperty(PREFIX_CUSTOM_NAME, VALID_FULL_NAME_REMARK,
+            null));
+    }
 
     @Test
     public void execute_isValidFullName_success() {
@@ -59,7 +70,7 @@ class CustomPropertyTest {
 
         // different prefix -> returns false
         CustomProperty editedPriority = new CustomPropertyBuilder(PRIORITY)
-                .withPrefix(VALID_PREFIX_NAME_RATING).build();
+            .withPrefix(VALID_PREFIX_NAME_RATING).build();
         assertFalse(INSTRUCTIONS.equals(editedPriority));
 
         // different full name -> returns false
