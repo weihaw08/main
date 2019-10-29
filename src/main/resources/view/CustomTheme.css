@@ -99,17 +99,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: #f9f9f9;
+    -fx-background-color: #c4fff9;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #f9f9f9;
-    -fx-border-color: #ffffff #ffffff #87c4d7 #ffffff;
+    -fx-border-color: black black black black;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #f9f9f9;
-    -fx-border-color: #ffffff #ffffff #87c4d7 #ffffff;
+    -fx-border-color: black black black black;
 }
 
 .list-cell:filled:selected {
