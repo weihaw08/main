@@ -1,5 +1,6 @@
 package seedu.exercise.model.property;
 
+import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.logic.parser.CliSyntax.setPrefixesSet;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class PropertyBook {
      * @param customProperties the set of custom properties to be added to the {@code PropertyBook}
      */
     public PropertyBook(Set<Prefix> prefixes, Set<String> fullNames, List<CustomProperty> customProperties) {
+        requireAllNonNull(prefixes, fullNames, customProperties);
         setPrefixes(prefixes);
         setFullNames(fullNames);
         setCustomProperties(customProperties);
@@ -102,6 +104,7 @@ public class PropertyBook {
         removeFullName(fullNameToRemove);
         CUSTOM_PROPERTIES.remove(toRemove);
         updatePropertyPrefixes();
+
     }
 
     /**

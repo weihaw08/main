@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.testutil.Assert.assertThrows;
+import static seedu.exercise.testutil.CommonTestData.VALID_DATE;
+import static seedu.exercise.testutil.CommonTestData.VALID_DATE_2;
 
 import java.util.ArrayList;
 
@@ -92,5 +94,26 @@ public class DateTest {
         expectedDate.add(new Date("05/05/2019"));
 
         assertEquals(actualDates, expectedDate);
+    }
+
+    @Test
+    public void toStringTest() {
+        Date originalDate = new Date(VALID_DATE);
+        assertEquals(VALID_DATE, originalDate.toString());
+    }
+
+    @Test
+    public void equals() {
+        Date twelveDecember = new Date(VALID_DATE);
+        assertTrue(twelveDecember.equals(new Date(VALID_DATE)));
+
+        Date thirteenDecember = new Date(VALID_DATE_2);
+        assertFalse(twelveDecember.equals(thirteenDecember));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Date twelveDecember = new Date(VALID_DATE);
+        assertEquals(twelveDecember.hashCode(), new Date(VALID_DATE).hashCode());
     }
 }

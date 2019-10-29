@@ -114,6 +114,7 @@ public class CommonTestData {
     public static final Prefix DASH_T = new Prefix("-t");
     public static final Prefix HAT_Q = new Prefix("^Q");
     public static final Prefix NUMBER_SLASH = new Prefix("34/");
+    public static final Prefix PUNCTUATION_SLASH = new Prefix("?!/");
 
     //=======================For being used to attach to front of commands=============================
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -173,7 +174,7 @@ public class CommonTestData {
             .build();
 
     //=======================For valid custom properties=============================
-    public static final String VALID_PREFIX_NAME_RATING = "a";
+    public static final String VALID_PREFIX_NAME_RATING = "r";
     public static final String PREFIX_NAME_DESC_RATING = " " + PREFIX_CUSTOM_NAME + VALID_PREFIX_NAME_RATING;
     public static final String VALID_PREFIX_NAME_REMARK = "b";
     public static final String PREFIX_NAME_DESC_REMARK = " " + PREFIX_CUSTOM_NAME + VALID_PREFIX_NAME_REMARK;
