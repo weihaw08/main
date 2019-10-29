@@ -93,7 +93,6 @@
     -fx-background-color: derive(#9cd8eb, 20%);
 }
 
-
 .list-cell {
     -fx-border-radius: 10;
     -fx-background-radius: 10;

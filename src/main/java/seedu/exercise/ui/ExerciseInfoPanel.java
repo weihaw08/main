@@ -57,7 +57,7 @@ public class ExerciseInfoPanel extends UiPart<Region> {
         calories.setText(exercise.getCalories().value + " kcal");
         quantityAndUnit.setText(exercise.getQuantity().value + " " + exercise.getUnit().unit);
         setMuscleTags(exercise.getMuscles());
-        customPropertiesList = new CustomPropertyListPanel(exercise.getCustomProperties());
+        customPropertiesList = new CustomPropertyListPanel(exercise.getObservableCustomPropertiesList());
         customProperties.getChildren().add(customPropertiesList.getRoot());
     }
 
