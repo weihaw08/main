@@ -69,7 +69,7 @@ public class CustomRemoveCommand extends CustomCommand {
      */
     private Map<String, String> updateCustomProperties(Map<String, String> oldPropertiesMap) {
         Map<String, String> updatedMap = new TreeMap<>();
-        List<CustomProperty> newCustomProperties = getCustomProperties();
+        Set<CustomProperty> newCustomProperties = getCustomProperties();
         for (CustomProperty customProperty : newCustomProperties) {
             String propertyName = customProperty.getFullName();
             if (oldPropertiesMap.containsKey(propertyName)) {

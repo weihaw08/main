@@ -2,11 +2,13 @@ package seedu.exercise.model.property;
 
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.logic.parser.CliSyntax.setPrefixesSet;
+import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultFullNames;
+import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPrefixes;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -18,56 +20,51 @@ import seedu.exercise.logic.parser.Prefix;
  * It also helps to keep track of all the existing custom properties that have been defined by the user.
  */
 public class PropertyBook {
-    private static final List<CustomProperty> CUSTOM_PROPERTIES = new ArrayList<>();
-    private final Set<Prefix> prefixes = new HashSet<>();
-    private final Set<String> fullNames = new HashSet<>();
+    private static final Set<CustomProperty> CUSTOM_PROPERTIES = new HashSet<>();
+
+    // Helps to ensure that the prefixes used in add/edit command and full names of default
+    // properties are always present.
+    private final Set<Prefix> prefixes = getDefaultPrefixes();
+    private final Set<String> fullNames = getDefaultFullNames();
 
     /**
-     * Initialises an instance of {@code PropertyBook} object.
+     * Initialises an instance of {@code PropertyBook} object. If any full name/prefix are present in the custom
+     * property but not in the prefixes
      *
-     * @param prefixes         the set of prefixes to be added to the {@code PropertyBook}
-     * @param fullNames        the set of full names to be added to the {@code PropertyBook}
      * @param customProperties the set of custom properties to be added to the {@code PropertyBook}
      */
-    public PropertyBook(Set<Prefix> prefixes, Set<String> fullNames, List<CustomProperty> customProperties) {
-        requireAllNonNull(prefixes, fullNames, customProperties);
-        setPrefixes(prefixes);
-        setFullNames(fullNames);
-        setCustomProperties(customProperties);
+    public PropertyBook(Set<CustomProperty> customProperties) {
+        requireAllNonNull(customProperties);
+        addCustomProperties(customProperties);
+        setPrefixesAndFullNames(customProperties);
     }
 
     /**
-     * Returns an immutable custom properties list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public static List<CustomProperty> getCustomProperties() {
-        return Collections.unmodifiableList(CUSTOM_PROPERTIES);
-    }
-
-    /**
-     * Adds in all the custom properties that are present in the given {@code List<CustomProperty> customProperties}
-     * into the PropertyBook only if there are no custom properties present.
+     * Adds in all the custom properties that are present in the given {@code Set<CustomProperty> customProperties}
+     * into the PropertyBook.
      *
      * @param customProperties the custom properties to be added
      */
-    public void setCustomProperties(List<CustomProperty> customProperties) {
-        if (CUSTOM_PROPERTIES.isEmpty()) {
-            CUSTOM_PROPERTIES.addAll(customProperties);
-        }
+    public void addCustomProperties(Set<CustomProperty> customProperties) {
+        CUSTOM_PROPERTIES.addAll(customProperties);
+        setPrefixesAndFullNames(customProperties);
     }
 
     /**
-     * Checks if the prefix has already been used by a property.
+     * Clears all of the custom properties in PropertyBook.
      */
-    public boolean isPrefixUsed(Prefix prefix) {
-        return prefixes.contains(prefix);
+    public void clearCustomProperties() {
+        CUSTOM_PROPERTIES.clear();
+        prefixes.retainAll(getDefaultPrefixes());
+        fullNames.retainAll(getDefaultFullNames());
     }
 
     /**
-     * Checks if the full name has already been used by a property.
+     * Returns an immutable custom properties set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public boolean isFullNameUsed(String fullName) {
-        return fullNames.contains(fullName);
+    public static Set<CustomProperty> getCustomProperties() {
+        return Collections.unmodifiableSet(CUSTOM_PROPERTIES);
     }
 
     /**
@@ -93,63 +90,25 @@ public class PropertyBook {
         }
     }
 
-    /**
-     * Removes the given {@code customProperty} and its associated prefix and full name from
-     * PropertyBook.
-     */
-    private void removeCustomProperty(CustomProperty toRemove) {
-        Prefix prefixToRemove = toRemove.getPrefix();
-        String fullNameToRemove = toRemove.getFullName();
-        removePrefix(prefixToRemove);
-        removeFullName(fullNameToRemove);
-        CUSTOM_PROPERTIES.remove(toRemove);
-        updatePropertyPrefixes();
-
-    }
-
-    /**
-     * Returns an immutable prefix set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Prefix> getPrefixes() {
-        return Collections.unmodifiableSet(prefixes);
-    }
-
-    /**
-     * Adds in all the prefixes that are present in the given {@code Set<Prefix> prefixes} object into the
-     * Property Manager only if there are no prefixes present.
-     *
-     * @param prefixes the prefixes to be added
-     */
-    public void setPrefixes(Set<Prefix> prefixes) {
-        if (this.prefixes.isEmpty()) {
-            this.prefixes.addAll(prefixes);
-        }
-    }
-
-    /**
-     * Returns an immutable full names set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<String> getFullNames() {
-        return Collections.unmodifiableSet(fullNames);
-    }
-
-    /**
-     * Adds in all the full names that are present in the given {@code Set<String> fullNames} object into
-     * the PropertyBook only if there are no full names present.
-     *
-     * @param fullNames the full names to be added
-     */
-    public void setFullNames(Set<String> fullNames) {
-        if (this.fullNames.isEmpty()) {
-            this.fullNames.addAll(fullNames);
-        }
-    }
-
     public void updatePropertyPrefixes() {
-        setPrefixesSet(getPrefixes());
+        setPrefixesSet(Collections.unmodifiableSet(prefixes));
     }
+
+
+    /**
+     * Checks if the prefix has already been used by a property.
+     */
+    public boolean isPrefixUsed(Prefix prefix) {
+        return prefixes.contains(prefix);
+    }
+
+    /**
+     * Checks if the full name has already been used by a property.
+     */
+    public boolean isFullNameUsed(String fullName) {
+        return fullNames.contains(fullName);
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -161,14 +120,23 @@ public class PropertyBook {
             return false;
         }
 
-        PropertyBook anotherManager = (PropertyBook) other;
-        return prefixes.equals(anotherManager.prefixes)
-            && fullNames.equals(anotherManager.fullNames);
+        PropertyBook anotherBook = (PropertyBook) other;
+        return prefixes.equals(anotherBook.prefixes)
+            && fullNames.equals(anotherBook.fullNames)
+            && CUSTOM_PROPERTIES.equals(anotherBook.CUSTOM_PROPERTIES);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prefixes, fullNames);
+        return Objects.hash(prefixes, fullNames, CUSTOM_PROPERTIES);
+    }
+
+
+    private void setPrefixesAndFullNames(Set<CustomProperty> customProperties) {
+        for (CustomProperty property : customProperties) {
+            this.addPrefix(property.getPrefix());
+            this.addFullName(property.getFullName());
+        }
     }
 
     /**
@@ -197,6 +165,19 @@ public class PropertyBook {
      */
     private void removeFullName(String fullName) {
         fullNames.remove(fullName);
+    }
+
+    /**
+     * Removes the given {@code customProperty} and its associated prefix and full name from
+     * PropertyBook.
+     */
+    private void removeCustomProperty(CustomProperty toRemove) {
+        Prefix prefixToRemove = toRemove.getPrefix();
+        String fullNameToRemove = toRemove.getFullName();
+        removePrefix(prefixToRemove);
+        removeFullName(fullNameToRemove);
+        CUSTOM_PROPERTIES.remove(toRemove);
+        updatePropertyPrefixes();
     }
 
     /**

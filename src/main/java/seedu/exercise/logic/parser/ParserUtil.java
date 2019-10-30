@@ -203,7 +203,7 @@ public class ParserUtil {
     static Map<String, String> parseCustomProperties(Map<String, String> customProperties)
         throws ParseException {
         requireNonNull(customProperties);
-        List<CustomProperty> allCustomProperties = getCustomProperties();
+        Set<CustomProperty> allCustomProperties = getCustomProperties();
         final Map<String, String> customPropertiesMap = new TreeMap<>();
         for (CustomProperty property : allCustomProperties) {
             String propertyName = property.getFullName();

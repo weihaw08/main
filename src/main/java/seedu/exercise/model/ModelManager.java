@@ -5,11 +5,13 @@ import static seedu.exercise.commons.util.AppUtil.requireMainAppState;
 import static seedu.exercise.commons.util.CollectionUtil.append;
 import static seedu.exercise.commons.util.CollectionUtil.areListsEmpty;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.exercise.model.property.PropertyBook.getCustomProperties;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPropertyBook;
 
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -465,4 +467,5 @@ public class ModelManager implements Model {
     private void addCombinedRegime(Regime regime) {
         regimeBook.addResource(regime);
     }
+
 }

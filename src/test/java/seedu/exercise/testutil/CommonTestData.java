@@ -223,7 +223,7 @@ public class CommonTestData {
                     + "["
                     + VALID_MUSCLE_BASKETBALL
                     + "] "
-                    + VALID_PREFIX_NAME_RATING
+                    + VALID_FULL_NAME_REMARK
                     + ": "
                     + VALID_PREFIX_NAME_REMARK;
 

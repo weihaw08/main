@@ -34,16 +34,13 @@ public class DefaultPropertyBookUtil {
      * an empty list of default custom properties.
      */
     public static PropertyBook getDefaultPropertyBook() {
-        Set<Prefix> defaultPrefixes = getDefaultPrefixes();
-        Set<String> defaultFullNames = getDefaultFullNames();
-        List<CustomProperty> defaultCustomProperties = getDefaultCustomProperties();
-        return new PropertyBook(defaultPrefixes, defaultFullNames, defaultCustomProperties);
+        return new PropertyBook(getDefaultCustomProperties());
     }
 
     /**
      * Creates a new {@code Set<Prefix>} that contains all the prefixes of the default exercise properties.
      */
-    private static Set<Prefix> getDefaultPrefixes() {
+    public static Set<Prefix> getDefaultPrefixes() {
         Set<Prefix> defaultPrefixes = new HashSet<>();
         defaultPrefixes.add(PREFIX_NAME);
         defaultPrefixes.add(PREFIX_DATE);
@@ -59,7 +56,7 @@ public class DefaultPropertyBookUtil {
     /**
      * Creates a new {@code Set<String>} that contains all the full names of the default exercise properties.
      */
-    private static Set<String> getDefaultFullNames() {
+    public static Set<String> getDefaultFullNames() {
         Set<String> defaultFullNames = new HashSet<>();
         defaultFullNames.add(PROPERTY_NAME);
         defaultFullNames.add(PROPERTY_DATE);
@@ -71,9 +68,9 @@ public class DefaultPropertyBookUtil {
     }
 
     /**
-     * Creates a new empty {@code List<CustomProperty>}
+     * Creates a new empty {@code Set<CustomProperty>}
      */
-    private static List<CustomProperty> getDefaultCustomProperties() {
-        return new ArrayList<>();
+    public static Set<CustomProperty> getDefaultCustomProperties() {
+        return new HashSet<>();
     }
 }
