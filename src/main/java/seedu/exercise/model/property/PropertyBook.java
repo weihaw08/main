@@ -22,8 +22,11 @@ public class PropertyBook {
 
     // Helps to ensure that the prefixes used in add/edit command and full names of default
     // properties are always present.
-    private final Set<Prefix> prefixes = getDefaultPrefixes();
-    private final Set<String> fullNames = getDefaultFullNames();
+    private final Set<Prefix> defaultPrefixes = getDefaultPrefixes();
+    private final Set<String> defaultFullNames = getDefaultFullNames();
+
+    private final Set<Prefix> customPrefixes = new HashSet<>();
+    private final Set<String> customFullNames = new HashSet<>();
 
     /**
      * Initialises an instance of {@code PropertyBook} object. If any full name/prefix are present in the custom
@@ -53,8 +56,8 @@ public class PropertyBook {
      */
     public void clearCustomProperties() {
         CUSTOM_PROPERTIES.clear();
-        prefixes.retainAll(getDefaultPrefixes());
-        fullNames.retainAll(getDefaultFullNames());
+        customPrefixes.clear();
+        customFullNames.clear();
     }
 
     /**
@@ -101,8 +104,14 @@ public class PropertyBook {
         updatePropertyPrefixes();
     }
 
+    /**
+     * Updates the property prefixes in {@code CliSyntax} class for use in add/edit command.
+     */
     public void updatePropertyPrefixes() {
-        setPropertyPrefixesSet(Collections.unmodifiableSet(prefixes));
+        Set<Prefix> combinedSet = new HashSet<>();
+        combinedSet.addAll(defaultPrefixes);
+        combinedSet.addAll(customPrefixes);
+        setPropertyPrefixesSet(Collections.unmodifiableSet(combinedSet));
     }
 
 
@@ -110,16 +119,22 @@ public class PropertyBook {
      * Checks if the prefix has already been used by a property.
      */
     public boolean isPrefixUsed(Prefix prefix) {
-        return prefixes.contains(prefix);
+        return customPrefixes.contains(prefix) || defaultPrefixes.contains(prefix);
     }
 
     /**
      * Checks if the full name has already been used by a property.
      */
     public boolean isFullNameUsed(String fullName) {
-        return fullNames.contains(fullName);
+        return customFullNames.contains(fullName) || defaultFullNames.contains(fullName);
     }
 
+    /**
+     * Checks if the full name is used by a custom property.
+     */
+    public boolean isFullNameUsedByCustomProperty(String fullName) {
+        return customFullNames.contains(fullName);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -132,13 +147,13 @@ public class PropertyBook {
         }
 
         PropertyBook anotherManager = (PropertyBook) other;
-        return prefixes.equals(anotherManager.prefixes)
-            && fullNames.equals(anotherManager.fullNames);
+        return customPrefixes.equals(anotherManager.customPrefixes)
+            && customFullNames.equals(anotherManager.customFullNames);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prefixes, fullNames);
+        return Objects.hash(customPrefixes, customFullNames);
     }
 
 
@@ -153,28 +168,28 @@ public class PropertyBook {
      * Adds the prefix of a newly defined custom property.
      */
     private void addPrefix(Prefix prefix) {
-        prefixes.add(prefix);
+        customPrefixes.add(prefix);
     }
 
     /**
      * Adds the full name of a newly defined custom property.
      */
     private void addFullName(String fullName) {
-        fullNames.add(fullName);
+        customFullNames.add(fullName);
     }
 
     /**
      * Removes the prefix of a custom property from {@code prefixes}.
      */
     private void removePrefix(Prefix prefix) {
-        prefixes.remove(prefix);
+        customPrefixes.remove(prefix);
     }
 
     /**
      * Removes the full name of a custom property from {@code fullNames}.
      */
     private void removeFullName(String fullName) {
-        fullNames.remove(fullName);
+        customFullNames.remove(fullName);
     }
 
     /**

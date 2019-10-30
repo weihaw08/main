@@ -338,6 +338,10 @@ public class ModelManager implements Model {
         return propertyBook.isFullNameUsed(fullName);
     }
 
+    public boolean isFullNameUsedByCustomProperty(String fullName) {
+        return propertyBook.isFullNameUsedByCustomProperty(fullName);
+    }
+
     public void addCustomProperty(CustomProperty customProperty) {
         propertyBook.addCustomProperty(customProperty);
     }

@@ -45,7 +45,7 @@ public class CustomRemoveCommand extends CustomCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.isFullNameUsed(toRemove)) {
+        if (!model.isFullNameUsedByCustomProperty(toRemove)) {
             throw new CommandException(MESSAGE_FULL_NAME_NOT_FOUND);
         }
 

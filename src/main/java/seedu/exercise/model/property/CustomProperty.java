@@ -72,7 +72,7 @@ public class CustomProperty {
      * @return a {@code Prefix} object that represents the prefix of the instance
      */
     public Prefix getPrefix() {
-        return new Prefix(prefix.getPrefix());
+        return new Prefix(prefix.toString());
     }
 
     /**
