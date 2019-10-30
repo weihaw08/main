@@ -1,7 +1,7 @@
 package seedu.exercise.model.property;
 
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.exercise.logic.parser.CliSyntax.setPrefixesSet;
+import static seedu.exercise.logic.parser.CliSyntax.setPropertyPrefixesSet;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultFullNames;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPrefixes;
 
@@ -102,7 +102,7 @@ public class PropertyBook {
     }
 
     public void updatePropertyPrefixes() {
-        setPrefixesSet(Collections.unmodifiableSet(prefixes));
+        setPropertyPrefixesSet(Collections.unmodifiableSet(prefixes));
     }
 
 
