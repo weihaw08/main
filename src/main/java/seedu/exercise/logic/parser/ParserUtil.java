@@ -15,7 +15,6 @@ import static seedu.exercise.model.property.PropertyBook.getCustomProperties;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -301,7 +300,7 @@ public class ParserUtil {
         if (!trimmedSuggestType.equals(SUGGEST_TYPE_BASIC)
             && !trimmedSuggestType.equals(SUGGEST_TYPE_POSSIBLE)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_TYPE, "Suggest type", SUGGEST_TYPE_BASIC, SUGGEST_TYPE_POSSIBLE));
+                String.format(MESSAGE_INVALID_TYPE, "Suggest type", SUGGEST_TYPE_BASIC, SUGGEST_TYPE_POSSIBLE));
         }
         return trimmedSuggestType;
     }
@@ -333,7 +332,7 @@ public class ParserUtil {
      * into a {@code Predicate<Exercise>}.
      */
     public static Predicate<Exercise> parsePredicate(
-            Set<Muscle> muscles, Map<String, String> customProperties, boolean isStrict) throws ParseException {
+        Set<Muscle> muscles, Map<String, String> customProperties, boolean isStrict) throws ParseException {
         requireNonNull(muscles);
         requireNonNull(customProperties);
 

@@ -32,7 +32,7 @@ public class CustomRemoveCommand extends CustomCommand {
 
     public static final String MESSAGE_SUCCESS = "Custom property removed: %1$s";
     public static final String MESSAGE_FULL_NAME_NOT_FOUND = "This full name is not used by an "
-        + "existing property";
+        + "existing custom property";
 
     private final String toRemove;
 

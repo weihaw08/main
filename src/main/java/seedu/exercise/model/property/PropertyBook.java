@@ -6,9 +6,7 @@ import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultFullNa
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPrefixes;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -90,6 +88,19 @@ public class PropertyBook {
         }
     }
 
+    /**
+     * Removes the given {@code customProperty} and its associated prefix and full name from
+     * PropertyBook.
+     */
+    private void removeCustomProperty(CustomProperty toRemove) {
+        Prefix prefixToRemove = toRemove.getPrefix();
+        String fullNameToRemove = toRemove.getFullName();
+        removePrefix(prefixToRemove);
+        removeFullName(fullNameToRemove);
+        CUSTOM_PROPERTIES.remove(toRemove);
+        updatePropertyPrefixes();
+    }
+
     public void updatePropertyPrefixes() {
         setPrefixesSet(Collections.unmodifiableSet(prefixes));
     }
@@ -120,15 +131,14 @@ public class PropertyBook {
             return false;
         }
 
-        PropertyBook anotherBook = (PropertyBook) other;
-        return prefixes.equals(anotherBook.prefixes)
-            && fullNames.equals(anotherBook.fullNames)
-            && CUSTOM_PROPERTIES.equals(anotherBook.CUSTOM_PROPERTIES);
+        PropertyBook anotherManager = (PropertyBook) other;
+        return prefixes.equals(anotherManager.prefixes)
+            && fullNames.equals(anotherManager.fullNames);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prefixes, fullNames, CUSTOM_PROPERTIES);
+        return Objects.hash(prefixes, fullNames);
     }
 
 
@@ -165,19 +175,6 @@ public class PropertyBook {
      */
     private void removeFullName(String fullName) {
         fullNames.remove(fullName);
-    }
-
-    /**
-     * Removes the given {@code customProperty} and its associated prefix and full name from
-     * PropertyBook.
-     */
-    private void removeCustomProperty(CustomProperty toRemove) {
-        Prefix prefixToRemove = toRemove.getPrefix();
-        String fullNameToRemove = toRemove.getFullName();
-        removePrefix(prefixToRemove);
-        removeFullName(fullNameToRemove);
-        CUSTOM_PROPERTIES.remove(toRemove);
-        updatePropertyPrefixes();
     }
 
     /**

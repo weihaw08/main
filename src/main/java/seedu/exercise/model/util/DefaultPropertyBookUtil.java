@@ -15,9 +15,7 @@ import static seedu.exercise.model.property.Name.PROPERTY_NAME;
 import static seedu.exercise.model.property.Quantity.PROPERTY_QUANTITY;
 import static seedu.exercise.model.property.Unit.PROPERTY_UNIT;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.exercise.logic.parser.Prefix;

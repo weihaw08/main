@@ -26,7 +26,7 @@ public class PropertyBookTest {
     private PropertyBook testBook = new PropertyBook(new HashSet<>());
 
     @BeforeEach
-    public void reset() {
+    public void setUp() {
         testBook.clearCustomProperties();
     }
 
