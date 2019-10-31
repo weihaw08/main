@@ -29,8 +29,7 @@ public class PropertyBook {
     private final Set<String> customFullNames = new HashSet<>();
 
     /**
-     * Initialises an instance of {@code PropertyBook} object. If any full name/prefix are present in the custom
-     * property but not in the prefixes
+     * Initialises an instance of {@code PropertyBook} object.
      *
      * @param customProperties the set of custom properties to be added to the {@code PropertyBook}
      */
