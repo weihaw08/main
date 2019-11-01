@@ -2,17 +2,17 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_REMOVE_CUSTOM;
-import static seedu.exercise.model.property.PropertyBook.getCustomProperties;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
+import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.property.Calories;
-import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
@@ -35,10 +35,12 @@ public class CustomRemoveCommand extends CustomCommand {
         + "existing custom property";
 
     private final String toRemove;
+    private final Optional<Index> index;
 
-    public CustomRemoveCommand(String toRemove) {
+    public CustomRemoveCommand(String toRemove, Optional<Index> index) {
         requireNonNull(toRemove);
         this.toRemove = toRemove;
+        this.index = index;
     }
 
     @Override
@@ -49,8 +51,12 @@ public class CustomRemoveCommand extends CustomCommand {
             throw new CommandException(MESSAGE_FULL_NAME_NOT_FOUND);
         }
 
-        model.removeCustomProperty(toRemove);
-        updateCustomPropertiesOfAllExercises(model);
+        if (index.isEmpty()) {
+            model.removeCustomProperty(toRemove);
+            updateCustomPropertiesOfAllExercises(model);
+        } else {
+            updateCustomPropertiesOfSingleExercise(model, index.get());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
     }
 
@@ -61,20 +67,19 @@ public class CustomRemoveCommand extends CustomCommand {
             && (toRemove.equals(((CustomRemoveCommand) other).toRemove));
     }
 
+
     /**
      * Updates the old custom properties map of an exercise with the updated custom properties.
      *
      * @param oldPropertiesMap the old custom properties map of an exercise
      * @return a new map consisting of the updated custom properties
      */
-    private Map<String, String> updateCustomProperties(Map<String, String> oldPropertiesMap) {
+    private Map<String, String> updateCustomPropertiesMap(Map<String, String> oldPropertiesMap) {
         Map<String, String> updatedMap = new TreeMap<>();
-        Set<CustomProperty> newCustomProperties = getCustomProperties();
-        for (CustomProperty customProperty : newCustomProperties) {
-            String propertyName = customProperty.getFullName();
-            if (oldPropertiesMap.containsKey(propertyName)) {
-                String value = oldPropertiesMap.get(propertyName);
-                updatedMap.put(propertyName, value);
+        Set<String> keySet = oldPropertiesMap.keySet();
+        for (String property : keySet) {
+            if (!property.equals(toRemove)) {
+                updatedMap.put(property, oldPropertiesMap.get(property));
             }
         }
         return updatedMap;
@@ -94,8 +99,17 @@ public class CustomRemoveCommand extends CustomCommand {
         Unit unit = exercise.getUnit();
         Set<Muscle> muscles = exercise.getMuscles();
         Map<String, String> oldCustomProperties = exercise.getCustomPropertiesMap();
-        Map<String, String> updatedCustomProperties = updateCustomProperties(oldCustomProperties);
+        Map<String, String> updatedCustomProperties = updateCustomPropertiesMap(oldCustomProperties);
         return new Exercise(name, date, calories, quantity, unit, muscles, updatedCustomProperties);
+    }
+
+    /**
+     * Updates the custom properties of the exercise at the given index in the model.
+     */
+    private void updateCustomPropertiesOfSingleExercise(Model model, Index index) {
+        Exercise oldExercise = model.getFilteredExerciseList().get(index.getZeroBased());
+        Exercise updatedExercise = updateExerciseCustomProperty(oldExercise);
+        model.setExercise(oldExercise, updatedExercise);
     }
 
     /**
