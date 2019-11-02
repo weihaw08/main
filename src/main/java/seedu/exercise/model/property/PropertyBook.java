@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
+import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.parser.Prefix;
 
 /**
@@ -20,7 +22,7 @@ import seedu.exercise.logic.parser.Prefix;
 public class PropertyBook {
     public static final String MESSAGE_DUPLICATE_NAME_OR_PREFIX = "The full name or the prefix of the custom"
         + " clashes with another property/parameter";
-
+    private static final Logger logger = LogsCenter.getLogger(PropertyBook.class);
     private static PropertyBook propertyBook;
 
     // Helps to ensure that the prefixes used in add/edit command and full names of default
@@ -38,6 +40,7 @@ public class PropertyBook {
 
     public static PropertyBook getInstance() {
         if (propertyBook == null) {
+            logger.info("PropertyBook first initialised");
             propertyBook = new PropertyBook();
         }
         return propertyBook;

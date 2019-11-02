@@ -9,20 +9,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.core.index.IndexUtil;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.property.Calories;
-import seedu.exercise.model.property.Date;
-import seedu.exercise.model.property.Muscle;
-import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.PropertyBook;
-import seedu.exercise.model.property.Quantity;
-import seedu.exercise.model.property.Unit;
 import seedu.exercise.model.resource.Exercise;
 
 /**
@@ -40,6 +36,7 @@ public class CustomRemoveCommand extends CustomCommand {
     public static final String MESSAGE_FULL_NAME_NOT_FOUND = "This full name is not used by an "
         + "existing custom property";
 
+    private static final Logger logger = LogsCenter.getLogger(CustomRemoveCommand.class);
     private final String toRemove;
     private final Optional<Index> index;
 
@@ -59,10 +56,12 @@ public class CustomRemoveCommand extends CustomCommand {
         }
 
         if (index.isEmpty()) {
+            logger.info("Removing " + toRemove + " from the app");
             propertyBook.removeCustomProperty(toRemove);
             updateCustomPropertiesOfAllExercises(model);
             return new CommandResult(String.format(MESSAGE_SUCCESS_ALL_REMOVED, toRemove));
         } else {
+            logger.info("Removing " + toRemove + " from a single exercise");
             Index indexToRemove = index.get();
             updateCustomPropertiesOfSingleExercise(model, indexToRemove);
             return new CommandResult(String.format(MESSAGE_SUCCESS_SINGLE_REMOVED, toRemove,
@@ -104,15 +103,11 @@ public class CustomRemoveCommand extends CustomCommand {
      *     kept the same.
      */
     private Exercise updateExerciseCustomProperty(Exercise exercise) {
-        Name name = exercise.getName();
-        Date date = exercise.getDate();
-        Calories calories = exercise.getCalories();
-        Quantity quantity = exercise.getQuantity();
-        Unit unit = exercise.getUnit();
-        Set<Muscle> muscles = exercise.getMuscles();
+        EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor(exercise);
         Map<String, String> oldCustomProperties = exercise.getCustomPropertiesMap();
-        Map<String, String> updatedCustomProperties = updateCustomPropertiesMap(oldCustomProperties);
-        return new Exercise(name, date, calories, quantity, unit, muscles, updatedCustomProperties);
+        Map<String, String> newCustomProperties = updateCustomPropertiesMap(oldCustomProperties);
+        editExerciseDescriptor.setCustomProperties(newCustomProperties);
+        return editExerciseDescriptor.buildEditedExercise();
     }
 
     /**

@@ -464,6 +464,9 @@ public class ModelManager implements Model {
         regimeBook.addResource(regime);
     }
 
+    /**
+     * @see PropertyBook#removeInvalidCustomProperties(Map)
+     */
     private void removeInvalidCustomProperties() {
         PropertyBook propertyBook = PropertyBook.getInstance();
         for (Exercise exercise : filteredExercises) {

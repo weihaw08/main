@@ -130,5 +130,4 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
         return index.equals(e.index)
             && editExerciseDescriptor.equals(e.editExerciseDescriptor);
     }
-
 }

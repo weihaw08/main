@@ -1,5 +1,7 @@
 package seedu.exercise.logic.commands;
 
+import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,6 +18,9 @@ import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
 import seedu.exercise.model.resource.Exercise;
 
+/**
+ * Represents a builder class that helps to build edited exercise.
+ */
 public class EditExerciseDescriptor {
     private Name name;
     private Calories calories;
@@ -159,7 +164,12 @@ public class EditExerciseDescriptor {
             updatedMuscles, updatedCustomProperties);
     }
 
+    /**
+     * Builds an edited exercise based on the fields of the {@code EditExerciseDescriptor}.
+     * Precondition: All fields must not be null.
+     */
     public Exercise buildEditedExercise() {
+        requireAllNonNull(name, date, calories, quantity, unit, muscles, customProperties);
         return new Exercise(name, date, calories, quantity, unit, muscles, customProperties);
     }
 
