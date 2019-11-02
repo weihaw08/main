@@ -89,7 +89,6 @@ class JsonPropertyBookStorageTest {
         jsonPropertyBookStorage.readPropertyBook(); // file path not specified
         retrievedSet = propertyBook.getCustomProperties();
         assertEquals(originalSet, retrievedSet);
-
     }
 
     @Test

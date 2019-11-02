@@ -28,6 +28,9 @@ class JsonSerializablePropertyBookTest {
         TEST_DATA_FOLDER.resolve("invalidParameterTypePropertyBook.json");
     private static final Path INVALID_FULL_NAME_PROPERTY_FILE =
         TEST_DATA_FOLDER.resolve("invalidFullNamePropertyBook.json");
+    private static final Path DUPLICATE_PREFIX_FILE = TEST_DATA_FOLDER.resolve("duplicatePrefixPropertyBook.json");
+    private static final Path DUPLICATE_FULL_NAMES_FILE =
+        TEST_DATA_FOLDER.resolve("duplicateFullNamePropertyBook.json");
 
     private PropertyBook propertyBook = PropertyBook.getInstance();
 
@@ -37,7 +40,7 @@ class JsonSerializablePropertyBookTest {
     }
 
     @Test
-    public void toModelManager_typicalPropertyFile_success() throws Exception {
+    public void toModelBook_typicalPropertyFile_success() throws Exception {
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
         PropertyBook propertyBook = dataFromFile.toModelBook();
@@ -46,7 +49,7 @@ class JsonSerializablePropertyBookTest {
     }
 
     @Test
-    public void toModelManager_invalidCustomProperty_throwsInvalidValueException() throws Exception {
+    public void toModelBook_invalidCustomProperty_throwsIllegalValueException() throws Exception {
         // Invalid parameter type in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_PARAMETER_TYPE_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
@@ -54,7 +57,7 @@ class JsonSerializablePropertyBookTest {
     }
 
     @Test
-    public void toModelManager_invalidPrefix_throwsInvalidValueException() throws Exception {
+    public void toModelBook_invalidPrefix_throwsIllegalValueException() throws Exception {
         // Invalid prefix in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_PREFIX_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
@@ -62,7 +65,7 @@ class JsonSerializablePropertyBookTest {
     }
 
     @Test
-    public void toModelManager_invalidFullName_throwsInvalidValueException() throws Exception {
+    public void toModelBook_invalidFullName_throwsIllegalValueException() throws Exception {
         // Invalid full name in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_FULL_NAME_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
@@ -70,4 +73,19 @@ class JsonSerializablePropertyBookTest {
 
     }
 
+    @Test
+    public void toModelBook_duplicatePrefix_throwsIllegalValueException() throws Exception {
+        // Duplicate prefixes in file
+        JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PREFIX_FILE,
+            JsonSerializablePropertyBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelBook);
+    }
+
+    @Test
+    public void toModelBook_duplicateFullName_throwsIllegalValueException() throws Exception {
+        // Duplicate full names in file
+        JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FULL_NAMES_FILE,
+            JsonSerializablePropertyBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelBook);
+    }
 }

@@ -3,6 +3,7 @@ package seedu.exercise.commons.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.exercise.commons.util.CollectionUtil.mapToStringList;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.testutil.Assert.assertThrows;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -148,12 +150,15 @@ public class CollectionUtilTest {
     }
 
     @Test
-    public void append_nullArguments_throwsNullPointerExceptino() {
+    public void append_nullArguments_throwsNullPointerException() {
         //Both null
         assertThrows(NullPointerException.class, () -> CollectionUtil.append(null, null));
 
         //One null
         assertThrows(NullPointerException.class, () -> CollectionUtil.append(null, new ArrayList<>()));
+
+        //One null
+        assertThrows(NullPointerException.class, () -> CollectionUtil.append(new ArrayList<>(), null));
     }
 
     @Test
@@ -163,6 +168,21 @@ public class CollectionUtilTest {
 
         //One null
         assertThrows(NullPointerException.class, () -> CollectionUtil.areListsEmpty(null, new ArrayList<>()));
+
+        //One null
+        assertThrows(NullPointerException.class, () -> CollectionUtil.areListsEmpty(new ArrayList<>(), null));
+    }
+
+    @Test
+    public void mapToStringList_nullArgument_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> CollectionUtil.mapToStringList(null));
+    }
+
+    @Test
+    public void mapToStringList_validArgument_success() {
+        Map<String, String> toConvert = Map.of("a", "b");
+        List<String> expectedResult = List.of("a: b");
+        assertEquals(expectedResult, CollectionUtil.mapToStringList(toConvert));
     }
 
     /**
