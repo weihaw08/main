@@ -19,8 +19,8 @@ public class EditExerciseDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditExerciseDescriptor descriptorWithSameValues =
-            new EditCommand.EditExerciseDescriptor(DESC_AEROBICS);
+        EditExerciseDescriptor descriptorWithSameValues =
+            new EditExerciseDescriptor(DESC_AEROBICS);
         assertTrue(DESC_AEROBICS.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +36,7 @@ public class EditExerciseDescriptorTest {
         assertFalse(DESC_AEROBICS.equals(DESC_BASKETBALL));
 
         // different name -> returns false
-        EditCommand.EditExerciseDescriptor editedAerobics =
+        EditExerciseDescriptor editedAerobics =
             new EditExerciseDescriptorBuilder(DESC_AEROBICS).withName(VALID_NAME_BASKETBALL).build();
         assertFalse(DESC_AEROBICS.equals(editedAerobics));
 

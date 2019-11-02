@@ -18,7 +18,7 @@ import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.ClearCommand;
 import seedu.exercise.logic.commands.DeleteExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.logic.commands.ExitCommand;
 import seedu.exercise.logic.commands.HelpCommand;
 import seedu.exercise.logic.commands.ListCommand;
@@ -79,11 +79,11 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser
-                .parseCommand(ListCommand.COMMAND_WORD
-                        + VALID_PREFIX_LIST_TYPE_EXERCISE) instanceof ListCommand);
+            .parseCommand(ListCommand.COMMAND_WORD
+                + VALID_PREFIX_LIST_TYPE_EXERCISE) instanceof ListCommand);
         assertTrue(parser
-                .parseCommand(ListCommand.COMMAND_WORD
-                        + VALID_PREFIX_LIST_TYPE_SUGGEST) instanceof ListCommand);
+            .parseCommand(ListCommand.COMMAND_WORD
+                + VALID_PREFIX_LIST_TYPE_SUGGEST) instanceof ListCommand);
     }
 
     @Test

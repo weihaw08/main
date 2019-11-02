@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Muscle;
 
@@ -34,6 +34,7 @@ import seedu.exercise.model.property.Muscle;
 public class EditCommandParser implements Parser<EditCommand> {
 
     private final Logger logger = LogsCenter.getLogger(EditCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -46,12 +47,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, commandPrefixes);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_INDEX)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
 
-        EditCommand.EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor();
+        EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editExerciseDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -121,7 +122,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     private Prefix[] getPrefixes() {
         Set<Prefix> prefixes = new HashSet<>();
         prefixes.addAll(List.of(PREFIX_INDEX, PREFIX_NAME, PREFIX_DATE,
-                PREFIX_CALORIES, PREFIX_QUANTITY, PREFIX_UNIT, PREFIX_MUSCLE));
+            PREFIX_CALORIES, PREFIX_QUANTITY, PREFIX_UNIT, PREFIX_MUSCLE));
 
         prefixes.addAll(Arrays.asList(getPropertyPrefixesArray()));
         return prefixes.toArray(new Prefix[prefixes.size()]);

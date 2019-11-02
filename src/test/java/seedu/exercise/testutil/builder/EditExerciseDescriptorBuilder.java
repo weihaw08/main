@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.exercise.logic.commands.EditCommand;
+import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
@@ -18,21 +18,21 @@ import seedu.exercise.model.resource.Exercise;
  */
 public class EditExerciseDescriptorBuilder {
 
-    private EditCommand.EditExerciseDescriptor descriptor;
+    private EditExerciseDescriptor descriptor;
 
     public EditExerciseDescriptorBuilder() {
-        descriptor = new EditCommand.EditExerciseDescriptor();
+        descriptor = new EditExerciseDescriptor();
     }
 
-    public EditExerciseDescriptorBuilder(EditCommand.EditExerciseDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditExerciseDescriptor(descriptor);
+    public EditExerciseDescriptorBuilder(EditExerciseDescriptor descriptor) {
+        this.descriptor = new EditExerciseDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditExerciseDescriptor} with fields containing {@code exercise}'s details
      */
     public EditExerciseDescriptorBuilder(Exercise exercise) {
-        descriptor = new EditCommand.EditExerciseDescriptor();
+        descriptor = new EditExerciseDescriptor();
         descriptor.setName(exercise.getName());
         descriptor.setCalories(exercise.getCalories());
         descriptor.setDate(exercise.getDate());
@@ -90,7 +90,7 @@ public class EditExerciseDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditExerciseDescriptor build() {
+    public EditExerciseDescriptor build() {
         return descriptor;
     }
 }

@@ -9,6 +9,7 @@ import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,10 +20,12 @@ import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.State;
 import seedu.exercise.commons.core.index.Index;
+import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.conflict.Conflict;
 import seedu.exercise.model.property.Name;
+import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
 import seedu.exercise.model.resource.Schedule;
@@ -63,6 +66,7 @@ public class ModelManager implements Model {
         this.scheduleBook = new ReadOnlyResourceBook<>(scheduleBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredExercises = new FilteredList<>(this.exerciseBook.getResourceList());
+        removeInvalidCustomProperties();
         filteredRegimes = new FilteredList<>(this.regimeBook.getResourceList());
         filteredSchedules = new FilteredList<>(this.scheduleBook.getResourceList());
         StatsFactory statsFactory = new StatsFactory(exerciseBook, "linechart", "calories", null, null);
@@ -424,4 +428,14 @@ public class ModelManager implements Model {
         regimeBook.addResource(regime);
     }
 
+    private void removeInvalidCustomProperties() {
+        PropertyBook propertyBook = PropertyBook.getInstance();
+        for (Exercise exercise : filteredExercises) {
+            Map<String, String> toCheck = exercise.getCustomPropertiesMap();
+            Map<String, String> newMap = propertyBook.removeInvalidCustomProperties(toCheck);
+            EditExerciseDescriptor editor = new EditExerciseDescriptor(exercise);
+            editor.setCustomProperties(newMap);
+            setExercise(exercise, editor.buildEditedExercise());
+        }
+    }
 }

@@ -12,6 +12,7 @@ import seedu.exercise.commons.exceptions.DataConversionException;
 import seedu.exercise.commons.exceptions.IllegalValueException;
 import seedu.exercise.commons.util.FileUtil;
 import seedu.exercise.commons.util.JsonUtil;
+import seedu.exercise.model.property.PropertyBook;
 
 /**
  * A class to access PropertyBook data stored as a json file in the hard disk.
@@ -45,6 +46,12 @@ public class JsonPropertyBookStorage implements PropertyBookStorage {
 
         Optional<JsonSerializablePropertyBook> jsonPropertyBook =
             JsonUtil.readJsonFile(filePath, JsonSerializablePropertyBook.class);
+
+        if (jsonPropertyBook.isEmpty()) {
+            PropertyBook.getInstance();
+            return;
+        }
+
         try {
             jsonPropertyBook.get().toModelBook();
         } catch (IllegalValueException ive) {
