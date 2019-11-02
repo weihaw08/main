@@ -183,7 +183,7 @@ public class CommonTestData {
     public static final String PREFIX_NAME_DESC_RATING = " " + PREFIX_CUSTOM_NAME + VALID_PREFIX_NAME_RATING;
     public static final String VALID_PREFIX_NAME_REMARK = "b";
     public static final String PREFIX_NAME_DESC_REMARK = " " + PREFIX_CUSTOM_NAME + VALID_PREFIX_NAME_REMARK;
-    public static final String VALID_PREFIX_NAME_END_DATE = "c";
+    public static final String VALID_PREFIX_NAME_END_DATE = "ed";
     public static final String PREFIX_NAME_DESC_END_DATE = " " + PREFIX_CUSTOM_NAME + VALID_PREFIX_NAME_END_DATE;
     public static final String VALID_FULL_NAME_RATING = "Rating";
     public static final String FULL_NAME_DESC_RATING = " " + PREFIX_FULL_NAME + VALID_FULL_NAME_RATING;

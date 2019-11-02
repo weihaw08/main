@@ -346,11 +346,11 @@
 }
 
 .commandBox {
-    -fx-background-color: rgb(0, 253, 119);
+    -fx-background-color: linear-gradient(to top, #5680e9, #84ceeb, #5ab9ea);
 }
 
 .resultDisplayBox {
-    -fx-background-color: rgb(0, 253, 119);
+    -fx-background-color: linear-gradient(to bottom, #5680e9, #84ceeb, #5ab9ea);
 }
 
 .tab-pane {
@@ -374,7 +374,7 @@
 }
 
 .logoBox {
-    -fx-background-color: rgb(0, 253, 119);
+    -fx-background-color: linear-gradient(to bottom, #5680e9, #84ceeb, #5ab9ea);
 }
 
 .chartBox {

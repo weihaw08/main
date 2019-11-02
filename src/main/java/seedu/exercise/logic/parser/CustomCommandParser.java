@@ -69,7 +69,7 @@ public class CustomCommandParser implements Parser<CustomCommand> {
 
     /**
      * Returns true if the only prefix present for the custom command is the prefix required for removing a
-     * custom property
+     * custom property.
      */
     private boolean isValidPrefixForRemoveCustom(ArgumentMultimap argMultimap) {
         return isRemovePrefixPresent(argMultimap)

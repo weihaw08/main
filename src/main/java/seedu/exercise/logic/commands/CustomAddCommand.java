@@ -9,6 +9,7 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.PropertyBook;
 
 /**
  * Adds a custom property for the exercises.
@@ -45,16 +46,17 @@ public class CustomAddCommand extends CustomCommand {
         requireNonNull(model);
 
         String fullName = toAdd.getFullName();
-        if (model.isFullNameUsed(fullName)) {
+        PropertyBook propertyBook = PropertyBook.getInstance();
+        if (propertyBook.isFullNameUsed(fullName)) {
             throw new CommandException(MESSAGE_DUPLICATE_FULL_NAME);
         }
 
         Prefix prefix = toAdd.getPrefix();
-        if (model.isPrefixUsed(prefix)) {
+        if (propertyBook.isPrefixUsed(prefix)) {
             throw new CommandException(MESSAGE_DUPLICATE_PREFIX_NAME);
         }
 
-        model.addCustomProperty(toAdd);
+        propertyBook.addCustomProperty(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

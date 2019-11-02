@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
@@ -28,14 +29,20 @@ class JsonSerializablePropertyBookTest {
     private static final Path INVALID_FULL_NAME_PROPERTY_FILE =
         TEST_DATA_FOLDER.resolve("invalidFullNamePropertyBook.json");
 
+    private PropertyBook propertyBook = PropertyBook.getInstance();
+
+    @BeforeEach
+    public void reset() {
+        propertyBook.clearCustomProperties();
+    }
+
     @Test
     public void toModelManager_typicalPropertyFile_success() throws Exception {
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
-        PropertyBook propertyBook = dataFromFile.toModelManager();
+        PropertyBook propertyBook = dataFromFile.toModelBook();
         Set<CustomProperty> expectedSet = Set.of(RATING, REMARK, END_DATE);
-        PropertyBook expectedBook = new PropertyBook(expectedSet);
-        assertEquals(propertyBook, expectedBook);
+        assertEquals(propertyBook.getCustomProperties(), expectedSet);
     }
 
     @Test
@@ -43,7 +50,7 @@ class JsonSerializablePropertyBookTest {
         // Invalid parameter type in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_PARAMETER_TYPE_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelManager);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelBook);
     }
 
     @Test
@@ -51,7 +58,7 @@ class JsonSerializablePropertyBookTest {
         // Invalid prefix in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_PREFIX_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelManager);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelBook);
     }
 
     @Test
@@ -59,7 +66,7 @@ class JsonSerializablePropertyBookTest {
         // Invalid full name in file
         JsonSerializablePropertyBook dataFromFile = JsonUtil.readJsonFile(INVALID_FULL_NAME_PROPERTY_FILE,
             JsonSerializablePropertyBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelManager);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelBook);
 
     }
 
