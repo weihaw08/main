@@ -171,7 +171,7 @@ class ModelStub implements Model {
     }
 
     @Override
-    public void resolveConflict(Name regimeName, List<Index> indexFromSchedule, List<Index> indexFromConflict) {
+    public Schedule resolveConflict(Name regimeName, List<Index> indexFromSchedule, List<Index> indexFromConflict) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -182,6 +182,11 @@ class ModelStub implements Model {
 
     @Override
     public void setConflict(Conflict conflict) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean isSelectedIndexesFromRegimeDuplicate(List<Index> scheduledIndex, List<Index> conflictingIndex) {
         throw new AssertionError("This method should not be called.");
     }
 

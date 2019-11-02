@@ -2,8 +2,8 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.logic.commands.EditExerciseDescriptor.createEditedExercise;
-import static seedu.exercise.logic.commands.events.EditEvent.KEY_EDITED_EXERCISE;
-import static seedu.exercise.logic.commands.events.EditEvent.KEY_ORIGINAL_EXERCISE;
+import static seedu.exercise.logic.commands.events.EditExerciseEvent.KEY_EDITED_EXERCISE;
+import static seedu.exercise.logic.commands.events.EditExerciseEvent.KEY_ORIGINAL_EXERCISE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
@@ -12,28 +12,15 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
 
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.core.index.IndexUtil;
-import seedu.exercise.commons.util.CollectionUtil;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.events.EventPayload;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.property.Calories;
-import seedu.exercise.model.property.Date;
-import seedu.exercise.model.property.Muscle;
-import seedu.exercise.model.property.Name;
-import seedu.exercise.model.property.Quantity;
-import seedu.exercise.model.property.Unit;
 import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.ui.ListResourceType;
 
@@ -102,7 +89,7 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
         EventHistory.getInstance().addCommandToUndoStack(this);
         model.updateStatistic();
         return new CommandResult(String.format(MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise),
-                ListResourceType.EXERCISE);
+            ListResourceType.EXERCISE);
     }
 
     @Override

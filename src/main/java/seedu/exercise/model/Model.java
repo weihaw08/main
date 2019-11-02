@@ -193,19 +193,21 @@ public interface Model {
 
     /**
      * Resolves a conflict based on the indexes provided by user.
-     * <p>
+     *
      * The state of the program must be {@link State#IN_CONFLICT} before calling this method.
      * The state of the program is not changed after execution of the method. Only command subclasses
      * can change {@code MainApp}'s state.
-     * <p>
+     *
      * If both list of indexes are empty, the {@code regimeName} provided
      * will be taken as the resolved schedule and the non-mentioned name is discarded.
+     *
+     * @return resolved schedule to be added to schedule book
      */
-    void resolveConflict(Name regimeName, List<Index> indexFromSchedule, List<Index> indexFromConflict);
+    Schedule resolveConflict(Name regimeName, List<Index> indexFromSchedule, List<Index> indexFromConflict);
 
     /**
      * Returns the conflict that is currently happening.
-     * <p>
+     *
      * The state of the program must be {@link State#IN_CONFLICT} before calling this method.
      * Only then will a conflict be available for fetching from the {@code Model}.
      */
@@ -213,10 +215,17 @@ public interface Model {
 
     /**
      * Sets the current conflicting schedule to {@code conflict}
-     * <p>
+     *
      * The state of the program must be {@link State#IN_CONFLICT} before calling this method.
      */
     void setConflict(Conflict conflict);
+
+    /**
+     * Checks if the indexes from scheduled and conflict regimes are duplicates.
+     *
+     * The state of the program must be {@link State#IN_CONFLICT} before calling this method.
+     */
+    boolean isSelectedIndexesFromRegimeDuplicate(List<Index> scheduledIndex, List<Index> conflictingIndex);
 
     /**
      * Returns an unmodifiable view of the list of suggested exercises
