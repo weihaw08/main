@@ -18,7 +18,7 @@ import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.ClearCommand;
 import seedu.exercise.logic.commands.DeleteExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.logic.commands.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.commands.ExitCommand;
 import seedu.exercise.logic.commands.HelpCommand;
 import seedu.exercise.logic.commands.ListCommand;
@@ -58,7 +58,7 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Exercise build = new ExerciseBuilder().build();
-        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(build).build();
+        EditExerciseBuilder descriptor = new EditExerciseDescriptorBuilder(build).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
             + VALID_PREFIX_INDEX + " " + ExerciseUtil.getEditExerciseDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_ONE_BASED_FIRST, descriptor), command);

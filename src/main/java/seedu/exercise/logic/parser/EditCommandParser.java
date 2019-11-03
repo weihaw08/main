@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.EditCommand;
-import seedu.exercise.logic.commands.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Muscle;
 
@@ -52,35 +52,35 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
 
-        EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor();
+        EditExerciseBuilder editExerciseBuilder = new EditExerciseBuilder();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editExerciseDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editExerciseBuilder.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editExerciseDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editExerciseBuilder.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_CALORIES).isPresent()) {
-            editExerciseDescriptor.setCalories(ParserUtil.parseCalories(argMultimap.getValue(PREFIX_CALORIES).get()));
+            editExerciseBuilder.setCalories(ParserUtil.parseCalories(argMultimap.getValue(PREFIX_CALORIES).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            editExerciseDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
+            editExerciseBuilder.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
         if (argMultimap.getValue(PREFIX_UNIT).isPresent()) {
-            editExerciseDescriptor.setUnit(ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get()));
+            editExerciseBuilder.setUnit(ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get()));
         }
 
-        parseMusclesForEdit(argMultimap.getAllValues(PREFIX_MUSCLE)).ifPresent(editExerciseDescriptor::setMuscles);
+        parseMusclesForEdit(argMultimap.getAllValues(PREFIX_MUSCLE)).ifPresent(editExerciseBuilder::setMuscles);
 
 
         parseCustomPropertiesForEdit(argMultimap.getAllCustomProperties())
-            .ifPresent(editExerciseDescriptor::setCustomProperties);
+            .ifPresent(editExerciseBuilder::setCustomProperties);
 
 
-        if (!editExerciseDescriptor.isAnyFieldEdited()) {
+        if (!editExerciseBuilder.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editExerciseDescriptor);
+        return new EditCommand(index, editExerciseBuilder);
     }
 
     /**

@@ -43,6 +43,7 @@ import seedu.exercise.ui.UiManager;
  * Runs the application.
  * <p>
  * Additionally, the MainApp wil keep track of the state of the program.
+ * </p>
  */
 public class MainApp extends Application {
 
@@ -295,6 +296,7 @@ public class MainApp extends Application {
      * Sets the current state of the program.
      * <p>
      * Only subclasses of {@code Command} can and should call this method.
+     * </p>
      */
     public static void setState(State newState) {
         requireAllNonNull(newState);

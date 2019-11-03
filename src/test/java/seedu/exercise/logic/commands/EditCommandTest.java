@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
 import seedu.exercise.model.ReadOnlyResourceBook;
@@ -44,7 +45,7 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Exercise editedExercise = new ExerciseBuilder().build();
-        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(editedExercise).build();
+        EditExerciseBuilder descriptor = new EditExerciseDescriptorBuilder(editedExercise).build();
         EditCommand editCommand = new EditCommand(INDEX_ONE_BASED_FIRST, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
@@ -67,7 +68,7 @@ public class EditCommandTest {
         Exercise editedExercise = exerciseInList.withName(VALID_NAME_BASKETBALL).withDate(VALID_DATE_BASKETBALL)
             .withMuscles(VALID_MUSCLE_AEROBICS).build();
 
-        EditExerciseDescriptor descriptor =
+        EditExerciseBuilder descriptor =
             new EditExerciseDescriptorBuilder().withName(VALID_NAME_BASKETBALL)
                 .withDate(VALID_DATE_BASKETBALL).withMuscles(VALID_MUSCLE_AEROBICS).build();
         EditCommand editCommand = new EditCommand(indexLastExercise, descriptor);
@@ -85,7 +86,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_ONE_BASED_FIRST, new EditExerciseDescriptor());
+        EditCommand editCommand = new EditCommand(INDEX_ONE_BASED_FIRST, new EditExerciseBuilder());
         Exercise editedExercise = model.getFilteredExerciseList().get(INDEX_ONE_BASED_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
@@ -121,7 +122,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateExerciseUnfilteredList_failure() {
         Exercise firstExercise = model.getFilteredExerciseList().get(INDEX_ONE_BASED_FIRST.getZeroBased());
-        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(firstExercise).build();
+        EditExerciseBuilder descriptor = new EditExerciseDescriptorBuilder(firstExercise).build();
         EditCommand editCommand = new EditCommand(INDEX_ONE_BASED_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_EXERCISE);
@@ -142,7 +143,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidExerciseIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExerciseList().size() + 1);
-        EditExerciseDescriptor descriptor =
+        EditExerciseBuilder descriptor =
             new EditExerciseDescriptorBuilder().withName(VALID_NAME_BASKETBALL).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -154,7 +155,7 @@ public class EditCommandTest {
         final EditCommand standardCommand = new EditCommand(INDEX_ONE_BASED_FIRST, DESC_AEROBICS);
 
         // same values -> returns true
-        EditExerciseDescriptor copyDescriptor = new EditExerciseDescriptor(DESC_AEROBICS);
+        EditExerciseBuilder copyDescriptor = new EditExerciseBuilder(DESC_AEROBICS);
         EditCommand commandWithSameValues = new EditCommand(INDEX_ONE_BASED_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 

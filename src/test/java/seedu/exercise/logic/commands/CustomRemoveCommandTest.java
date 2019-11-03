@@ -8,6 +8,7 @@ import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_END_DATE;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_RATING;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_REMARK;
+import static seedu.exercise.testutil.TestUtil.assertCommonEqualsTest;
 import static seedu.exercise.testutil.typicalutil.TypicalCustomProperties.REMARK;
 import static seedu.exercise.testutil.typicalutil.TypicalExercises.WALK;
 import static seedu.exercise.testutil.typicalutil.TypicalIndexes.INDEX_ONE_BASED_FIRST;
@@ -46,7 +47,7 @@ public class CustomRemoveCommandTest {
     private PropertyBook propertyBook = PropertyBook.getInstance();
 
     @BeforeEach
-    public void reset() {
+    public void setUp() {
         propertyBook.clearCustomProperties();
         propertyBook.addCustomProperty(REMARK);
         model.setExerciseBook(exerciseBook);
@@ -125,8 +126,7 @@ public class CustomRemoveCommandTest {
         CustomRemoveCommand removeEndDate = new CustomRemoveCommand(VALID_FULL_NAME_END_DATE, Optional.empty());
         CustomRemoveCommand anotherRemoveRating = new CustomRemoveCommand(VALID_FULL_NAME_RATING, Optional.empty());
 
-        // Same object -> true
-        assertTrue(removeRating.equals(removeRating));
+        assertCommonEqualsTest(removeRating);
 
         // Same values -> true
         assertTrue(removeRating.equals(anotherRemoveRating));
@@ -143,7 +143,5 @@ public class CustomRemoveCommandTest {
         // Different object -> false
         assertFalse(removeRating.equals(3.5));
 
-        // null -> false
-        assertFalse(removeRating.equals(null));
     }
 }

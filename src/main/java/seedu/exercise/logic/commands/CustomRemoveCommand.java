@@ -16,6 +16,7 @@ import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.core.index.IndexUtil;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.property.PropertyBook;
@@ -103,11 +104,11 @@ public class CustomRemoveCommand extends CustomCommand {
      *     kept the same.
      */
     private Exercise updateExerciseCustomProperty(Exercise exercise) {
-        EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor(exercise);
+        EditExerciseBuilder editExerciseBuilder = new EditExerciseBuilder(exercise);
         Map<String, String> oldCustomProperties = exercise.getCustomPropertiesMap();
         Map<String, String> newCustomProperties = updateCustomPropertiesMap(oldCustomProperties);
-        editExerciseDescriptor.setCustomProperties(newCustomProperties);
-        return editExerciseDescriptor.buildEditedExercise();
+        editExerciseBuilder.setCustomProperties(newCustomProperties);
+        return editExerciseBuilder.buildEditedExercise();
     }
 
     /**

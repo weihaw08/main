@@ -19,7 +19,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_SUGGEST_TYPE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
-import seedu.exercise.logic.commands.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.testutil.builder.EditExerciseDescriptorBuilder;
 
@@ -162,7 +162,7 @@ public class CommonTestData {
     public static final String INVALID_MUSCLE_DESC = " " + PREFIX_MUSCLE + "Chest*"; // '*' not allowed in muscle
 
     //=======================For valid exercise editors=============================
-    public static final EditExerciseDescriptor DESC_AEROBICS = new EditExerciseDescriptorBuilder()
+    public static final EditExerciseBuilder DESC_AEROBICS = new EditExerciseDescriptorBuilder()
         .withName(CommonTestData.VALID_NAME_AEROBICS)
         .withDate(CommonTestData.VALID_DATE_AEROBICS)
         .withCalories(CommonTestData.VALID_CALORIES_AEROBICS)
@@ -170,7 +170,7 @@ public class CommonTestData {
         .withMuscles(CommonTestData.VALID_MUSCLE_AEROBICS)
         .build();
 
-    public static final EditExerciseDescriptor DESC_BASKETBALL = new EditExerciseDescriptorBuilder()
+    public static final EditExerciseBuilder DESC_BASKETBALL = new EditExerciseDescriptorBuilder()
         .withName(CommonTestData.VALID_NAME_BASKETBALL)
         .withDate(CommonTestData.VALID_DATE_BASKETBALL)
         .withCalories(CommonTestData.VALID_CALORIES_BASKETBALL)

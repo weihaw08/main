@@ -22,7 +22,7 @@ import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.commons.core.State;
 import seedu.exercise.commons.core.index.Index;
-import seedu.exercise.logic.commands.EditExerciseDescriptor;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.conflict.Conflict;
@@ -472,7 +472,7 @@ public class ModelManager implements Model {
         for (Exercise exercise : filteredExercises) {
             Map<String, String> toCheck = exercise.getCustomPropertiesMap();
             Map<String, String> newMap = propertyBook.removeInvalidCustomProperties(toCheck);
-            EditExerciseDescriptor editor = new EditExerciseDescriptor(exercise);
+            EditExerciseBuilder editor = new EditExerciseBuilder(exercise);
             editor.setCustomProperties(newMap);
             setExercise(exercise, editor.buildEditedExercise());
         }

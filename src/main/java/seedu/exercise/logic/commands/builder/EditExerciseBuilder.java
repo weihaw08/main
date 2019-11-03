@@ -1,4 +1,4 @@
-package seedu.exercise.logic.commands;
+package seedu.exercise.logic.commands.builder;
 
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -21,7 +21,7 @@ import seedu.exercise.model.resource.Exercise;
 /**
  * Represents a builder class that helps to build edited exercise.
  */
-public class EditExerciseDescriptor {
+public class EditExerciseBuilder {
     private Name name;
     private Calories calories;
     private Date date;
@@ -30,14 +30,14 @@ public class EditExerciseDescriptor {
     private Set<Muscle> muscles;
     private Map<String, String> customProperties;
 
-    public EditExerciseDescriptor() {
+    public EditExerciseBuilder() {
     }
 
     /**
      * Copy constructor.
      * A defensive copy of {@code muscles} is used internally.
      */
-    public EditExerciseDescriptor(EditExerciseDescriptor toCopy) {
+    public EditExerciseBuilder(EditExerciseBuilder toCopy) {
         setName(toCopy.name);
         setCalories(toCopy.calories);
         setDate(toCopy.date);
@@ -50,7 +50,7 @@ public class EditExerciseDescriptor {
     /**
      * A constructor that copies all of the information from an exercise.
      */
-    public EditExerciseDescriptor(Exercise toEdit) {
+    public EditExerciseBuilder(Exercise toEdit) {
         setName(toEdit.getName());
         setCalories(toEdit.getCalories());
         setDate(toEdit.getDate());
@@ -143,20 +143,20 @@ public class EditExerciseDescriptor {
 
     /**
      * Creates and returns a {@code Exercise} with the details of {@code exerciseToEdit}
-     * edited with {@code editExerciseDescriptor}.
+     * edited with {@code editExerciseBuilder}.
      */
     public static Exercise createEditedExercise(
-        Exercise exerciseToEdit, EditExerciseDescriptor editExerciseDescriptor) {
+        Exercise exerciseToEdit, EditExerciseBuilder editExerciseBuilder) {
         assert exerciseToEdit != null;
 
-        Name updatedName = editExerciseDescriptor.getName().orElse(exerciseToEdit.getName());
-        Calories updatedCalories = editExerciseDescriptor.getCalories().orElse(exerciseToEdit.getCalories());
-        Date updatedDate = editExerciseDescriptor.getDate().orElse(exerciseToEdit.getDate());
-        Quantity updatedQuantity = editExerciseDescriptor.getQuantity().orElse(exerciseToEdit.getQuantity());
-        Unit updatedUnit = editExerciseDescriptor.getUnit().orElse(exerciseToEdit.getUnit());
-        Set<Muscle> updatedMuscles = editExerciseDescriptor.getMuscles().orElse(exerciseToEdit.getMuscles());
+        Name updatedName = editExerciseBuilder.getName().orElse(exerciseToEdit.getName());
+        Calories updatedCalories = editExerciseBuilder.getCalories().orElse(exerciseToEdit.getCalories());
+        Date updatedDate = editExerciseBuilder.getDate().orElse(exerciseToEdit.getDate());
+        Quantity updatedQuantity = editExerciseBuilder.getQuantity().orElse(exerciseToEdit.getQuantity());
+        Unit updatedUnit = editExerciseBuilder.getUnit().orElse(exerciseToEdit.getUnit());
+        Set<Muscle> updatedMuscles = editExerciseBuilder.getMuscles().orElse(exerciseToEdit.getMuscles());
         Map<String, String> updatedCustomProperties = new TreeMap<>(exerciseToEdit.getCustomPropertiesMap());
-        Map<String, String> newCustomProperties = editExerciseDescriptor.getCustomProperties()
+        Map<String, String> newCustomProperties = editExerciseBuilder.getCustomProperties()
             .orElse(new TreeMap<>());
         updatedCustomProperties.putAll(newCustomProperties);
 
@@ -165,7 +165,7 @@ public class EditExerciseDescriptor {
     }
 
     /**
-     * Builds an edited exercise based on the fields of the {@code EditExerciseDescriptor}.
+     * Builds an edited exercise based on the fields of the {@code EditExerciseBuilder}.
      * Precondition: All fields must not be null.
      */
     public Exercise buildEditedExercise() {
@@ -181,12 +181,12 @@ public class EditExerciseDescriptor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditExerciseDescriptor)) {
+        if (!(other instanceof EditExerciseBuilder)) {
             return false;
         }
 
         // state check
-        EditExerciseDescriptor e = (EditExerciseDescriptor) other;
+        EditExerciseBuilder e = (EditExerciseBuilder) other;
 
         return getName().equals(e.getName())
             && getCalories().equals(e.getCalories())

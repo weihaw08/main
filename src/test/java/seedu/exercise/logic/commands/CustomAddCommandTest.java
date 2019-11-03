@@ -37,7 +37,7 @@ class CustomAddCommandTest {
     private PropertyBook propertyBook = PropertyBook.getInstance();
 
     @BeforeEach
-    public void reset() {
+    public void setUp() {
         propertyBook.clearCustomProperties();
     }
 

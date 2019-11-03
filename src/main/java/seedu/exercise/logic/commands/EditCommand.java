@@ -1,7 +1,7 @@
 package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.exercise.logic.commands.EditExerciseDescriptor.createEditedExercise;
+import static seedu.exercise.logic.commands.builder.EditExerciseBuilder.createEditedExercise;
 import static seedu.exercise.logic.commands.events.EditExerciseEvent.KEY_EDITED_EXERCISE;
 import static seedu.exercise.logic.commands.events.EditExerciseEvent.KEY_ORIGINAL_EXERCISE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
@@ -17,6 +17,7 @@ import java.util.List;
 import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.core.index.IndexUtil;
+import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.events.EventPayload;
 import seedu.exercise.logic.commands.exceptions.CommandException;
@@ -52,20 +53,20 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in the exercise book.";
 
     private final Index index;
-    private final EditExerciseDescriptor editExerciseDescriptor;
+    private final EditExerciseBuilder editExerciseBuilder;
     private EventPayload<Exercise> eventPayload;
 
     /**
      * @param index                  of the exercise in the filtered exercise list to edit
-     * @param editExerciseDescriptor details to edit the person with
+     * @param editExerciseBuilder details to edit the person with
      */
-    public EditCommand(Index index, EditExerciseDescriptor editExerciseDescriptor) {
+    public EditCommand(Index index, EditExerciseBuilder editExerciseBuilder) {
         requireNonNull(index);
-        requireNonNull(editExerciseDescriptor);
+        requireNonNull(editExerciseBuilder);
 
         this.index = index;
         this.eventPayload = new EventPayload<>();
-        this.editExerciseDescriptor = new EditExerciseDescriptor(editExerciseDescriptor);
+        this.editExerciseBuilder = new EditExerciseBuilder(editExerciseBuilder);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
         }
 
         Exercise exerciseToEdit = lastShownList.get(index.getZeroBased());
-        Exercise editedExercise = createEditedExercise(exerciseToEdit, editExerciseDescriptor);
+        Exercise editedExercise = createEditedExercise(exerciseToEdit, editExerciseBuilder);
 
         if (!exerciseToEdit.isSameResource(editedExercise) && model.hasExercise(editedExercise)) {
             throw new CommandException(MESSAGE_DUPLICATE_EXERCISE);
@@ -128,6 +129,6 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-            && editExerciseDescriptor.equals(e.editExerciseDescriptor);
+            && editExerciseBuilder.equals(e.editExerciseBuilder);
     }
 }
