@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S1-CS2103T-T09-2/main/tree/master
 
-By: `Team ExerHealth`      Since: `Sep 2016`      Licence: `MIT`
+By: `Team ExerHealth`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
 
@@ -89,8 +89,8 @@ Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/
 
 ****
 * Dates that are entered have to be of the form `dd/MM/yyyy`.
-* The day of each date must be between 1 and 31 inclusive.
-* The month of each date must be between 1 and 12 inclusive.
+* The day of each date must be between 01 and 31 inclusive.
+* The month of each date must be between 01 and 12 inclusive.
 * If the day of the month entered is within the above range but exceeds the number of days present
 in that particular month, the date will be treated as the last day of that particular month e.g. if
 `31/02/2019` is entered, it will be treated as `28/02/2019`.
@@ -98,8 +98,14 @@ in that particular month, the date will be treated as the last day of that parti
 
 Examples:
 
-* `add t/exercise n/Run d/19/09/2019`
+* `add t/exercise n/Run d/19/09/2019 c/2.4 q/300 u/km`
+
+Adds the exercise `Run` into ExerHealth. This exercise will be stored together with the information
+`19/09/2019 2.4km 300kcal`.
+
 * `add t/exercise n/Swimming d/19/09/2019 c/2000`
+
+Adds the exercise
 * `add t/exercise n/Bench press d/19/09/2019 c/500 q/50 u/reps m/Chest`
 
 ==== Adding exercises to scheduling regime +

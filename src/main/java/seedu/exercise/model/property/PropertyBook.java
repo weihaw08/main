@@ -136,17 +136,6 @@ public class PropertyBook {
     }
 
     /**
-     * Updates the property prefixes in {@code CliSyntax} class for use in add/edit command.
-     */
-    public void updatePropertyPrefixes() {
-        Set<Prefix> combinedSet = new HashSet<>();
-        combinedSet.addAll(defaultPrefixes);
-        combinedSet.addAll(customPrefixes);
-        setPropertyPrefixesSet(Collections.unmodifiableSet(combinedSet));
-    }
-
-
-    /**
      * Checks if the prefix has already been used by a property.
      */
     public boolean isPrefixUsed(Prefix prefix) {
@@ -212,6 +201,16 @@ public class PropertyBook {
      */
     private void removeFullName(String fullName) {
         customFullNames.remove(fullName);
+    }
+
+    /**
+     * Updates the property prefixes in {@code CliSyntax} class for use in add/edit command.
+     */
+    private void updatePropertyPrefixes() {
+        Set<Prefix> combinedSet = new HashSet<>();
+        combinedSet.addAll(defaultPrefixes);
+        combinedSet.addAll(customPrefixes);
+        setPropertyPrefixesSet(Collections.unmodifiableSet(combinedSet));
     }
 
     /**
