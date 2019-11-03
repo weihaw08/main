@@ -27,7 +27,6 @@ import seedu.exercise.model.property.Name;
 import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
 import seedu.exercise.model.resource.Schedule;
-import seedu.exercise.model.util.DefaultPropertyBookUtil;
 import seedu.exercise.testutil.typicalutil.TypicalConflict;
 import seedu.exercise.testutil.typicalutil.TypicalExercises;
 import seedu.exercise.testutil.typicalutil.TypicalIndexes;
@@ -54,9 +53,9 @@ public class ResolveCommandTest {
         Arrays.asList(TypicalIndexes.INDEX_ONE_BASED_FIRST),
         new ArrayList<>());
     private final ResolveCommand validResolveCommandWithNonEmptyIndexesDifferentName = new ResolveCommand(
-            new Name(TypicalRegime.VALID_REGIME_NAME_CHEST),
-            Arrays.asList(TypicalIndexes.INDEX_ONE_BASED_FIRST),
-            Arrays.asList(TypicalIndexes.INDEX_ONE_BASED_FIRST));
+        new Name(TypicalRegime.VALID_REGIME_NAME_CHEST),
+        Arrays.asList(TypicalIndexes.INDEX_ONE_BASED_FIRST),
+        Arrays.asList(TypicalIndexes.INDEX_ONE_BASED_FIRST));
     private final ResolveCommand validResolveCommandWithOutOfBoundIndexes = new ResolveCommand(
         new Name(TypicalRegime.VALID_REGIME_NAME_CARDIO),
         Arrays.asList(TypicalIndexes.INDEX_VERY_LARGE_NUMBER),
@@ -174,7 +173,7 @@ public class ResolveCommandTest {
         Model expectedModel = deepCopyModel();
 
         assertCommandFailure(validResolveCommandWithNonEmptyIndexesDifferentName,
-                model, expectedMessage);
+            model, expectedMessage);
     }
 
     private Model deepCopyModel() {

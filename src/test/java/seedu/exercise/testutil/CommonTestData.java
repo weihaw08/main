@@ -19,7 +19,6 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_SUGGEST_TYPE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
-import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.testutil.builder.EditExerciseDescriptorBuilder;

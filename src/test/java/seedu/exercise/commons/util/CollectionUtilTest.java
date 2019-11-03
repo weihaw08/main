@@ -3,7 +3,6 @@ package seedu.exercise.commons.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.exercise.commons.util.CollectionUtil.mapToStringList;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.testutil.Assert.assertThrows;
 
@@ -134,8 +133,8 @@ public class CollectionUtilTest {
     @Test
     public void areListsEmpty_listsEmpty_returnsTrue() {
         assertTrue(CollectionUtil.areListsEmpty(
-                new ArrayList<>(),
-                new ArrayList<>()
+            new ArrayList<>(),
+            new ArrayList<>()
         ));
     }
 
@@ -144,8 +143,8 @@ public class CollectionUtilTest {
         List<String> nonEmpty = new ArrayList<>();
         nonEmpty.add("a");
         assertFalse(CollectionUtil.areListsEmpty(
-                new ArrayList<>(),
-                nonEmpty
+            new ArrayList<>(),
+            nonEmpty
         ));
     }
 

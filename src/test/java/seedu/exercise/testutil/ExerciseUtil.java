@@ -11,7 +11,6 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 import java.util.Set;
 
 import seedu.exercise.logic.commands.AddExerciseCommand;
-import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditExerciseDescriptor;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.resource.Exercise;

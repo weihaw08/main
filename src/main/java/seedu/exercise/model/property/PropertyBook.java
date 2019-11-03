@@ -4,6 +4,7 @@ import static seedu.exercise.logic.parser.CliSyntax.setPropertyPrefixesSet;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultFullNames;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPrefixes;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -12,6 +13,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.parser.Prefix;
 
@@ -87,6 +90,13 @@ public class PropertyBook {
      */
     public Set<CustomProperty> getCustomProperties() {
         return Collections.unmodifiableSet(customProperties);
+    }
+
+    /**
+     * Returns an observable list of custom properties for display.
+     */
+    public ObservableList<CustomProperty> getObservableCustomProperties() {
+        return FXCollections.observableList(new ArrayList<>(customProperties));
     }
 
     /**

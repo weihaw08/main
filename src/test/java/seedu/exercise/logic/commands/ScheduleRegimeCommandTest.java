@@ -82,7 +82,7 @@ public class ScheduleRegimeCommandTest {
             new ReadOnlyResourceBook<>(), model.getAllScheduleData(), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(scheduleRegimeCommandWithConflictingDate, model,
-            new CommandResult(expectedMessage, false, false, true), expectedModel);
+            new CommandResult(expectedMessage, false, false, true, false), expectedModel);
 
         //Ensure state is in conflict after execution of command
         assertEquals(State.IN_CONFLICT, MainApp.getState());
