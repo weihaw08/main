@@ -374,11 +374,15 @@
 }
 
 .logoBox {
-    -fx-background-color: linear-gradient(to bottom, #5680e9, #84ceeb, #5ab9ea);
+    -fx-background-color: rgb(0, 253, 119);
 }
 
 .chartBox {
-    -fx-border-color: transparent;
+    -fx-border-color: #f9f9f9 #f9f9f9 #f9f9f9 #bababa;
+}
+
+.chartBoxBorder {
+    -fx-background-color: rgb(0, 253, 119);
 }
 
 #cardPane {
