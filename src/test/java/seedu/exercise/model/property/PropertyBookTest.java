@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.exercise.testutil.CommonTestData.P_SLASH;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_END_DATE;
+import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_RATING;
 import static seedu.exercise.testutil.CommonTestData.VALID_FULL_NAME_REMARK;
 import static seedu.exercise.testutil.typicalutil.TypicalCustomProperties.END_DATE;
 import static seedu.exercise.testutil.typicalutil.TypicalCustomProperties.RATING;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.exercise.logic.parser.Prefix;
+import seedu.exercise.testutil.builder.CustomPropertyBuilder;
 
 public class PropertyBookTest {
 
@@ -73,5 +75,31 @@ public class PropertyBookTest {
         // Prefix not used by custom property and parameters in add/edit command -> false
         assertFalse(testBook.isPrefixUsed(P_SLASH));
         assertFalse(testBook.isFullNameUsed("Definitely not used"));
+    }
+
+    @Test
+    public void isFullNameUsedByCustomProperty() {
+        testBook.addCustomProperty(REMARK);
+        assertTrue(testBook.isFullNameUsedByCustomProperty(VALID_FULL_NAME_REMARK));
+
+        assertFalse(testBook.isFullNameUsedByCustomProperty("Date"));
+    }
+
+    @Test
+    public void hasClashingPrefixOrName() {
+        testBook.addCustomProperty(REMARK);
+        // Same name and different prefix -> true
+        CustomProperty sameFullName = new CustomPropertyBuilder(RATING)
+            .withFullName(VALID_FULL_NAME_REMARK).build();
+        assertTrue(testBook.hasClashingPrefixOrName(sameFullName));
+
+        // Different name and same prefix -> true
+        CustomProperty samePrefix = new CustomPropertyBuilder(REMARK)
+            .withFullName(VALID_FULL_NAME_RATING).build();
+        assertTrue(testBook.hasClashingPrefixOrName(samePrefix));
+
+        // Different name and prefix -> false
+
+        assertFalse(testBook.hasClashingPrefixOrName(END_DATE));
     }
 }
