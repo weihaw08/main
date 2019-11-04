@@ -1,12 +1,16 @@
 package seedu.exercise.model.util;
 
+import static seedu.exercise.model.resource.ResourceComparator.DEFAULT_EXERCISE_COMPARATOR;
+import static seedu.exercise.model.resource.ResourceComparator.DEFAULT_REGIME_COMPARATOR;
+import static seedu.exercise.model.resource.ResourceComparator.DEFAULT_SCHEDULE_COMPARATOR;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import seedu.exercise.model.ReadOnlyResourceBook;
-import seedu.exercise.model.UniqueResourceList;
+import seedu.exercise.model.SortedUniqueResourceList;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
@@ -45,7 +49,7 @@ public class SampleDataUtil {
     }
 
     public static Regime[] getSampleRegimes() {
-        UniqueResourceList<Exercise> list1 = new UniqueResourceList<>();
+        SortedUniqueResourceList<Exercise> list1 = new SortedUniqueResourceList<>(DEFAULT_EXERCISE_COMPARATOR);
         list1.add(new Exercise(new Name("Rope Skipping"), new Date("12/12/2019"), new Calories("330"),
             new Quantity("10"), new Unit("counts"),
             getMuscleSet("Legs"), new TreeMap<>()));
@@ -54,7 +58,7 @@ public class SampleDataUtil {
             getMuscleSet("Triceps"), new TreeMap<>()));
 
 
-        UniqueResourceList<Exercise> list2 = new UniqueResourceList<>();
+        SortedUniqueResourceList<Exercise> list2 = new SortedUniqueResourceList<>(DEFAULT_EXERCISE_COMPARATOR);
         list2.add(new Exercise(new Name("Running"), new Date("12/12/2019"), new Calories("9999"),
             new Quantity("2.4"), new Unit("km"),
             getMuscleSet("Legs"), new TreeMap<>()));
@@ -65,7 +69,7 @@ public class SampleDataUtil {
             new Quantity("10"), new Unit("laps"),
             getMuscleSet("Calves"), new TreeMap<>()));
 
-        UniqueResourceList<Exercise> list3 = new UniqueResourceList<>();
+        SortedUniqueResourceList<Exercise> list3 = new SortedUniqueResourceList<>(DEFAULT_EXERCISE_COMPARATOR);
         list3.add(new Exercise(new Name("Rope Skipping"), new Date("12/12/2019"), new Calories("330"),
             new Quantity("10"), new Unit("counts"),
             getMuscleSet("Legs"), new TreeMap<>()));
@@ -123,7 +127,7 @@ public class SampleDataUtil {
 
 
     public static ReadOnlyResourceBook<Exercise> getSampleExerciseBook() {
-        ReadOnlyResourceBook<Exercise> sampleEb = new ReadOnlyResourceBook<>();
+        ReadOnlyResourceBook<Exercise> sampleEb = new ReadOnlyResourceBook<>(DEFAULT_EXERCISE_COMPARATOR);
         for (Exercise sampleExercise : getSampleExercises()) {
             sampleEb.addResource(sampleExercise);
         }
@@ -131,7 +135,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyResourceBook<Schedule> getSampleScheduleBook() {
-        ReadOnlyResourceBook<Schedule> sampleSb = new ReadOnlyResourceBook<>();
+        ReadOnlyResourceBook<Schedule> sampleSb = new ReadOnlyResourceBook<>(DEFAULT_SCHEDULE_COMPARATOR);
         for (Schedule sampleSchedule : getSampleSchedules()) {
             sampleSb.addResource(sampleSchedule);
         }
@@ -139,7 +143,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyResourceBook<Regime> getSampleRegimeBook() {
-        ReadOnlyResourceBook<Regime> sampleRb = new ReadOnlyResourceBook<>();
+        ReadOnlyResourceBook<Regime> sampleRb = new ReadOnlyResourceBook<>(DEFAULT_REGIME_COMPARATOR);
         for (Regime sampleRegime : getSampleRegimes()) {
             sampleRb.addResource(sampleRegime);
         }
