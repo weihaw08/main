@@ -62,17 +62,20 @@ ensures that the custom property feature is more complete and provides greater u
 * *Minor enhancement 2*: Designed the centre panel UI for exercises. This design helps to display both the default and custom
 properties of each exercise to the user.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=weihaw08&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[Code Contribution]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the UI  (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/129[#129], https://github.com/AY1920S1-CS2103T-T09-2/main/pull/133[#133])
+*** Wrote additional tests for existing features to increase coverage (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/140[#140], https://github.com/AY1920S1-CS2103T-T09-2/main/pull/194[#194])
+*** Involved in the morphing of AddressBook to suit ExerHealth (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/13[#13])
+
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])

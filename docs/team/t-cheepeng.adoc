@@ -68,4 +68,4 @@ We had to update the Developer Guide that was provided by the basic application(
 |_Given below are sections I contributed to the *ExerHealth Developer Guide*. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=resolve]
+include::../DeveloperGuide.adoc[tag=resolvefeature]
