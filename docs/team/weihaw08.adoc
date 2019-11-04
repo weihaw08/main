@@ -66,37 +66,22 @@ properties of each exercise to the user.
 
 * *Other contributions*:
 
-** Project management:
-
 ** Enhancements to existing features:
 *** Updated the UI  (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/129[#129], https://github.com/AY1920S1-CS2103T-T09-2/main/pull/133[#133])
 *** Wrote additional tests for existing features to increase coverage (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/140[#140], https://github.com/AY1920S1-CS2103T-T09-2/main/pull/194[#194])
 *** Involved in the morphing of AddressBook to suit ExerHealth (Pull requests https://github.com/AY1920S1-CS2103T-T09-2/main/pull/13[#13])
 
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** PRs reviewed (with non-trivial review comments):  https://github.com/AY1920S1-CS2103T-T09-2/main/pull/81[#81], https://github.com/AY1920S1-CS2103T-T09-2/main/pull/103[#103]
+*** Reviewed and provided suggestions for individuals in the class: https://github.com/nus-cs2103-AY1920S1/duke/pull/86[#86], https://github.com/nus-cs2103-AY1920S1/duke/pull/229[#229]
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=delete]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=customfeature]
 
 == Contributions to the Developer Guide
 
@@ -104,13 +89,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=customfeature]
 
 
-== PROJECT: PowerPointLabs
 
----
-
-_{Optionally, you may include other projects in your portfolio.}_
