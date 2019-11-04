@@ -248,7 +248,7 @@ public class ParserUtil {
      *
      * @throws ParseException if any of the keys present in {@code customProperties} is invalid.
      */
-    static Map<String, String> parseCustomProperties(Map<String, String> customProperties)
+    public static Map<String, String> parseCustomProperties(Map<String, String> customProperties)
         throws ParseException {
         requireNonNull(customProperties);
         Set<CustomProperty> allCustomProperties = PropertyBook.getInstance().getCustomProperties();
@@ -271,7 +271,7 @@ public class ParserUtil {
      * @return a trimmed full name of a custom property in Start Case style.
      * @throws ParseException if the given full name is invalid.
      */
-    static String parseFullName(String fullName) throws ParseException {
+    public static String parseFullName(String fullName) throws ParseException {
         requireNonNull(fullName);
         String trimmedFullName = fullName.trim();
         if (!CustomProperty.isValidFullName(trimmedFullName)) {
@@ -287,7 +287,7 @@ public class ParserUtil {
      * @return a {@code Prefix} object containing the trimmed prefix name for a custom property
      * @throws ParseException if the given prefix name is invalid
      */
-    static Prefix parsePrefixName(String prefixName) throws ParseException {
+    public static Prefix parsePrefixName(String prefixName) throws ParseException {
         requireNonNull(prefixName);
         String trimmedPrefixName = prefixName.trim();
         if (!CustomProperty.isValidPrefixName(trimmedPrefixName)) {
@@ -303,7 +303,7 @@ public class ParserUtil {
      * @return a {@code ParameterType} that corresponds with the intended parameter type
      * @throws ParseException if the intended parameter type is invalid
      */
-    static ParameterType parseParameterType(String parameterType) throws ParseException {
+    public static ParameterType parseParameterType(String parameterType) throws ParseException {
         requireNonNull(parameterType);
         String trimmedParameterType = parameterType.trim();
 

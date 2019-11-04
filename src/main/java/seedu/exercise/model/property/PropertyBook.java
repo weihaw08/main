@@ -70,21 +70,6 @@ public class PropertyBook {
     }
 
     /**
-     * Returns a new {@code Map<String, String>} containing valid custom properties that are present in the
-     * PropertyBook. This ensures that if the user did not define a custom property in the storage and yet
-     * edits the exercises' custom properties in the storage, the undefined custom properties will not show up.
-     */
-    public Map<String, String> removeInvalidCustomProperties(Map<String, String> customPropertiesMap) {
-        Map<String, String> newMap = new TreeMap<>();
-        for (String validProperty : customFullNames) {
-            if (customPropertiesMap.containsKey(validProperty)) {
-                newMap.put(validProperty, customPropertiesMap.get(validProperty));
-            }
-        }
-        return newMap;
-    }
-
-    /**
      * Returns an immutable custom properties set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

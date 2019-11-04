@@ -311,6 +311,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         resolveWindow.hideAndClearPanels();
+        customPropertiesWindow.hide();
         primaryStage.hide();
     }
 

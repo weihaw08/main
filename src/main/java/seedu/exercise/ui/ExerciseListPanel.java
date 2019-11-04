@@ -19,7 +19,6 @@ import seedu.exercise.model.resource.Exercise;
 public class ExerciseListPanel extends ResourceListPanel {
 
     private static final String FXML = "ExerciseListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private ListView<Exercise> exerciseListView;

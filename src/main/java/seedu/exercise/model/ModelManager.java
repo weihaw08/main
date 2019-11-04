@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -26,6 +27,8 @@ import seedu.exercise.logic.commands.ResolveCommand;
 import seedu.exercise.logic.commands.builder.EditExerciseBuilder;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.commands.statistic.StatsFactory;
+import seedu.exercise.logic.parser.ParserUtil;
+import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.conflict.Conflict;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.PropertyBook;
@@ -469,13 +472,18 @@ public class ModelManager implements Model {
     }
 
     /**
-     * @see PropertyBook#removeInvalidCustomProperties(Map)
+     * Removes invalid custom properties that are present in the exercises.
+     * This ensures that undefined custom properties and custom properties of invalid values do not exist.
      */
     private void removeInvalidCustomProperties() {
-        PropertyBook propertyBook = PropertyBook.getInstance();
         for (Exercise exercise : filteredExercises) {
             Map<String, String> toCheck = exercise.getCustomPropertiesMap();
-            Map<String, String> newMap = propertyBook.removeInvalidCustomProperties(toCheck);
+            Map<String, String> newMap;
+            try {
+                newMap = ParserUtil.parseCustomProperties(toCheck);
+            } catch (ParseException e) {
+                newMap = new TreeMap<>();
+            }
             EditExerciseBuilder editor = new EditExerciseBuilder(exercise);
             editor.setCustomProperties(newMap);
             setExercise(exercise, editor.buildEditedExercise());
