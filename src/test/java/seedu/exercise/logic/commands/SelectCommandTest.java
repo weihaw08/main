@@ -32,8 +32,8 @@ public class SelectCommandTest {
 
     private Model model = new ModelManager(getTypicalExerciseBook(), getTypicalRegimeBook(), getTypicalExerciseBook(),
         getTypicalScheduleBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), getTypicalRegimeBook(), getTypicalExerciseBook(),
-        getTypicalScheduleBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalExerciseBook(), getTypicalRegimeBook(),
+        getTypicalExerciseBook(), getTypicalScheduleBook(), new UserPrefs());
 
     @Test
     public void constructor_nullArguments_throwsNullPointerException() {
@@ -114,6 +114,9 @@ public class SelectCommandTest {
         assertFalse(selectExerciseCommand.equals(5.00));
     }
 
+    /**
+     * A utility method that helps to generate the correct {@code CommandResult} based on the {@code resourceType}.
+     */
     private CommandResult createdExpectedCommandResult(ListResourceType resourceType) {
         int selectedIndex = INDEX_ONE_BASED_FIRST.getOneBased();
         String selectedResource = resourceType.toString().toLowerCase();
