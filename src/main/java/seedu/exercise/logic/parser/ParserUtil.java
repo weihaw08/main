@@ -6,14 +6,15 @@ import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_TYPE;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.logic.parser.AddCommandParser.ADD_CATEGORY_EXERCISE;
 import static seedu.exercise.logic.parser.AddCommandParser.ADD_CATEGORY_REGIME;
-import static seedu.exercise.logic.parser.ListCommandParser.LIST_TYPE_EXERCISE;
-import static seedu.exercise.logic.parser.ListCommandParser.LIST_TYPE_REGIME;
-import static seedu.exercise.logic.parser.ListCommandParser.LIST_TYPE_SCHEDULE;
-import static seedu.exercise.logic.parser.ListCommandParser.LIST_TYPE_SUGGEST;
 import static seedu.exercise.logic.parser.SuggestCommandParser.SUGGEST_TYPE_BASIC;
 import static seedu.exercise.logic.parser.SuggestCommandParser.SUGGEST_TYPE_POSSIBLE;
 import static seedu.exercise.logic.parser.predicate.PredicateUtil.OPERATION_TYPE_AND;
 import static seedu.exercise.logic.parser.predicate.PredicateUtil.OPERATION_TYPE_OR;
+import static seedu.exercise.ui.ListResourceType.LIST_RESOURCE_TYPE_CONSTRAINTS;
+import static seedu.exercise.ui.ListResourceType.LIST_TYPE_EXERCISE;
+import static seedu.exercise.ui.ListResourceType.LIST_TYPE_REGIME;
+import static seedu.exercise.ui.ListResourceType.LIST_TYPE_SCHEDULE;
+import static seedu.exercise.ui.ListResourceType.LIST_TYPE_SUGGESTION;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -230,17 +231,12 @@ public class ParserUtil {
         case LIST_TYPE_SCHEDULE:
             return ListResourceType.SCHEDULE;
 
-        case LIST_TYPE_SUGGEST:
-            return ListResourceType.SUGGEST;
+        case LIST_TYPE_SUGGESTION:
+            return ListResourceType.SUGGESTION;
 
         default:
-            throw new ParseException("Category can only be \'"
-                + LIST_TYPE_EXERCISE + "\'" + " or \'"
-                + LIST_TYPE_REGIME + "\'" + " or \'"
-                + LIST_TYPE_SCHEDULE + "\'" + " or \'"
-                + LIST_TYPE_SUGGEST + "\'");
+            throw new ParseException(LIST_RESOURCE_TYPE_CONSTRAINTS);
         }
-
     }
 
     /**

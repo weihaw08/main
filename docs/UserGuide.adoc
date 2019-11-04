@@ -121,14 +121,16 @@ Adds the 1st, 2nd and 3rd exercise in the list to the regime named `power sets`.
 
 Adds the 4th exercise in the list to the regime named `cardio`.
 
-=== Listing all exercises : `list`
+=== Listing information : `list`
 
-Retrieves all categories of information - Exercise, Regime or Scheduled Regime - from ExerHealth.
+Retrieves a list of information - Exercise, Regime, Scheduled Regime or Suggestion - from ExerHealth.
 
-Type of information shown when will be specified by the category type specified. For example,
-if you wish to see your current list of regimes, you may specify the `CAT_NAME` as `regime`.
+Format: `list t/LIST_TYPE`
 
-Format: `list t/CAT_NAME`
+****
+* There are 4 types of list in ExerHealth: `exercise`, `regime`, `schedule` and `suggest`.
+* The `suggest` list will only be displayed if you have used the <<suggestion, suggestion>> feature before.
+****
 
 Example:
 
@@ -149,6 +151,17 @@ image::ListRegimeResult.png[]
 Expected result:
 
 image::ListScheduleResult.png[]
+
+=== Selecting an item: `select`
+
+Selects the item at the given index of the chosen category list.
+
+Format: `select t/LIST_TYPE i/INDEX`
+
+[TIP]
+ `LIST_TYPE` can only be one of the following: `exercise`, `regime`, `schedule`, `suggest`.
+
+Example: `select t/exercise i/1`
 
 === Edit exercise information: `edit`
 
@@ -352,7 +365,10 @@ Takes exercise 1, 2, 3 from scheduled regime and exercise 2, 4 from conflicting 
 // end::scheduleresolve[]
 
 // tag::suggest[]
+
+[[suggestion]]
 === Suggesting ideas: `suggest`
+
 ==== Suggest basic exercises
 Recommends exercises from ExerHealth's inbuilt database for beginners.
 
@@ -488,13 +504,13 @@ Format: `custom rm/FULL_NAME [i/INDEX]`
 
 Example:
 
-* `custom rm/Ratings`
+* `custom rm/Rating`
 
-Removes the custom property `Ratings` from all of the exercises and from ExerHealth.
+Removes the custom property `Rating` from all of the exercises and from ExerHealth.
 
-* `custom rm/Ratings i/1`
+* `custom rm/Rating i/1`
 
-Removes the custom property `Ratings` from the 1st exercise in the list.
+Removes the custom property `Rating` from the 1st exercise in the list.
 
 ==== Viewing custom properties: `viewcustom`
 
@@ -551,8 +567,10 @@ _{explain how the user can enable/disable data encryption}_
 e.g. `add t/exercise n/Bench press d/19/09/2019 c/500 q/50 u/reps m/Chest`
 * *Add regimes* : `add t/regime n/REGIME_NAME [i/INDEX_OF_EXERCISE]...`
 e.g. `add t/regime n/Cardio i/1 i/2 i/3`
-* *List* : `list t/CAT_NAME`
+* *List* : `list t/LIST_TYPE`
 e.g. `list t/exercise`
+* *Select* : `select t/LIST_TYPE i/INDEX`
+e.g. `select t/exercise i/1`
 * *Edit exercise* : `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]... `
 e.g. `edit i/3 n/Bench press d/22/09/2019 c/240 q/10 u/sets m/Chest`
 * *Delete exercise* : `delete t/exercise i/INDEX`

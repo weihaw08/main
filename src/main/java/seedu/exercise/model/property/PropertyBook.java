@@ -7,10 +7,8 @@ import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPrefix
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;

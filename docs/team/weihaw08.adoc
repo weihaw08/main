@@ -10,8 +10,7 @@
 ExerHealth is a desktop application that is created by me and another 4 Computer Science students. It
 enables users to track important information about their exercises and also provides other functionality such as
 the ability to create their own fitness regimes and the ability to provide statistical analysis of their activities.
-This app is designed with 2 particular groups of people in mind, beginners who wish to start exercising and experts
-who wish to maintain their personalised fitness regime.
+Users can also define their own properties which they wish to track for their exercises.
 
 == Summary of contributions
 
@@ -61,6 +60,12 @@ ensures that the custom property feature is more complete and provides greater u
 
 * *Minor enhancement 2*: Designed the centre panel UI for exercises. This design helps to display both the default and custom
 properties of each exercise to the user.
+
+* *Minor enhancement 3*: Added a `select` command that allows user to select a specific exercise/regime/schedule/suggestion
+which they wish to view.
+
+** Justification: As our intended target audience are also fast typists, providing them with a keyboard method to select an item which
+they wish to view is very appropriate.
 
 * *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=weihaw08&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[Code Contribution]]
 
