@@ -123,6 +123,7 @@ Examples:
 
 Expected result:
 
+.The exercise `Run` is added
 image::AddRunResult.png[]
 
 ==== Adding exercises to scheduling regime +
@@ -159,18 +160,21 @@ Example:
 
 Expected result:
 
+.The exercise list is displayed
 image::ListExerciseResult.png[]
 
 * `list t/regime`
 
 Expected result:
 
+.The regime list is displayed
 image::ListRegimeResult.png[]
 
 * `list t/schedule`
 
 Expected result:
 
+.The schedule list is displayed
 image::ListScheduleResult.png[]
 
 === Selecting an item: `select`
@@ -179,10 +183,10 @@ Selects the item at the given index of the chosen list type.
 
 Format: `select t/LIST_TYPE i/INDEX`
 
-[TIP]
- `LIST_TYPE` can only be one of the following: `exercise`, `regime`, `schedule`, `suggest`.
+Example: `select t/exercise i/3`
 
-Example: `select t/exercise i/1`
+.Exercise number 3 is selected
+image::SelectResult.png[]
 
 === Edit exercise information: `edit`
 
@@ -275,8 +279,9 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 * It also includes total and average `CATEGORY` per day of exercises in the date range.
 ****
 
-Figure below shows an example of pie chart. +
+The figure below shows an example of pie chart. +
 
+.The pie chart which you can choose to display
 image::PieChart.png[width="790"]
 NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the pie chart.
 
@@ -340,10 +345,12 @@ Schedules the regime called `cardio` on the date `12/12/2019`. If there are no o
 
 Expected Result:
 
+.The `cardio` regime is scheduled on 12/12/2019
 image::ScheduleRegimeCardio.png[]
 
 Expected Result (if other schedule exist on `12/12/2019`):
 
+.The result when a scheduling conflict is detected
 image::ScheduleRegimeCardioConflict.png[]
 
 If the resolve window pops up for you, please refer to <<resolve>> for details on resolving a scheduling conflict.
@@ -356,7 +363,7 @@ Format: `schedule i/INDEX_OF_SCHEDULE`
 
 
 [TIP]
-The `INDEX_OF_SCHEDULE` provided must be a valid index from your schedule list. Please use <<list, `list t/schedule`>> to view you index of the schedule you wish to complete.
+The `INDEX_OF_SCHEDULE` provided must be a valid index from your schedule list. Please use <<list, `list t/schedule`>> to view the index of the schedule you wish to complete.
 
 *Example:*
 
@@ -368,14 +375,17 @@ Expected Result:
 
 Before execution of `schedule i/2`
 
+.Before the execution of the command
 image::ScheduleCompleteBefore.png[]
 
 In your exercise tracker
 
+.Exercises from the schedule are added to your tracker
 image::ScheduleCompleteExerciseTracker.png[]
 
 In your schedule tracker after completing execution of `schedule i/2`
 
+.The completed regime is removed from your schedule
 image::ScheduleCompleteScheduleTracker.png[]
 
 // end::scheduleresolve[]
@@ -399,6 +409,7 @@ Format: `resolve n/SCHEDULED_OR_CONFLICTING`
 [TIP]
 You can only enter `n/scheduled` or `n/conflicting` to tell ExerHealth which schedule you wish to take. The scheduled or conflicting regimes are stated at the top of the list of exercises as shown below.
 
+.An example of the resolve conflict window
 image::ResolveScheduledOrConflicting.png[]
 
 *Example:*
@@ -411,10 +422,12 @@ Takes the already scheduled regime and schedule it at conflicting date.
 
 The resolve window and inputting the example command
 
+.Selecting all the exercises in the scheduled regime
 image::ResolveScheduled.png[]
 
 Once resolve window closes, the scheduled regime should be taken and scheduled at the correct date.
 
+.The scheduled regime should appear in your scheduling list
 image::ResolveScheduledResult.png[]
 
 
@@ -441,14 +454,17 @@ Expected Result:
 
 Takes exercise `1` from `scheduled regime` and exercises `2` and `4` from `conflicting regime` and adds them to a new regime called `new cardio`
 
+.Selecting some exercises from each regime
 image::ResolveTakeOneOrOther.png[]
 
 The `new cardio` regime is now scheduled at the conflicting date with the new exercises that have been resolved.
 
+.A newly created regime will appear in your scheduling list
 image::ResolveTakeResolved.png[]
 
 The `new cardio` regime is now added to your collection of regimes
 
+.The newly created regime will also appear in your regime list!
 image::ResolveRegimeTracker.png[]
 
 
@@ -547,33 +563,51 @@ cannot be used.
 
 Example:
 
-* `custom s/a f/Rating p/Number`
+* `custom s/r f/Rating p/Number`
 
-Creates a `Rating` property for each exercise.
-Information for this property can be updated for each exercise by using `a/NUMBER` in the relevant command where `NUMBER` refers to
-a number.
+Creates a `Rating` property for each of your exercises.
 
-* `custom s/b f/rEmaRk p/Text`
+Expected Result:
 
-Creates a `Remark` property for each exercise.
-Information for this property can be updated for each exercise by using `b/TEXT` in the relevant command where
-`TEXT` refers to a text sentence.
+.Your rating property has been created
+image::CustomRating.png[]
+
+* `custom s/re f/rEmaRk p/Text`
+
+Creates a `Remark` property for each of your exercises.
+
+Expected Result:
+
+.Your remark property has been created
+image::CustomRemark.png[]
+
 
 * `custom s/ed f/End Date p/Date`
 
-Creates a `End Date` property for each exercise.
-Information for this property can be updated for each exercise by using `ed/DATE` in the relevant command where
-`DATE` refers to a date.
+Creates a `End Date` property for each of your exercises.
+
+Expected Result:
+
+.Your end date property has been created
+image::CustomEndDate.png[]
+
 
 Using `Rating` as an example, you can now perform the following actions after adding it:
 
-* `add t/exercise n/Run d/01/10/2019 a/5`
+* `add t/exercise n/Run d/07/11/2019 c/400 q/2.4 u/km r/5`
 
-Adds an exercise with the name `Run`, date `01/10/2019` and rating `5` into the app.
+Expected Result:
 
-* `edit t/exercise i/4 a/3`
+.A new exercise with the remark property is added
+image::AddCustomRating.png[]
 
-Edits the rating of the 4th exercise in the list to `3`.
+
+* `edit i/6 r/4.5`
+
+Expected Result:
+
+.The rating of the 6th exercise is edited to 4.5
+image::EditCustomRating.png[]
 
 ==== Removing custom properties: `custom`
 
@@ -594,11 +628,43 @@ Example:
 
 * `custom rm/Rating`
 
-Removes the custom property `Rating` from all of the exercises and from ExerHealth.
+Before the execution, the `Rating` property will be present in exercises that have them.
 
-* `custom rm/Rating i/1`
+.A rating of 4.5 for exercise 6
+image::EditCustomRating.png[]
 
-Removes the custom property `Rating` from the 1st exercise in the list.
+.A rating of 3.5 for exercise 7
+image::EditAnotherCustomRating.png[]
+
+After the execution, the `Rating` property will be removed from all of the exercises and the app
+as illustrated in the next few figures.
+
+.The rating property is removed from the app
+image::RemoveCustomRating.png[]
+
+.Rating in exercise 6 is removed
+image::RunRatingRemoved.png[]
+
+.Rating in exercise 7 is also removed
+image::BenchPressRatingRemoved.png[]
+
+* `custom rm/Rating i/6`
+
+Before the execution, both exercises 6 and 7 have a rating attached to them.
+
+.A rating of 4.5 to exercise 6
+image::EditCustomRating.png[]
+
+.A rating of 3.5 to exercise 7
+image::EditAnotherCustomRating.png[]
+
+After the execution, only exercise 6 has its rating property removed.
+
+.The rating for exercise 6 is removed
+image::RatingRemovedForSix.png[]
+
+.The rating for exercise 7 remains
+image::RatingRemainedForSeven.png[]
 
 ==== Viewing custom properties: `viewcustom`
 
@@ -611,7 +677,11 @@ Example:
 
 * `viewcustom`
 
-Opens up a window containing information of all existing custom properties.
+Expected Result:
+
+.A window showing the custom properties you have defined is opened
+image::ViewCustom.png[]
+
 // end::customfeature[]
 
 === Exiting the program : `exit`
@@ -649,9 +719,6 @@ Allows you to encrypt your data files for more security.
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ExerHealth folder.
-
-*Q*: What if I am unable to view the command box? +
-*A*: You can try setting the
 
 == Command Summary
 
