@@ -374,12 +374,7 @@ image::ScheduleActivityDiagram.png[]
 ==== Rationale
 A quick conversation with a few of our friends revealed that there are many properties which they intend to keep track
 for exercises. However, it is unlikely that we can implement all of these properties for the exercises as there may
-be too much overhead and we can never be certain that we have met all of the users' needs. As such, we decide to allow
-users to define their own properties should they require them. These custom properties can then be applied to all of the
-exercises, providing more flexibility in terms of tracking the exercises' properties.
-
-Furthermore, as noted by one of our user stories, there are users that love customisations too. This can also come in handy
-when they want to define their own properties for the exercises.
+be too much overhead and we can never be certain that we have met all of the users' needs.
 
 ==== Overview
 This feature is facilitated by both `PropertyBook` and `CustomProperty`. Whenever a user
@@ -428,9 +423,6 @@ added, the prefix set in `CliSyntax` is also updated.
 5. `PropertyBook#removeCustomProperty(CustomProperty)`: Removes a pre-defined custom property. Its associated prefix
 is also removed from the prefix set in `CliSyntax`.
 
-Method 3 is implemented to ensure that the name of a default property is not removed by mistake if the user chooses to
-remove a predefined custom property.
-
 All of the crucial associations mentioned above are summarised in the next class diagram.
 
 .Class diagram of the associations of `PropertyBook` and `CustomProperty`
@@ -472,36 +464,7 @@ Once a custom property is successfully added into `PropertyBook`, the user can u
 ===== Removing Custom Properties
 Should a user wish to remove a custom property from all of the exercises, he/she can simply make use of the command
 `custom rm/FULL_NAME`. Alternatively, if the user wishes to remove a custom property just from a single exercise, he/she
-can choose to enter `custom rm/FULL_NAME i/INDEX` instead.
-
-The following sequence diagram illustrates how a custom property is removed from all of the exercises
-when a user wishes to remove, say, the `Rating` property from the `PropertyBook`.
-
-.Sequence diagram of a successful removal of a custom property from all exercises
-image::EditedCustomRemoveSequenceDiagram.png[]
-
-For further clarity, one can identify the above diagram with the following sequence of steps:
-
-*Step 1:* The user first enters the name of the custom property which they wish to remove from the app.
-
-*Step 2:* The parser will parse the command and after which, a `CustomRemoveCommand` object is created.
-
-*Step 3:* The `execute` method of this `CustomRemoveCommand` object will be executed. Following which, the`CustomProperty`
-object with the given name will be removed from `PropertyBook`.
-
-*Step 4:* Once the removal of the `CustomProperty` object is done, the custom properties of every exercise in `Model` will
-be updated.
-
-*Step 5:* Finally, a `CommandResult` object is created and returned.
-
-Similar to the addition of custom properties, the removal of a custom property involves a sequence of checks to
-ensure that the correct custom property is removed from the correct exercise(s). These checks are summarised in the
-next activity diagram.
-
-.Activity diagram of the workflow when a custom property is to be removed
-image::CustomRemoveActivityDiagram.png[]
-
-A custom property that has been removed from the ``PropertyBook`` can be re-added back if the user chooses to.
+can choose to enter `custom rm/FULL_NAME i/INDEX` instead. A custom property that has been removed from the ``PropertyBook`` can be re-added back if the user chooses to.
 
 ===== Viewing Custom Properties
 To allow user to view the custom properties which they have defined, they can enter ``viewcustom`` which will produce
@@ -512,9 +475,7 @@ a table that lists out the name, prefix and parameter type of each custom proper
 ===== Aspect: `PropertyBook` design
 * **Choice 1 (Current choice)**: Represent `PropertyBook` as a singleton class that will
 act as the only access point for the addition and removal of custom properties.
-** Pros: This prevents situations where there could be 2 instances of `PropertyBook` objects and the addition
-of a custom property is only carried out to one instance and not in the other. Furthermore, having a singleton
-like this helps to provide more utility for methods that rely on the `CustomProperty` objects that have been
+** Pros: Having a singleton helps to provide more utility for methods that rely on the `CustomProperty` objects that have been
 created.
 ** Cons: It makes testing much difficult as the results from the previous test cases are carried over. Furthermore,
 it increases coupling across the code base.
@@ -533,13 +494,12 @@ for the custom properties in the add/edit commands are valid. However, as the `E
 `String` as a parameter, there has to be another way of retrieving the custom properties. While we can change the
 `ExerciseBookParser` to take in a data structure containing `CustomProperty` objects, this does not seem good as its responsibility
 is just to ensure that a predefined command is entered and is passed to the correct command parser.
-Thus, it does not require knowledge of any custom properties. So, a slightly better choice in this case
-is to make the data structure holding the `CustomProperty` objects a static variable and parsers that require it can access
+A slightly better choice in this case is to make the data structure holding the `CustomProperty` objects a static variable and parsers that require it can access
 it directly.
 
 2. If the data structure holding the `CustomProperty` object is to be made static, it means that this information is
 shared among all of the `PropertyBook` instances if Choice 2 was implemented instead. Thus, `PropertyBook`
-is acting similarly to a singleton since the information carried by any instance of `PropertyBook` is the same.
+is acting similarly to a singleton.
 
 As such, after much consideration, Choice 1 was implemented. To ensure that testing can be carried out better,
 the data inside `PropertyBook` is cleared before each test.

@@ -572,26 +572,6 @@ Expected Result:
 .Your rating property has been created
 image::CustomRating.png[]
 
-* `custom s/re f/rEmaRk p/Text`
-
-Creates a `Remark` property for each of your exercises.
-
-Expected Result:
-
-.Your remark property has been created
-image::CustomRemark.png[]
-
-
-* `custom s/ed f/End Date p/Date`
-
-Creates a `End Date` property for each of your exercises.
-
-Expected Result:
-
-.Your end date property has been created
-image::CustomEndDate.png[]
-
-
 Using `Rating` as an example, you can now perform the following actions after adding it:
 
 * `add t/exercise n/Run d/07/11/2019 c/400 q/2.4 u/km r/5`
@@ -600,14 +580,6 @@ Expected Result:
 
 .A new exercise with the remark property is added
 image::AddCustomRating.png[]
-
-
-* `edit i/6 r/4.5`
-
-Expected Result:
-
-.The rating of the 6th exercise is edited to 4.5
-image::EditCustomRating.png[]
 
 ==== Removing custom properties: `custom`
 
@@ -639,32 +611,13 @@ image::EditAnotherCustomRating.png[]
 After the execution, the `Rating` property will be removed from all of the exercises and the app
 as illustrated in the next few figures.
 
-.The rating property is removed from the app
-image::RemoveCustomRating.png[]
-
 .Rating in exercise 6 is removed
 image::RunRatingRemoved.png[]
 
 .Rating in exercise 7 is also removed
 image::BenchPressRatingRemoved.png[]
 
-* `custom rm/Rating i/6`
-
-Before the execution, both exercises 6 and 7 have a rating attached to them.
-
-.A rating of 4.5 to exercise 6
-image::EditCustomRating.png[]
-
-.A rating of 3.5 to exercise 7
-image::EditAnotherCustomRating.png[]
-
-After the execution, only exercise 6 has its rating property removed.
-
-.The rating for exercise 6 is removed
-image::RatingRemovedForSix.png[]
-
-.The rating for exercise 7 remains
-image::RatingRemainedForSeven.png[]
+// end::customfeature[]
 
 ==== Viewing custom properties: `viewcustom`
 
@@ -681,8 +634,6 @@ Expected Result:
 
 .A window showing the custom properties you have defined is opened
 image::ViewCustom.png[]
-
-// end::customfeature[]
 
 === Exiting the program : `exit`
 
