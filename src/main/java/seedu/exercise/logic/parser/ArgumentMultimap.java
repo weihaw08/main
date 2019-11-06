@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.model.property.PropertyBook;
 
 /**

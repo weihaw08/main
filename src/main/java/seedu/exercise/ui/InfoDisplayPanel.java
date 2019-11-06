@@ -19,7 +19,6 @@ public class InfoDisplayPanel extends UiPart<Region> {
 
     private static final String FXML = "InfoDisplayPanel.fxml";
     private static final String DEFAULT_MESSAGE = "Select an exercise/regime/schedule to display its info.";
-    private final Logger logger = LogsCenter.getLogger(InfoDisplayPanel.class);
 
     @FXML
     private StackPane infoPanelPlaceholder;

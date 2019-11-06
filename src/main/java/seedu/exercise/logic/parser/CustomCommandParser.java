@@ -15,8 +15,8 @@ import seedu.exercise.logic.commands.CustomAddCommand;
 import seedu.exercise.logic.commands.CustomCommand;
 import seedu.exercise.logic.commands.CustomRemoveCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.property.CustomProperty;
-import seedu.exercise.model.property.ParameterType;
+import seedu.exercise.model.property.custom.CustomProperty;
+import seedu.exercise.model.property.custom.ParameterType;
 
 /**
  * Parses input arguments and creates a new CustomAddCommand object.

@@ -28,7 +28,7 @@ import seedu.exercise.model.resource.Exercise;
 public class CustomRemoveCommand extends CustomCommand {
 
     public static final String MESSAGE_USAGE_CUSTOM_REMOVE = "Parameters: "
-        + PREFIX_REMOVE_CUSTOM + "FULL NAME\n"
+        + PREFIX_REMOVE_CUSTOM + "FULL NAME\t"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_REMOVE_CUSTOM + "Rating ";
 

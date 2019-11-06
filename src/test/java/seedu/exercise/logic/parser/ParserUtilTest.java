@@ -26,7 +26,7 @@ import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.Name;
-import seedu.exercise.model.property.ParameterType;
+import seedu.exercise.model.property.custom.ParameterType;
 import seedu.exercise.model.property.Quantity;
 import seedu.exercise.model.property.Unit;
 

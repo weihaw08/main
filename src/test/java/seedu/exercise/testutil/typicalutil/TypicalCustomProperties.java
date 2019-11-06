@@ -10,7 +10,7 @@ import static seedu.exercise.testutil.CommonTestData.VALID_PREFIX_NAME_END_DATE;
 import static seedu.exercise.testutil.CommonTestData.VALID_PREFIX_NAME_RATING;
 import static seedu.exercise.testutil.CommonTestData.VALID_PREFIX_NAME_REMARK;
 
-import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.testutil.builder.CustomPropertyBuilder;
 
 /**

@@ -29,7 +29,7 @@ import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;
 import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.UserPrefs;
-import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.testutil.builder.CustomPropertyBuilder;
 

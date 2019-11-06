@@ -1,4 +1,4 @@
-package seedu.exercise.model.property;
+package seedu.exercise.model.property.custom;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.core.ValidationRegex.ONLY_ALPHABETS_AND_SPACE;

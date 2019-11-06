@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
-import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.model.property.PropertyBook;
 
 /**

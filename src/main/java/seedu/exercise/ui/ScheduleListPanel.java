@@ -15,7 +15,6 @@ import seedu.exercise.model.resource.Schedule;
  */
 public class ScheduleListPanel extends ResourceListPanel {
     private static final String FXML = "ScheduleListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ScheduleListPanel.class);
 
     @FXML
     private ListView<Schedule> scheduleListView;

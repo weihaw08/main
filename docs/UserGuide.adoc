@@ -50,6 +50,22 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
+== Important terms
+
+If this is your first time using our app, fear not! Below are some of the terms that you may commonly encounter when
+reading our guide.
+
+1. Prefix: The term that comes before each parameter. E.g.: the prefix in `t/exercise` is `t/`.
+
+2. Prefix name: The word in a Prefix. E.g.: the prefix name of `t/` is `t` and the prefix name of `ed/` is `ed`.
+
+3. List Type: In ExerHealth, there are 4 different types of lists
+
+* Exercise which will be denoted as `exercise`
+* Regime which will be denoted as `regime`
+* Schedule which will be denoted as `schedule`
+* Suggestion which will be denoted as `suggestion`
+
 [[Features]]
 == Features
 
@@ -83,7 +99,7 @@ You can enter the following additional information for each exercise:
 * Quantity of exercises completed
 * Units of measure
 * Muscle group(s) that are being worked out
-* <<customproperty, Custom Properties>> that have been added
+* <<customproperty, Custom properties>> that have been added
 
 Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...`
 
@@ -128,8 +144,7 @@ Retrieves a list of information - Exercise, Regime, Scheduled Regime or Suggesti
 Format: `list t/LIST_TYPE`
 
 ****
-* There are 4 types of list in ExerHealth: `exercise`, `regime`, `schedule` and `suggest`.
-* The `suggest` list will only be displayed if you have used the <<suggestion, suggestion>> feature before.
+* The `suggestion` list will only be displayed if you have used the <<suggestion, suggestion>> feature before.
 ****
 
 Example:
@@ -154,7 +169,7 @@ image::ListScheduleResult.png[]
 
 === Selecting an item: `select`
 
-Selects the item at the given index of the chosen category list.
+Selects the item at the given index of the chosen list type.
 
 Format: `select t/LIST_TYPE i/INDEX`
 
@@ -399,11 +414,11 @@ display all the exercises tagged with "Chest" in the exercise tracker and ExerHe
 
 Similar to matching muscles tags, you can search for suggestions with matching custom property tags.
 
-After creating <<customproperty, Custom Properties>> and tracking exercises,
+After creating <<customproperty, custom properties>> and tracking exercises,
 you can search for suggestions with those custom properties.
 
 Example:
-Suppose you have created a new Custom Property and have been tracking a few exercises with said custom property:
+Suppose you have created a new custom property and have been tracking a few exercises with said custom property:
 
 `custom s/r f/Rating p/Number`
 
@@ -421,7 +436,7 @@ Thus the command will display only the exercise named "Bench Press".
 
 // tag::customfeature[]
 [[customproperty]]
-=== Custom properties
+=== Custom properties `custom` / `viewcustom`
 
 ==== Adding custom properties: `custom`
 
@@ -550,16 +565,13 @@ Autocompletes the commands while typing.
 
 Imports data to update inbuilt database of exercises.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ExerHealth folder.
+
+*Q*: What if I am unable to view the command box? +
+*A*: You can try setting the
 
 == Command Summary
 

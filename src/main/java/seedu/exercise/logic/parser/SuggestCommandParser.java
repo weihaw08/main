@@ -17,7 +17,7 @@ import seedu.exercise.logic.commands.SuggestBasicCommand;
 import seedu.exercise.logic.commands.SuggestCommand;
 import seedu.exercise.logic.commands.SuggestPossibleCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
-import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.model.property.Muscle;
 import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.resource.Exercise;

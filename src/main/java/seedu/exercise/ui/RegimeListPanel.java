@@ -15,7 +15,6 @@ import seedu.exercise.model.resource.Regime;
  */
 public class RegimeListPanel extends ResourceListPanel {
     private static final String FXML = "RegimeListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(RegimeListPanel.class);
 
     @FXML
     private ListView<Regime> regimeListView;

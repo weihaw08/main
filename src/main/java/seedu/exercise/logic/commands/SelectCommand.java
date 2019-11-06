@@ -30,7 +30,7 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Selects the exercise/regime/schedule/suggestion"
         + " identified" + " by the index number in their respective list.\n"
         + "Parameters: "
-        + PREFIX_CATEGORY + "LIST_TYPE " + PREFIX_INDEX + "INDEX (must be a positive integer)\n"
+        + PREFIX_CATEGORY + "LIST_TYPE " + PREFIX_INDEX + "INDEX (must be a positive integer)\t"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_CATEGORY + "exercise "
         + PREFIX_INDEX + "1";

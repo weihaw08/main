@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.parser.Prefix;
+import seedu.exercise.model.property.custom.CustomProperty;
 
 /**
  * Helps to keep track of all the existing prefixes and full names for both default and custom properties.

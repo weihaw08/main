@@ -10,7 +10,6 @@ import seedu.exercise.commons.core.LogsCenter;
  */
 public class StatsDisplayPanel extends UiPart<Region> {
     private static final String FXML = "StatsDisplayPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StatsDisplayPanel.class);
 
     public StatsDisplayPanel() {
         super(FXML);
