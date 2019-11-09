@@ -12,6 +12,10 @@ enables users to track important information about their exercises and also prov
 the ability to create their own fitness regimes and the ability to provide statistical analysis of their activities.
 Users can also define their own properties which they wish to track for their exercises.
 
+Below is a screenshot of our application:
+
+image::Ui.png[width="650"]
+
 == Summary of contributions
 
 * *Major enhancement 1*: Provided a feature that *allows user to define their own custom properties* and *remove them*.
@@ -19,19 +23,13 @@ Users can also define their own properties which they wish to track for their ex
 ** What it does: Users can simply add in or remove their own custom properties should they wish to keep track of extra/lesser properties
 for each exercise.
 
-** Justification: This feature was introduced after a quick conversation with our friends who provided us with lots of
-properties which they wish to keep track of for their exercises. So, we have decided to provide a set of default properties (such as calories, date etc)
-which appear frequently among the suggestions while introducing custom properties to provide greater flexibility among
-the various users if they wish to include more information which they wish to track. This customisation can help users to
+** Justification: This feature provides greater flexibility among various users if they wish to include more information which they wish to track. This customisation can help users to
 tailor suit the app for their personal use.
 
-** Highlights: This feature complements well with another feature that was implemented by my team mate, Kee En. By having
+** Highlights: This feature complements well with the suggestion feature. By having
 custom properties, users can now produce exercise suggestions based on the custom properties they had created. Furthermore, the implementation of this feature is
-quite challenging as there are a few aspects to take note of:
-
-*** Representation of custom properties in each exercise
-*** Tracking of custom properties that have been created
-*** Storage of custom properties so that they will not be a one-off thing
+quite challenging as there are a few aspects to take note of: the representation of custom properties in each exercise, the tracking of custom properties that have been created
+and storage of custom properties.
 
 * *Minor enhancement 1*: Added a `viewcustom` command that allows user to view the custom properties that they have defined.
 

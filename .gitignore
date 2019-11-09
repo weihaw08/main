@@ -11,7 +11,7 @@ src/main/resources/docs/
 # Storage/log files
 /data/exercisebook.json
 /data/propertybook.json
-/data/propertymanager.json
+/data/exercisedatabase.json
 /data/regimebook.json
 /data/schedulebook.json
 

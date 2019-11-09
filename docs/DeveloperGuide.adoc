@@ -425,7 +425,7 @@ is also removed from the prefix set in `CliSyntax`.
 All of the crucial associations mentioned above are summarised in the next class diagram.
 
 .Class diagram of the associations of `PropertyBook` and `CustomProperty`
-image::CustomClassDiagram.png[]
+image::CustomClassDiagram.png[width="500"]
 
 ===== Adding Custom Properties
 To add a new custom property for the exercises, the user can do it through the command `custom s/PREFIX_NAME f/FULL_NAME
@@ -455,7 +455,7 @@ The above steps illustrate the main success scenario. However, not all additions
 The next activity diagram shows the workflow when a new custom property is defined.
 
 .Activity diagram of the workflow when a new custom property is added
-image::CustomAddActivityDiagram.png[]
+image::CustomAddActivityDiagram.png[width="500"]
 
 Once a custom property is successfully added into `PropertyBook`, the user can use the prefix of the custom property in
 `add` or `edit` command.
