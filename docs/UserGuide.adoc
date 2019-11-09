@@ -847,7 +847,7 @@ Creates a `Rating` property for each of your exercises.
 Expected Result:
 
 .Your rating property has been created
-image::CustomRating.png[width="600"]
+image::CustomRating.png[width="550"]
 
 You can now add a new exercise with `Rating`!
 
@@ -856,7 +856,7 @@ You can now add a new exercise with `Rating`!
 Expected Result:
 
 .A new exercise with the remark property is added
-image::AddCustomRating.png[width="600"]
+image::AddCustomRating.png[width="550"]
 
 ==== Removing custom properties: `custom`
 
@@ -880,19 +880,19 @@ Example:
 Before the execution, the `Rating` property will be present in exercises that have them.
 
 .A rating of 4.5 for exercise 6
-image::EditCustomRating.png[width="600"]
+image::EditCustomRating.png[width="550"]
 
 .A rating of 3.5 for exercise 7
-image::EditAnotherCustomRating.png[width="600"]
+image::EditAnotherCustomRating.png[width="550"]
 
 After the execution, the `Rating` property will be removed from all of the exercises and the app
 as illustrated in the next few figures.
 
 .Rating in exercise 6 is removed
-image::RunRatingRemoved.png[width="600"]
+image::RunRatingRemoved.png[width="550"]
 
 .Rating in exercise 7 is also removed
-image::BenchPressRatingRemoved.png[width="600"]
+image::BenchPressRatingRemoved.png[width="550"]
 
 // end::customfeature[]
 

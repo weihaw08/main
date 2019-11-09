@@ -425,7 +425,7 @@ is also removed from the prefix set in `CliSyntax`.
 All of the crucial associations mentioned above are summarised in the next class diagram.
 
 .Class diagram of the associations of `PropertyBook` and `CustomProperty`
-image::CustomClassDiagram.png[width="500"]
+image::CustomClassDiagram.png[]
 
 ===== Adding Custom Properties
 To add a new custom property for the exercises, the user can do it through the command `custom s/PREFIX_NAME f/FULL_NAME
@@ -462,13 +462,13 @@ Once a custom property is successfully added into `PropertyBook`, the user can u
 
 ===== Removing Custom Properties
 Should a user wish to remove a custom property from all of the exercises, he/she can simply make use of the command
-`custom rm/FULL_NAME`. Alternatively, if the user wishes to remove a custom property just from a single exercise, he/she
-can choose to enter `custom rm/FULL_NAME i/INDEX` instead. A custom property that has been removed from the ``PropertyBook`` can be re-added back if the user chooses to.
+`custom rm/FULL_NAME`. A custom property that has been removed from the ``PropertyBook`` can be re-added back if the user chooses to.
+Alternatively, if the user wishes to remove a custom property just from a single exercise, he/she can choose to enter `custom rm/FULL_NAME i/INDEX` instead.
 
-===== Viewing Custom Properties
-To allow user to view the custom properties which they have defined, they can enter ``viewcustom`` which will produce
-a table that lists out the name, prefix and parameter type of each custom property they have defined.
+The next sequence diagram illustrates what happens when a custom property is removed from the `PropertyBook`.
 
+.Sequence diagram of a successful removal of a custom property from all exercises
+image::EditedCustomRemoveSequenceDiagram.png[]
 ==== Design Considerations
 
 ===== Aspect: `PropertyBook` design
@@ -485,23 +485,19 @@ can be created for different tests.
 ** Cons: There could be situations where 2 instances of `PropertyBook` objects are created and the addition of a
 custom property is done to only one instance and not in the other.
 
-Choice 2 seems like an ideal selection at the start as coupling is reduced and it reduces the likelihood
-of untestable code. However, certain issues arise:
+After much consideration, Choice 1 was implemented with the following reasons:
 
 1. `AddCommandParser` and `EditCommandParser` have to gain access to the `CustomProperty` in order to ensure that the values entered
 for the custom properties in the add/edit commands are valid. However, as the `ExerciseBookParser` in the original code base only takes in a
 `String` as a parameter, there has to be another way of retrieving the custom properties. While we can change the
 `ExerciseBookParser` to take in a data structure containing `CustomProperty` objects, this does not seem good as its responsibility
-is just to ensure that a predefined command is entered and is passed to the correct command parser.
-A slightly better choice in this case is to make the data structure holding the `CustomProperty` objects a static variable and parsers that require it can access
+is just to ensure that a predefined command is entered and is passed to the correct command parser.A slightly better choice in this case is to make the data structure holding the `CustomProperty` objects a static variable and parsers that require it can access
 it directly.
 
 2. If the data structure holding the `CustomProperty` object is to be made static, it means that this information is
-shared among all of the `PropertyBook` instances if Choice 2 was implemented instead. Thus, `PropertyBook`
-is acting similarly to a singleton.
+shared among all of the `PropertyBook` instances if Choice 2 was implemented. Thus, `PropertyBook`
+is acting like a singleton and so, a singleton class will be appropriate.
 
-As such, after much consideration, Choice 1 was implemented. To ensure that testing can be carried out better,
-the data inside `PropertyBook` is cleared before each test.
 //end::customfeature[]
 
 // tag::suggest[]
