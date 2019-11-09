@@ -22,6 +22,7 @@ import seedu.exercise.model.Model;
 import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.resource.Exercise;
 
+//@@author weihaw08
 /**
  * Removes the custom property with the given full name.
  */

@@ -3,6 +3,7 @@ package seedu.exercise.logic.commands;
 import static seedu.exercise.logic.commands.CustomAddCommand.MESSAGE_USAGE_CUSTOM_ADD;
 import static seedu.exercise.logic.commands.CustomRemoveCommand.MESSAGE_USAGE_CUSTOM_REMOVE;
 
+//@@author weihaw08
 /**
  * Represents a CustomCommand with hidden internal logic and the ability to be executed.
  */

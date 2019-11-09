@@ -14,6 +14,7 @@ import seedu.exercise.model.Model;
 import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.property.custom.CustomProperty;
 
+//@@author weihaw08
 /**
  * Adds a custom property for the exercises.
  */

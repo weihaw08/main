@@ -21,6 +21,7 @@ import seedu.exercise.model.resource.Regime;
 import seedu.exercise.model.resource.Schedule;
 import seedu.exercise.ui.ListResourceType;
 
+//@@author weihaw08
 /**
  * Selects the resource at the given index of the desired resource list.
  */
