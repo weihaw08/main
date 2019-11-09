@@ -129,6 +129,11 @@ Expected result:
 .The exercise `Run` is added
 image::AddRunResult.png[]
 
+* `add t/exercise n/Sprinting d/11/11/2019 c/500 q/400 u/metres m/Thighs`
+
+.The exercise `Sprinting` is added
+image::AddExerciseWithMuscle.png[]
+
 ==== Adding exercises to scheduling regime +
 
 Adds exercises from the exercises you have added into a new exercise regime.
@@ -847,7 +852,7 @@ Creates a `Rating` property for each of your exercises.
 Expected Result:
 
 .Your rating property has been created
-image::CustomRating.png[width="550"]
+image::CustomRating.png[]
 
 You can now add a new exercise with `Rating`!
 
@@ -856,7 +861,7 @@ You can now add a new exercise with `Rating`!
 Expected Result:
 
 .A new exercise with the remark property is added
-image::AddCustomRating.png[width="550"]
+image::AddCustomRating.png[]
 
 ==== Removing custom properties: `custom`
 
@@ -880,21 +885,39 @@ Example:
 Before the execution, the `Rating` property will be present in exercises that have them.
 
 .A rating of 4.5 for exercise 6
-image::EditCustomRating.png[width="550"]
+image::EditCustomRating.png[]
 
 .A rating of 3.5 for exercise 7
-image::EditAnotherCustomRating.png[width="550"]
+image::EditAnotherCustomRating.png[]
 
 After the execution, the `Rating` property will be removed from all of the exercises and the app
 as illustrated in the next few figures.
 
 .Rating in exercise 6 is removed
-image::RunRatingRemoved.png[width="550"]
+image::RunRatingRemoved.png[]
 
 .Rating in exercise 7 is also removed
-image::BenchPressRatingRemoved.png[width="550"]
+image::BenchPressRatingRemoved.png[]
 
 // end::customfeature[]
+
+* `custom rm/Rating i/6`
+
+Before the execution, both exercises 6 and 7 have a rating attached to them.
+
+.A rating of 4.5 to exercise 6
+image::EditCustomRating.png[]
+
+.A rating of 3.5 to exercise 7
+image::EditAnotherCustomRating.png[]
+
+After the execution, only exercise 6 has its rating property removed.
+
+.The rating for exercise 6 is removed
+image::RatingRemovedForSix.png[]
+
+.The rating for exercise 7 remains
+image::RatingRemainedForSeven.png[]
 
 ==== Viewing custom properties: `viewcustom`
 
@@ -951,7 +974,7 @@ Allows you to encrypt your data files for more security.
 *Q*: There are times where a `null` message appears in the result display. What should I do?
 
 .A null message appeared
-image::NullMessage.png[]
+image::NullMessage.png[width="400"]
 
 *A*: Fear not! Simply restart the app and the `null` message will go away.
 
@@ -961,7 +984,7 @@ these exercises? +
 The same thing can also be done for custom properties!
 
 .The friendly tooltip displaying the name of an exercise
-image::LongNamesTooltip.png[]
+image::LongNamesTooltip.png[width="400"]
 
 
 == Command Summary

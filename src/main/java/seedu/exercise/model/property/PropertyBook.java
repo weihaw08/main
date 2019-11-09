@@ -120,21 +120,21 @@ public class PropertyBook {
     }
 
     /**
-     * Checks if the prefix has already been used by a property.
+     * Returns true if the prefix has already been used by a property.
      */
     public boolean isPrefixUsed(Prefix prefix) {
         return customPrefixes.contains(prefix) || defaultPrefixes.contains(prefix);
     }
 
     /**
-     * Checks if the full name has already been used by a property.
+     * Returns true if the full name has already been used by a property.
      */
     public boolean isFullNameUsed(String fullName) {
         return customFullNames.contains(fullName) || defaultFullNames.contains(fullName);
     }
 
     /**
-     * Checks if the full name is used by a custom property.
+     * Returns true if the full name is used by a custom property.
      */
     public boolean isFullNameUsedByCustomProperty(String fullName) {
         return customFullNames.contains(fullName);
