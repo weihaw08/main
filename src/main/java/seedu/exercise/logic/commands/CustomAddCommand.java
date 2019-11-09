@@ -11,8 +11,8 @@ import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.property.custom.CustomProperty;
 import seedu.exercise.model.property.PropertyBook;
+import seedu.exercise.model.property.custom.CustomProperty;
 
 /**
  * Adds a custom property for the exercises.

@@ -53,6 +53,7 @@ public class ExerciseListCard extends UiPart<Region> {
         exercise.getMuscles().stream()
             .sorted(Comparator.comparing(muscle -> muscle.muscleName))
             .forEach(muscle -> tags.getChildren().add(new Label(muscle.muscleName)));
+
     }
 
     @Override

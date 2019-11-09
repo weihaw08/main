@@ -84,7 +84,7 @@ public class PropertyBook {
     }
 
     /**
-     * Adds the newly defined custom property into the manager.
+     * Adds the newly defined custom property into the PropertyBook.
      */
     public void addCustomProperty(CustomProperty customProperty) {
         Prefix newPrefix = customProperty.getPrefix();
