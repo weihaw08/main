@@ -111,7 +111,7 @@ You can enter the following additional information for each exercise:
 * Muscle group(s) that are being worked out
 * <<customproperty, Custom properties>> that have been added
 
-Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...`
+Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...`
 
 ****
 * Calories entered have to be less than or equal to 50000.
@@ -235,12 +235,12 @@ Example:
 
 Edits the name and the date of the 2nd exercise to `Running` and `20/09/2019` respectively.
 
-Before +
+[.underline]#Before# +
 
 .Before editing the 2nd exercise
 image::EditExerciseBefore.png[align="center", width=85%, scaledwidth=15cm]
 
-After +
+[.underline]#After# +
 Exercise now appears at the bottom as the list is sorted by date. +
 
 .After editing the 2nd exercise
@@ -251,12 +251,12 @@ image::EditExerciseAfter.png[align="center", width=85%, scaledwidth=15cm]
 Edits the name, date, calories burnt, quantity, units and muscle group trained of the 3rd exercise to `Bench press`,
 `22/09/2019`, `240`, `10`, `sets` and `Chest` respectively.
 
-Before +
+[.underline]#Before# +
 
 .Before editing the 3rd exercise
 image::EditExerciseBefore2.png[align="center", width=85%, scaledwidth=15cm]
 
-After +
+[.underline]#After# +
 
 .After editing the 3rd exercise
 image::EditExerciseAfter2.png[align="center", width=85%, scaledwidth=15cm]
@@ -427,6 +427,7 @@ Format: `undo`
 Example:
 
 * Undoing a `delete t/regime [i/INDEX]...` command that deletes exercise from an existing regime. +
+
 **Initial**: +
 
 .Selecting the 3rd regime
@@ -444,10 +445,10 @@ Adds the exercise `Hiking` back to the regime `Level 3` +
 .`undo` reverses the deletion!
 image::DeleteExerciseFromRegimeUndoOutcome.png[align="center", width=85%, scaledwidth=15cm]
 // end::undoredoexample[]
-{sp} +
-{sp} +
+
 
 * Undoing a <<schedulecomplete, Schedule Complete>> command and a <<scheduleregime, Schedule Regime>> command +
+
 **Initial**: Schedule list only contains two scheduled regimes +
 
 .The initial appearance of the schedule list
@@ -503,6 +504,7 @@ Format: `redo`
 Example:
 
 * Redoing a `add t/exercise` command that has just been undone. +
+
 **Initial**: +
 
 .Initial appearance of the exercise list
@@ -526,10 +528,8 @@ Redoing the command returns the `Squats` exercise to the list again. +
 .`redo` adds `Squats` back!
 image::AddExerciseAfterRedo.png[align="center", width=85%, scaledwidth=15cm]
 
-{sp} +
-{sp} +
-
 * Redoing a <<resolve, resolve>> command that has just been undone. +
+
 **Initial**: +
 Attempts to schedule `Level 2` regime on the date of `Level 1` regime. +
 
@@ -566,7 +566,6 @@ Redoing the command updates the scheduled regime from `Level 1` to the resolved
 .`redo` returns the new regime that was created after the conflict resolution!
 image::ScheduleRegimeAfterResolveRedo.png[align="center", width=85%, scaledwidth=15cm]
 
-{sp} +
 
 // tag::scheduleresolve[]
 
@@ -810,7 +809,7 @@ As seen from the image above, the information from the "Bench Press" on "06/11/2
 Adds in a custom property which you can define for the exercises.
 
 Once a new custom property is created, you can simply use the prefix name which you defined for the
-property to the `add` and `edit` command to include information for the new property.
+property in the `add` and `edit` command to include information for the new property.
 
 ****
 * The prefix name can only contain alphabets and should not contain spaces.
@@ -999,7 +998,7 @@ e.g. `add t/regime n/Cardio i/1 i/2 i/3`
 e.g. `list t/exercise`
 * *Select* : `select t/LIST_TYPE i/INDEX`
 e.g. `select t/exercise i/1`
-* *Edit exercise* : `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]... `
+* *Edit exercise* : `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...`
 e.g. `edit i/3 n/Bench press d/22/09/2019 c/240 q/10 u/sets m/Chest`
 * *Delete exercise* : `delete t/exercise i/INDEX`
 e.g. `delete t/exercise i/2`

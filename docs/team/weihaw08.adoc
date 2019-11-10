@@ -15,7 +15,7 @@ Users can also define their own properties which they wish to track for their ex
 Below is a screenshot of our application:
 
 .A screenshot of ExerHealth application
-image::Ui.png[width="550"]
+image::Ui.png[align="center", width="550"]
 
 == Summary of contributions
 
