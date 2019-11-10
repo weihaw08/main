@@ -845,7 +845,7 @@ Use case ends
 Use case ends
 
 [Discrete]
-=== UC04: Custom Command
+=== UC04: Custom
 
 *System:* ExerHealth
 
@@ -862,11 +862,11 @@ Use case ends
 
 *Extensions*
 [None]
-* 1a. ExerHealth detects that the user-defined property is a duplicate
-of another property for exercises
+* 1a. ExerHealth detects that the <<prefixName, prefix name>>/full name of the user-defined property is a duplicate
+of another property/parameter for add / edit command.
 [None]
-** 1a1. ExerHealth informs the user that his/her new property is a
-duplicate of a current property.
+** 1a1. ExerHealth informs the user that the prefix name/full name of his/her new property is a
+duplicate of a current property/parameter for add / edit command.
 +
 Use case ends
 
