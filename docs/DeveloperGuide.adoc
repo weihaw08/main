@@ -844,7 +844,7 @@ Use case ends
 Use case ends
 
 [Discrete]
-=== UC04: Configure Command
+=== UC04: Custom Command
 
 *System:* ExerHealth
 
@@ -991,6 +991,38 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No exercise is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+=== Adding a custom property
+
+. Adding a custom property when app is first launched.
+
+.. Prerequisites: The custom property `Remark` with the prefix name `re` must not be created yet. The following test cases should be tried in order.
+.. Test case: `custom s/re f/Remark p/Text` +
+   Expected: The custom property `Remark` is created for all exercises. The prefix name and full name of the property
+   will be displayed in the status message.
+.. Test case: `custom s/re f/AnotherRemark p/Text` +
+   Expected: No custom property is created. An error message will be shown, informing the user that the prefix has been used
+   for an existing parameter in add/edit command.
+.. Test case: `custom s/tt f/Remark p/Text` +
+   Expected: No custom property is created. An error message will be shown, informing the user that the name has been used
+   by an existing property.
+
+=== Deleting a custom property
+
+. Deleting a custom property.
+
+.. Prerequisites: The custom property `Remark` with the prefix name `re` should have been created.
+                  There should be at least 3 exercises with the custom property `Remark`, preferably
+                  the exercises at indices 1 to 3. The following test cases should be tried in order.
+.. Test case: `custom rm/Remark i/1` +
+   Expected: `Remark` is removed from exercise 1. A message informing the user that `Remark` has been removed from
+   exercise 1 will be shown. The `Remark` property for exercises 1 and 2 will still be present.
+.. Test case: `custom rm/Remark`
+   Expected: `Remark` is removed from the app. A message informing the user that `Remark` has been removed will be shown.
+   The `Remark` property is removed from all exercises.
+.. Test case: `custom rm/Date`
+   Expected: No custom property is removed. An error message informing the user that `Date` is not used by
+   an custom property will be shown.
 
 === Saving data
 
