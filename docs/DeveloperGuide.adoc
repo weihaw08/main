@@ -1119,7 +1119,7 @@ exercises from database that are tagged `Chest` are also displayed.
    The `Remark` property is removed from all exercises.
 .. Test case: `custom rm/Date`
    Expected: No custom property is removed. An error message informing the user that `Date` is not used by
-   an custom property will be shown.
+   a custom property will be shown.
 
 === Saving data
 
