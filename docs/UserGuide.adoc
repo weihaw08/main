@@ -936,7 +936,7 @@ Example:
 Expected Result:
 
 .A window showing the custom properties you have defined is opened
-image::ViewCustom.png[align="center", width=85%, scaledwidth=15cm]
+image::ViewCustom.png[align="center", width=400]
 
 === Exiting the program : `exit`
 
