@@ -821,7 +821,7 @@ property in the `add` and `edit` command to include information for the new prop
 word is capitalised with the other letters in lower case e.g. `enD DaTe` will be changed to `End Date`.
 * The date entered for custom properties with a `DATE` parameter must follow the same requirements as that of <<addexercise, add>> command.
 * The text entered for custom properties with a `TEXT` parameter can contain only alphabets.
-* The number entered for custom properties with a `NUMBER` parameter must be non-negative.
+* The number entered for custom properties with a `NUMBER` parameter must be a non-negative integer.
 * You need not include the custom properties when adding a new exercise to the app.
 ****
 
