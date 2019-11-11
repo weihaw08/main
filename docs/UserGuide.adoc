@@ -881,7 +881,7 @@ Example:
 
 * `custom rm/Rating`
 
-Before the execution, the `Rating` property will be present in exercises that have them.
+Before the execution, the `Rating` property will be present in exercises that have it.
 
 .A rating of 4.5 for exercise 6
 image::EditCustomRating.png[align="center", width=85%, scaledwidth=15cm]
