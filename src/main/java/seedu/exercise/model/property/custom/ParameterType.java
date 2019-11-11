@@ -15,7 +15,7 @@ public enum ParameterType {
     public static final String PARAMETER_CONSTRAINTS = "Parameter types should be one of the following: Number, "
         + "Date or Text";
     public static final String TEXT_CONSTRAINTS = "Text should contain only alphabets and should not be blank.";
-    public static final String NUMBER_CONSTRAINTS = "Number should contain only numbers and should not be blank.";
+    public static final String NUMBER_CONSTRAINTS = "Number should be non-negative and should not be blank.";
     private final String parameterName;
 
     ParameterType(String parameterName) {
